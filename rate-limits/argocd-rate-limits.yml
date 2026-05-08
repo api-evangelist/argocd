@@ -5,32 +5,64 @@ provider: Argo CD
 providerId: argocd
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
-- DevOps
-- GitOps
-- Kubernetes
-- CD
-- CNCF
-- Rate Limiting
-- Quotas
-- Throttling
-description: Placeholder rate-limit artifact for Argo CD. Replace with real limits once the pipeline
-  researches the provider's rate-limit documentation.
-notes: Initial scaffold — limits have not yet been reconciled against the provider's documentation.
+  - DevOps
+  - GitOps
+  - Kubernetes
+  - Open Source
+  - Rate Limiting
+description: >-
+  Argo CD does not publish hard request-per-second rate limits on its REST/gRPC API. Throttling is the responsibility of the operator — typically enforced via the ingress controller (NGINX, Istio, AWS ALB) sitting in front of argocd-server, or via Kubernetes API server limits affecting the underlying watch/list calls Argo CD makes. Internally, Argo CD throttles its outbound traffic to source repositories (Git/Helm/OCI) and to target Kubernetes API servers via configurable concurrency knobs (reposerver.parallelism.limit, controller.kubectl.parallelism.limit, etc.). Login and account endpoints are protected by built-in failed-login attempt locking.
+notes: >-
+  Operators running multi-tenant Argo CD should set ingress-level rate limits and tune the listed concurrency knobs based on cluster size. Refer to Argo CD operator-manual high-availability guidance for sharding and scale tuning.
 sources:
-- https://argo-cd.readthedocs.io/
+  - https://argo-cd.readthedocs.io/en/stable/operator-manual/high_availability/
+  - https://argo-cd.readthedocs.io/en/stable/operator-manual/argocd-cmd-params-cm-yaml/
+  - https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
 responseCodes:
-  throttled: 429
+  unauthenticated: 401
+  forbidden: 403
+  tooManyRequests: 429
 limits:
-- name: Default
-  scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+  - name: Failed Login Attempts
+    scope: account
+    metric: failed-attempts
+    limit: 5
+    timeFrame: window
+    notes: >-
+      argocd-server locks the local account after the configured threshold of consecutive failed login attempts (default 5; controlled by server.failure.max.count and server.failure.window.seconds in argocd-cm).
+  - name: Repo Server Parallelism
+    scope: repo-server
+    metric: concurrent-operations
+    limit: -1
+    timeFrame: simultaneous
+    notes: >-
+      Configurable via reposerver.parallelism.limit; bounds concurrent manifest generation operations against source repositories.
+  - name: Kubectl Parallelism
+    scope: application-controller
+    metric: concurrent-operations
+    limit: -1
+    timeFrame: simultaneous
+    notes: >-
+      controller.kubectl.parallelism.limit caps concurrent kubectl operations the application controller issues against target clusters.
+  - name: Status Refresh Throttle
+    scope: application-controller
+    metric: applications-per-cycle
+    limit: -1
+    timeFrame: cycle
+    notes: >-
+      Application controller refresh interval and reconcile concurrency are tunable; default cycle is short enough to detect drift quickly without overwhelming source repos.
 policies:
-- name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  - name: Operator-Imposed Rate Limiting
+    description: >-
+      Place an ingress / API gateway in front of argocd-server (NGINX, Istio, AWS ALB) and apply per-source-IP or per-token rate limits appropriate to your tenancy.
+  - name: Sharding for Scale
+    description: >-
+      For large numbers of clusters, shard the application controller (ARGOCD_CONTROLLER_REPLICAS) so each replica reconciles a subset, reducing per-instance load.
+  - name: Repo Cache Tuning
+    description: >-
+      Tune reposerver.cache.expiration and use the shallow-clone / git-LFS optimizations to reduce upstream Git provider load.
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
