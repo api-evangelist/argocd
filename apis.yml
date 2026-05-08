@@ -29,6 +29,8 @@ apis:
         type: Documentation
       - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
         type: API Reference
+      - url: openapi/argocd-server-openapi.json
+        type: OpenAPI
     description: >-
       The Argo CD Applications API (/api/v1/applications) creates, updates, deletes, syncs, refreshes, and rolls back applications, surfaces application resource trees, manifests, events, logs, and pod terminal access. All endpoints accept an optional `project` query parameter to scope by AppProject.
   - aid: argocd:argocd-applicationsets-api
