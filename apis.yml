@@ -1,0 +1,29 @@
+aid: argocd
+url: https://raw.githubusercontent.com/api-evangelist/argocd/refs/heads/main/apis.yml
+name: Argo CD
+x-type: company
+description: >-
+  Argo CD is a declarative GitOps continuous delivery tool for Kubernetes maintained as part of the Argo CNCF graduated project. The Argo CD API exposes applications, clusters, projects, repositories, and sync operations.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - DevOps
+  - GitOps
+  - Kubernetes
+  - CD
+  - CNCF
+created: '2026-05-08'
+modified: '2026-05-08'
+specificationVersion: '0.19'
+apis: []
+common:
+  - type: Website
+    url: https://argo-cd.readthedocs.io/
+  - type: Plans
+    url: plans/argocd-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/argocd-rate-limits.yml
+  - type: FinOps
+    url: finops/argocd-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
