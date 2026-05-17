@@ -1,7 +1,7 @@
 aid: argocd
 url: https://raw.githubusercontent.com/api-evangelist/argocd/refs/heads/main/apis.yml
 name: Argo CD
-x-type: opensource
+kind: opensource
 description: >-
   Argo CD is a declarative GitOps continuous-delivery tool for Kubernetes, part of the CNCF Graduated Argo project. The argocd-server component exposes a gRPC and REST API used by the Web UI, the argocd CLI, and CI/CD systems. APIs cover applications, projects, clusters, repositories, accounts, certificates, GPG keys, sessions, settings, and notifications. Argo CD is also a Kubernetes operator that defines first-class CRDs (Application, ApplicationSet, AppProject) — those CRDs are themselves a Kubernetes-native API. Argo CD is open-source under the Apache 2.0 license; commercial offerings are provided by third parties (notably Akuity, founded by the Argo project's creators) rather than the Argo CD project itself.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
@@ -28,7 +28,7 @@ apis:
       - url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
         type: Documentation
       - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
-        type: API Reference
+        type: APIReference
       - url: openapi/argocd-server-openapi.json
         type: OpenAPI
     description: >-
@@ -202,11 +202,11 @@ common:
     url: https://argo-cd.readthedocs.io/
   - type: Documentation
     url: https://argo-cd.readthedocs.io/en/stable/
-  - type: API Reference
+  - type: APIReference
     url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://argo-cd.readthedocs.io/en/stable/getting_started/
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/argoproj
   - type: Source
     url: https://github.com/argoproj/argo-cd
@@ -226,7 +226,7 @@ common:
     url: https://www.youtube.com/@ArgoProj
   - type: Releases
     url: https://github.com/argoproj/argo-cd/releases
-  - type: Roadmap
+  - type: RoadMap
     url: https://github.com/argoproj/argo-cd/blob/master/docs/roadmap.md
   - type: Contribution Guide
     url: https://argo-cd.readthedocs.io/en/stable/developer-guide/contributors-quickstart-guide/
