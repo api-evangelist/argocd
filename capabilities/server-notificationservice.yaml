@@ -1,0 +1,131 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Consolidate Services — NotificationService
+  description: 'Consolidate Services — NotificationService. 3 operations. Lead operation: List returns list of services. Self-contained
+    Naftiko capability covering one Argocd business surface.'
+  tags:
+  - Argocd
+  - NotificationService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ARGOCD_API_KEY: ARGOCD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: server-notificationservice
+    baseUri: ''
+    description: Consolidate Services — NotificationService business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-notifications-services
+      path: /api/v1/notifications/services
+      operations:
+      - name: notificationservicelistservices
+        method: GET
+        description: List returns list of services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-notifications-templates
+      path: /api/v1/notifications/templates
+      operations:
+      - name: notificationservicelisttemplates
+        method: GET
+        description: List returns list of templates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-notifications-triggers
+      path: /api/v1/notifications/triggers
+      operations:
+      - name: notificationservicelisttriggers
+        method: GET
+        description: List returns list of triggers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: server-notificationservice-rest
+    port: 8080
+    description: REST adapter for Consolidate Services — NotificationService. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/notifications/services
+      name: api-v1-notifications-services
+      description: REST surface for api-v1-notifications-services.
+      operations:
+      - method: GET
+        name: notificationservicelistservices
+        description: List returns list of services
+        call: server-notificationservice.notificationservicelistservices
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/notifications/templates
+      name: api-v1-notifications-templates
+      description: REST surface for api-v1-notifications-templates.
+      operations:
+      - method: GET
+        name: notificationservicelisttemplates
+        description: List returns list of templates
+        call: server-notificationservice.notificationservicelisttemplates
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/notifications/triggers
+      name: api-v1-notifications-triggers
+      description: REST surface for api-v1-notifications-triggers.
+      operations:
+      - method: GET
+        name: notificationservicelisttriggers
+        description: List returns list of triggers
+        call: server-notificationservice.notificationservicelisttriggers
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-notificationservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Consolidate Services — NotificationService. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-returns-list-services
+      description: List returns list of services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-notificationservice.notificationservicelistservices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-returns-list-templates
+      description: List returns list of templates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-notificationservice.notificationservicelisttemplates
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-returns-list-triggers
+      description: List returns list of triggers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-notificationservice.notificationservicelisttriggers
+      outputParameters:
+      - type: object
+        mapping: $.

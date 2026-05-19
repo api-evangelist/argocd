@@ -1,0 +1,1187 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Consolidate Services — RepositoryService
+  description: 'Consolidate Services — RepositoryService. 17 operations. Lead operation: ListRepositories gets a list of all
+    configured repositories. Self-contained Naftiko capability covering one Argocd business surface.'
+  tags:
+  - Argocd
+  - RepositoryService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ARGOCD_API_KEY: ARGOCD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: server-repositoryservice
+    baseUri: ''
+    description: Consolidate Services — RepositoryService business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-repositories
+      path: /api/v1/repositories
+      operations:
+      - name: repositoryservicelistrepositories
+        method: GET
+        description: ListRepositories gets a list of all configured repositories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: query
+          type: string
+          description: Repo URL for query.
+        - name: forceRefresh
+          in: query
+          type: boolean
+          description: Whether to force a cache refresh on repo's connection state.
+        - name: appProject
+          in: query
+          type: string
+          description: App project for query.
+      - name: repositoryservicecreaterepository
+        method: POST
+        description: CreateRepository creates a new repository configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: Repository definition
+          required: true
+        - name: upsert
+          in: query
+          type: boolean
+          description: Whether to create in upsert mode.
+        - name: credsOnly
+          in: query
+          type: boolean
+          description: Whether to operate on credential set instead of repository.
+    - name: api-v1-repositories-repo.repo
+      path: /api/v1/repositories/{repo.repo}
+      operations:
+      - name: repositoryserviceupdaterepository
+        method: PUT
+        description: UpdateRepository updates a repository configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo.repo
+          in: path
+          type: string
+          description: Repo contains the URL to the remote repository
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-repositories-repo
+      path: /api/v1/repositories/{repo}
+      operations:
+      - name: repositoryserviceget
+        method: GET
+        description: Get returns a repository or its credentials
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: path
+          type: string
+          description: Repo URL for query
+          required: true
+        - name: forceRefresh
+          in: query
+          type: boolean
+          description: Whether to force a cache refresh on repo's connection state.
+        - name: appProject
+          in: query
+          type: string
+          description: App project for query.
+      - name: repositoryservicedeleterepository
+        method: DELETE
+        description: DeleteRepository deletes a repository from the configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: path
+          type: string
+          description: Repo URL for query
+          required: true
+        - name: forceRefresh
+          in: query
+          type: boolean
+          description: Whether to force a cache refresh on repo's connection state.
+        - name: appProject
+          in: query
+          type: string
+          description: App project for query.
+    - name: api-v1-repositories-repo-apps
+      path: /api/v1/repositories/{repo}/apps
+      operations:
+      - name: repositoryservicelistapps
+        method: GET
+        description: ListApps returns list of apps in the repo
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: path
+          type: string
+          required: true
+        - name: revision
+          in: query
+          type: string
+        - name: appName
+          in: query
+          type: string
+        - name: appProject
+          in: query
+          type: string
+    - name: api-v1-repositories-repo-helmcharts
+      path: /api/v1/repositories/{repo}/helmcharts
+      operations:
+      - name: repositoryservicegethelmcharts
+        method: GET
+        description: GetHelmCharts returns list of helm charts in the specified repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: path
+          type: string
+          description: Repo URL for query
+          required: true
+        - name: forceRefresh
+          in: query
+          type: boolean
+          description: Whether to force a cache refresh on repo's connection state.
+        - name: appProject
+          in: query
+          type: string
+          description: App project for query.
+    - name: api-v1-repositories-repo-oci-tags
+      path: /api/v1/repositories/{repo}/oci-tags
+      operations:
+      - name: repositoryservicelistocitags
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: path
+          type: string
+          description: Repo URL for query
+          required: true
+        - name: forceRefresh
+          in: query
+          type: boolean
+          description: Whether to force a cache refresh on repo's connection state.
+        - name: appProject
+          in: query
+          type: string
+          description: App project for query.
+    - name: api-v1-repositories-repo-refs
+      path: /api/v1/repositories/{repo}/refs
+      operations:
+      - name: repositoryservicelistrefs
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: path
+          type: string
+          description: Repo URL for query
+          required: true
+        - name: forceRefresh
+          in: query
+          type: boolean
+          description: Whether to force a cache refresh on repo's connection state.
+        - name: appProject
+          in: query
+          type: string
+          description: App project for query.
+    - name: api-v1-repositories-repo-validate
+      path: /api/v1/repositories/{repo}/validate
+      operations:
+      - name: repositoryservicevalidateaccess
+        method: POST
+        description: ValidateAccess validates access to a repository with given parameters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: path
+          type: string
+          description: The URL to the repo
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: The URL to the repo
+          required: true
+        - name: username
+          in: query
+          type: string
+          description: Username for accessing repo.
+        - name: password
+          in: query
+          type: string
+          description: Password for accessing repo.
+        - name: sshPrivateKey
+          in: query
+          type: string
+          description: Private key data for accessing SSH repository.
+        - name: insecure
+          in: query
+          type: boolean
+          description: Whether to skip certificate or host key validation.
+        - name: tlsClientCertData
+          in: query
+          type: string
+          description: TLS client cert data for accessing HTTPS repository.
+        - name: tlsClientCertKey
+          in: query
+          type: string
+          description: TLS client cert key for accessing HTTPS repository.
+        - name: type
+          in: query
+          type: string
+          description: The type of the repo.
+        - name: name
+          in: query
+          type: string
+          description: The name of the repo.
+        - name: enableOci
+          in: query
+          type: boolean
+          description: Whether helm-oci support should be enabled for this repo.
+        - name: githubAppPrivateKey
+          in: query
+          type: string
+          description: Github App Private Key PEM data.
+        - name: githubAppID
+          in: query
+          type: string
+          description: Github App ID of the app used to access the repo.
+        - name: githubAppInstallationID
+          in: query
+          type: string
+          description: Github App Installation ID of the installed GitHub App.
+        - name: githubAppEnterpriseBaseUrl
+          in: query
+          type: string
+          description: Github App Enterprise base url if empty will default to https://api.github.com.
+        - name: proxy
+          in: query
+          type: string
+          description: HTTP/HTTPS proxy to access the repository.
+        - name: project
+          in: query
+          type: string
+          description: Reference between project and repository that allow you automatically to be added as item inside SourceRepos
+            project entity.
+        - name: gcpServiceAccountKey
+          in: query
+          type: string
+          description: Google Cloud Platform service account key.
+        - name: forceHttpBasicAuth
+          in: query
+          type: boolean
+          description: Whether to force HTTP basic auth.
+        - name: useAzureWorkloadIdentity
+          in: query
+          type: boolean
+          description: Whether to use azure workload identity for authentication.
+        - name: bearerToken
+          in: query
+          type: string
+          description: BearerToken contains the bearer token used for Git auth at the repo server.
+        - name: insecureOciForceHttp
+          in: query
+          type: boolean
+          description: Whether https should be disabled for an OCI repo.
+        - name: azureServicePrincipalClientId
+          in: query
+          type: string
+          description: Azure Service Principal Client ID.
+        - name: azureServicePrincipalClientSecret
+          in: query
+          type: string
+          description: Azure Service Principal Client Secret.
+        - name: azureServicePrincipalTenantId
+          in: query
+          type: string
+          description: Azure Service Principal Tenant ID.
+        - name: azureActiveDirectoryEndpoint
+          in: query
+          type: string
+          description: Azure Active Directory Endpoint.
+    - name: api-v1-repositories-source.repoURL-appdetails
+      path: /api/v1/repositories/{source.repoURL}/appdetails
+      operations:
+      - name: repositoryservicegetappdetails
+        method: POST
+        description: GetAppDetails returns application details by given path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: source.repoURL
+          in: path
+          type: string
+          description: RepoURL is the URL to the repository (Git or Helm) that contains the application manifests
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-write-repositories
+      path: /api/v1/write-repositories
+      operations:
+      - name: repositoryservicelistwriterepositories
+        method: GET
+        description: ListWriteRepositories gets a list of all configured write repositories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: query
+          type: string
+          description: Repo URL for query.
+        - name: forceRefresh
+          in: query
+          type: boolean
+          description: Whether to force a cache refresh on repo's connection state.
+        - name: appProject
+          in: query
+          type: string
+          description: App project for query.
+      - name: repositoryservicecreatewriterepository
+        method: POST
+        description: CreateWriteRepository creates a new write repository configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: Repository definition
+          required: true
+        - name: upsert
+          in: query
+          type: boolean
+          description: Whether to create in upsert mode.
+        - name: credsOnly
+          in: query
+          type: boolean
+          description: Whether to operate on credential set instead of repository.
+    - name: api-v1-write-repositories-repo.repo
+      path: /api/v1/write-repositories/{repo.repo}
+      operations:
+      - name: repositoryserviceupdatewriterepository
+        method: PUT
+        description: UpdateWriteRepository updates a write repository configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo.repo
+          in: path
+          type: string
+          description: Repo contains the URL to the remote repository
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-write-repositories-repo
+      path: /api/v1/write-repositories/{repo}
+      operations:
+      - name: repositoryservicegetwrite
+        method: GET
+        description: GetWrite returns a repository or its write credentials
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: path
+          type: string
+          description: Repo URL for query
+          required: true
+        - name: forceRefresh
+          in: query
+          type: boolean
+          description: Whether to force a cache refresh on repo's connection state.
+        - name: appProject
+          in: query
+          type: string
+          description: App project for query.
+      - name: repositoryservicedeletewriterepository
+        method: DELETE
+        description: DeleteWriteRepository deletes a write repository from the configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: path
+          type: string
+          description: Repo URL for query
+          required: true
+        - name: forceRefresh
+          in: query
+          type: boolean
+          description: Whether to force a cache refresh on repo's connection state.
+        - name: appProject
+          in: query
+          type: string
+          description: App project for query.
+    - name: api-v1-write-repositories-repo-validate
+      path: /api/v1/write-repositories/{repo}/validate
+      operations:
+      - name: repositoryservicevalidatewriteaccess
+        method: POST
+        description: ValidateWriteAccess validates write access to a repository with given parameters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: repo
+          in: path
+          type: string
+          description: The URL to the repo
+          required: true
+        - name: body
+          in: body
+          type: string
+          description: The URL to the repo
+          required: true
+        - name: username
+          in: query
+          type: string
+          description: Username for accessing repo.
+        - name: password
+          in: query
+          type: string
+          description: Password for accessing repo.
+        - name: sshPrivateKey
+          in: query
+          type: string
+          description: Private key data for accessing SSH repository.
+        - name: insecure
+          in: query
+          type: boolean
+          description: Whether to skip certificate or host key validation.
+        - name: tlsClientCertData
+          in: query
+          type: string
+          description: TLS client cert data for accessing HTTPS repository.
+        - name: tlsClientCertKey
+          in: query
+          type: string
+          description: TLS client cert key for accessing HTTPS repository.
+        - name: type
+          in: query
+          type: string
+          description: The type of the repo.
+        - name: name
+          in: query
+          type: string
+          description: The name of the repo.
+        - name: enableOci
+          in: query
+          type: boolean
+          description: Whether helm-oci support should be enabled for this repo.
+        - name: githubAppPrivateKey
+          in: query
+          type: string
+          description: Github App Private Key PEM data.
+        - name: githubAppID
+          in: query
+          type: string
+          description: Github App ID of the app used to access the repo.
+        - name: githubAppInstallationID
+          in: query
+          type: string
+          description: Github App Installation ID of the installed GitHub App.
+        - name: githubAppEnterpriseBaseUrl
+          in: query
+          type: string
+          description: Github App Enterprise base url if empty will default to https://api.github.com.
+        - name: proxy
+          in: query
+          type: string
+          description: HTTP/HTTPS proxy to access the repository.
+        - name: project
+          in: query
+          type: string
+          description: Reference between project and repository that allow you automatically to be added as item inside SourceRepos
+            project entity.
+        - name: gcpServiceAccountKey
+          in: query
+          type: string
+          description: Google Cloud Platform service account key.
+        - name: forceHttpBasicAuth
+          in: query
+          type: boolean
+          description: Whether to force HTTP basic auth.
+        - name: useAzureWorkloadIdentity
+          in: query
+          type: boolean
+          description: Whether to use azure workload identity for authentication.
+        - name: bearerToken
+          in: query
+          type: string
+          description: BearerToken contains the bearer token used for Git auth at the repo server.
+        - name: insecureOciForceHttp
+          in: query
+          type: boolean
+          description: Whether https should be disabled for an OCI repo.
+        - name: azureServicePrincipalClientId
+          in: query
+          type: string
+          description: Azure Service Principal Client ID.
+        - name: azureServicePrincipalClientSecret
+          in: query
+          type: string
+          description: Azure Service Principal Client Secret.
+        - name: azureServicePrincipalTenantId
+          in: query
+          type: string
+          description: Azure Service Principal Tenant ID.
+        - name: azureActiveDirectoryEndpoint
+          in: query
+          type: string
+          description: Azure Active Directory Endpoint.
+  exposes:
+  - type: rest
+    namespace: server-repositoryservice-rest
+    port: 8080
+    description: REST adapter for Consolidate Services — RepositoryService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/repositories
+      name: api-v1-repositories
+      description: REST surface for api-v1-repositories.
+      operations:
+      - method: GET
+        name: repositoryservicelistrepositories
+        description: ListRepositories gets a list of all configured repositories
+        call: server-repositoryservice.repositoryservicelistrepositories
+        with:
+          repo: rest.repo
+          forceRefresh: rest.forceRefresh
+          appProject: rest.appProject
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: repositoryservicecreaterepository
+        description: CreateRepository creates a new repository configuration
+        call: server-repositoryservice.repositoryservicecreaterepository
+        with:
+          body: rest.body
+          upsert: rest.upsert
+          credsOnly: rest.credsOnly
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/repositories/{repo-repo}
+      name: api-v1-repositories-repo-repo
+      description: REST surface for api-v1-repositories-repo.repo.
+      operations:
+      - method: PUT
+        name: repositoryserviceupdaterepository
+        description: UpdateRepository updates a repository configuration
+        call: server-repositoryservice.repositoryserviceupdaterepository
+        with:
+          repo.repo: rest.repo.repo
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/repositories/{repo}
+      name: api-v1-repositories-repo
+      description: REST surface for api-v1-repositories-repo.
+      operations:
+      - method: GET
+        name: repositoryserviceget
+        description: Get returns a repository or its credentials
+        call: server-repositoryservice.repositoryserviceget
+        with:
+          repo: rest.repo
+          forceRefresh: rest.forceRefresh
+          appProject: rest.appProject
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: repositoryservicedeleterepository
+        description: DeleteRepository deletes a repository from the configuration
+        call: server-repositoryservice.repositoryservicedeleterepository
+        with:
+          repo: rest.repo
+          forceRefresh: rest.forceRefresh
+          appProject: rest.appProject
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/repositories/{repo}/apps
+      name: api-v1-repositories-repo-apps
+      description: REST surface for api-v1-repositories-repo-apps.
+      operations:
+      - method: GET
+        name: repositoryservicelistapps
+        description: ListApps returns list of apps in the repo
+        call: server-repositoryservice.repositoryservicelistapps
+        with:
+          repo: rest.repo
+          revision: rest.revision
+          appName: rest.appName
+          appProject: rest.appProject
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/repositories/{repo}/helmcharts
+      name: api-v1-repositories-repo-helmcharts
+      description: REST surface for api-v1-repositories-repo-helmcharts.
+      operations:
+      - method: GET
+        name: repositoryservicegethelmcharts
+        description: GetHelmCharts returns list of helm charts in the specified repository
+        call: server-repositoryservice.repositoryservicegethelmcharts
+        with:
+          repo: rest.repo
+          forceRefresh: rest.forceRefresh
+          appProject: rest.appProject
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/repositories/{repo}/oci-tags
+      name: api-v1-repositories-repo-oci-tags
+      description: REST surface for api-v1-repositories-repo-oci-tags.
+      operations:
+      - method: GET
+        name: repositoryservicelistocitags
+        description: repositoryservicelistocitags
+        call: server-repositoryservice.repositoryservicelistocitags
+        with:
+          repo: rest.repo
+          forceRefresh: rest.forceRefresh
+          appProject: rest.appProject
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/repositories/{repo}/refs
+      name: api-v1-repositories-repo-refs
+      description: REST surface for api-v1-repositories-repo-refs.
+      operations:
+      - method: GET
+        name: repositoryservicelistrefs
+        description: repositoryservicelistrefs
+        call: server-repositoryservice.repositoryservicelistrefs
+        with:
+          repo: rest.repo
+          forceRefresh: rest.forceRefresh
+          appProject: rest.appProject
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/repositories/{repo}/validate
+      name: api-v1-repositories-repo-validate
+      description: REST surface for api-v1-repositories-repo-validate.
+      operations:
+      - method: POST
+        name: repositoryservicevalidateaccess
+        description: ValidateAccess validates access to a repository with given parameters
+        call: server-repositoryservice.repositoryservicevalidateaccess
+        with:
+          repo: rest.repo
+          body: rest.body
+          username: rest.username
+          password: rest.password
+          sshPrivateKey: rest.sshPrivateKey
+          insecure: rest.insecure
+          tlsClientCertData: rest.tlsClientCertData
+          tlsClientCertKey: rest.tlsClientCertKey
+          type: rest.type
+          name: rest.name
+          enableOci: rest.enableOci
+          githubAppPrivateKey: rest.githubAppPrivateKey
+          githubAppID: rest.githubAppID
+          githubAppInstallationID: rest.githubAppInstallationID
+          githubAppEnterpriseBaseUrl: rest.githubAppEnterpriseBaseUrl
+          proxy: rest.proxy
+          project: rest.project
+          gcpServiceAccountKey: rest.gcpServiceAccountKey
+          forceHttpBasicAuth: rest.forceHttpBasicAuth
+          useAzureWorkloadIdentity: rest.useAzureWorkloadIdentity
+          bearerToken: rest.bearerToken
+          insecureOciForceHttp: rest.insecureOciForceHttp
+          azureServicePrincipalClientId: rest.azureServicePrincipalClientId
+          azureServicePrincipalClientSecret: rest.azureServicePrincipalClientSecret
+          azureServicePrincipalTenantId: rest.azureServicePrincipalTenantId
+          azureActiveDirectoryEndpoint: rest.azureActiveDirectoryEndpoint
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/repositories/{source-repourl}/appdetails
+      name: api-v1-repositories-source-repourl-appdetails
+      description: REST surface for api-v1-repositories-source.repoURL-appdetails.
+      operations:
+      - method: POST
+        name: repositoryservicegetappdetails
+        description: GetAppDetails returns application details by given path
+        call: server-repositoryservice.repositoryservicegetappdetails
+        with:
+          source.repoURL: rest.source.repoURL
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/write-repositories
+      name: api-v1-write-repositories
+      description: REST surface for api-v1-write-repositories.
+      operations:
+      - method: GET
+        name: repositoryservicelistwriterepositories
+        description: ListWriteRepositories gets a list of all configured write repositories
+        call: server-repositoryservice.repositoryservicelistwriterepositories
+        with:
+          repo: rest.repo
+          forceRefresh: rest.forceRefresh
+          appProject: rest.appProject
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: repositoryservicecreatewriterepository
+        description: CreateWriteRepository creates a new write repository configuration
+        call: server-repositoryservice.repositoryservicecreatewriterepository
+        with:
+          body: rest.body
+          upsert: rest.upsert
+          credsOnly: rest.credsOnly
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/write-repositories/{repo-repo}
+      name: api-v1-write-repositories-repo-repo
+      description: REST surface for api-v1-write-repositories-repo.repo.
+      operations:
+      - method: PUT
+        name: repositoryserviceupdatewriterepository
+        description: UpdateWriteRepository updates a write repository configuration
+        call: server-repositoryservice.repositoryserviceupdatewriterepository
+        with:
+          repo.repo: rest.repo.repo
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/write-repositories/{repo}
+      name: api-v1-write-repositories-repo
+      description: REST surface for api-v1-write-repositories-repo.
+      operations:
+      - method: GET
+        name: repositoryservicegetwrite
+        description: GetWrite returns a repository or its write credentials
+        call: server-repositoryservice.repositoryservicegetwrite
+        with:
+          repo: rest.repo
+          forceRefresh: rest.forceRefresh
+          appProject: rest.appProject
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: repositoryservicedeletewriterepository
+        description: DeleteWriteRepository deletes a write repository from the configuration
+        call: server-repositoryservice.repositoryservicedeletewriterepository
+        with:
+          repo: rest.repo
+          forceRefresh: rest.forceRefresh
+          appProject: rest.appProject
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/write-repositories/{repo}/validate
+      name: api-v1-write-repositories-repo-validate
+      description: REST surface for api-v1-write-repositories-repo-validate.
+      operations:
+      - method: POST
+        name: repositoryservicevalidatewriteaccess
+        description: ValidateWriteAccess validates write access to a repository with given parameters
+        call: server-repositoryservice.repositoryservicevalidatewriteaccess
+        with:
+          repo: rest.repo
+          body: rest.body
+          username: rest.username
+          password: rest.password
+          sshPrivateKey: rest.sshPrivateKey
+          insecure: rest.insecure
+          tlsClientCertData: rest.tlsClientCertData
+          tlsClientCertKey: rest.tlsClientCertKey
+          type: rest.type
+          name: rest.name
+          enableOci: rest.enableOci
+          githubAppPrivateKey: rest.githubAppPrivateKey
+          githubAppID: rest.githubAppID
+          githubAppInstallationID: rest.githubAppInstallationID
+          githubAppEnterpriseBaseUrl: rest.githubAppEnterpriseBaseUrl
+          proxy: rest.proxy
+          project: rest.project
+          gcpServiceAccountKey: rest.gcpServiceAccountKey
+          forceHttpBasicAuth: rest.forceHttpBasicAuth
+          useAzureWorkloadIdentity: rest.useAzureWorkloadIdentity
+          bearerToken: rest.bearerToken
+          insecureOciForceHttp: rest.insecureOciForceHttp
+          azureServicePrincipalClientId: rest.azureServicePrincipalClientId
+          azureServicePrincipalClientSecret: rest.azureServicePrincipalClientSecret
+          azureServicePrincipalTenantId: rest.azureServicePrincipalTenantId
+          azureActiveDirectoryEndpoint: rest.azureActiveDirectoryEndpoint
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-repositoryservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Consolidate Services — RepositoryService. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: listrepositories-gets-list-all-configured
+      description: ListRepositories gets a list of all configured repositories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-repositoryservice.repositoryservicelistrepositories
+      with:
+        repo: tools.repo
+        forceRefresh: tools.forceRefresh
+        appProject: tools.appProject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createrepository-creates-new-repository-configuration
+      description: CreateRepository creates a new repository configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-repositoryservice.repositoryservicecreaterepository
+      with:
+        body: tools.body
+        upsert: tools.upsert
+        credsOnly: tools.credsOnly
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updaterepository-updates-repository-configuration
+      description: UpdateRepository updates a repository configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: server-repositoryservice.repositoryserviceupdaterepository
+      with:
+        repo.repo: tools.repo.repo
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-returns-repository-its-credentials
+      description: Get returns a repository or its credentials
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-repositoryservice.repositoryserviceget
+      with:
+        repo: tools.repo
+        forceRefresh: tools.forceRefresh
+        appProject: tools.appProject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleterepository-deletes-repository-configuration
+      description: DeleteRepository deletes a repository from the configuration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: server-repositoryservice.repositoryservicedeleterepository
+      with:
+        repo: tools.repo
+        forceRefresh: tools.forceRefresh
+        appProject: tools.appProject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listapps-returns-list-apps-repo
+      description: ListApps returns list of apps in the repo
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-repositoryservice.repositoryservicelistapps
+      with:
+        repo: tools.repo
+        revision: tools.revision
+        appName: tools.appName
+        appProject: tools.appProject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gethelmcharts-returns-list-helm-charts
+      description: GetHelmCharts returns list of helm charts in the specified repository
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-repositoryservice.repositoryservicegethelmcharts
+      with:
+        repo: tools.repo
+        forceRefresh: tools.forceRefresh
+        appProject: tools.appProject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: repositoryservicelistocitags
+      description: repositoryservicelistocitags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-repositoryservice.repositoryservicelistocitags
+      with:
+        repo: tools.repo
+        forceRefresh: tools.forceRefresh
+        appProject: tools.appProject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: repositoryservicelistrefs
+      description: repositoryservicelistrefs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-repositoryservice.repositoryservicelistrefs
+      with:
+        repo: tools.repo
+        forceRefresh: tools.forceRefresh
+        appProject: tools.appProject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: validateaccess-validates-access-repository-given
+      description: ValidateAccess validates access to a repository with given parameters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: server-repositoryservice.repositoryservicevalidateaccess
+      with:
+        repo: tools.repo
+        body: tools.body
+        username: tools.username
+        password: tools.password
+        sshPrivateKey: tools.sshPrivateKey
+        insecure: tools.insecure
+        tlsClientCertData: tools.tlsClientCertData
+        tlsClientCertKey: tools.tlsClientCertKey
+        type: tools.type
+        name: tools.name
+        enableOci: tools.enableOci
+        githubAppPrivateKey: tools.githubAppPrivateKey
+        githubAppID: tools.githubAppID
+        githubAppInstallationID: tools.githubAppInstallationID
+        githubAppEnterpriseBaseUrl: tools.githubAppEnterpriseBaseUrl
+        proxy: tools.proxy
+        project: tools.project
+        gcpServiceAccountKey: tools.gcpServiceAccountKey
+        forceHttpBasicAuth: tools.forceHttpBasicAuth
+        useAzureWorkloadIdentity: tools.useAzureWorkloadIdentity
+        bearerToken: tools.bearerToken
+        insecureOciForceHttp: tools.insecureOciForceHttp
+        azureServicePrincipalClientId: tools.azureServicePrincipalClientId
+        azureServicePrincipalClientSecret: tools.azureServicePrincipalClientSecret
+        azureServicePrincipalTenantId: tools.azureServicePrincipalTenantId
+        azureActiveDirectoryEndpoint: tools.azureActiveDirectoryEndpoint
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getappdetails-returns-application-details-given
+      description: GetAppDetails returns application details by given path
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-repositoryservice.repositoryservicegetappdetails
+      with:
+        source.repoURL: tools.source.repoURL
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listwriterepositories-gets-list-all-configured
+      description: ListWriteRepositories gets a list of all configured write repositories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-repositoryservice.repositoryservicelistwriterepositories
+      with:
+        repo: tools.repo
+        forceRefresh: tools.forceRefresh
+        appProject: tools.appProject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createwriterepository-creates-new-write-repository
+      description: CreateWriteRepository creates a new write repository configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-repositoryservice.repositoryservicecreatewriterepository
+      with:
+        body: tools.body
+        upsert: tools.upsert
+        credsOnly: tools.credsOnly
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatewriterepository-updates-write-repository-configuration
+      description: UpdateWriteRepository updates a write repository configuration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: server-repositoryservice.repositoryserviceupdatewriterepository
+      with:
+        repo.repo: tools.repo.repo
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getwrite-returns-repository-its-write
+      description: GetWrite returns a repository or its write credentials
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-repositoryservice.repositoryservicegetwrite
+      with:
+        repo: tools.repo
+        forceRefresh: tools.forceRefresh
+        appProject: tools.appProject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletewriterepository-deletes-write-repository-configuration
+      description: DeleteWriteRepository deletes a write repository from the configuration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: server-repositoryservice.repositoryservicedeletewriterepository
+      with:
+        repo: tools.repo
+        forceRefresh: tools.forceRefresh
+        appProject: tools.appProject
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: validatewriteaccess-validates-write-access-repository
+      description: ValidateWriteAccess validates write access to a repository with given parameters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: server-repositoryservice.repositoryservicevalidatewriteaccess
+      with:
+        repo: tools.repo
+        body: tools.body
+        username: tools.username
+        password: tools.password
+        sshPrivateKey: tools.sshPrivateKey
+        insecure: tools.insecure
+        tlsClientCertData: tools.tlsClientCertData
+        tlsClientCertKey: tools.tlsClientCertKey
+        type: tools.type
+        name: tools.name
+        enableOci: tools.enableOci
+        githubAppPrivateKey: tools.githubAppPrivateKey
+        githubAppID: tools.githubAppID
+        githubAppInstallationID: tools.githubAppInstallationID
+        githubAppEnterpriseBaseUrl: tools.githubAppEnterpriseBaseUrl
+        proxy: tools.proxy
+        project: tools.project
+        gcpServiceAccountKey: tools.gcpServiceAccountKey
+        forceHttpBasicAuth: tools.forceHttpBasicAuth
+        useAzureWorkloadIdentity: tools.useAzureWorkloadIdentity
+        bearerToken: tools.bearerToken
+        insecureOciForceHttp: tools.insecureOciForceHttp
+        azureServicePrincipalClientId: tools.azureServicePrincipalClientId
+        azureServicePrincipalClientSecret: tools.azureServicePrincipalClientSecret
+        azureServicePrincipalTenantId: tools.azureServicePrincipalTenantId
+        azureActiveDirectoryEndpoint: tools.azureActiveDirectoryEndpoint
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,380 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Consolidate Services — RepoCredsService
+  description: 'Consolidate Services — RepoCredsService. 8 operations. Lead operation: ListRepositoryCredentials gets a list
+    of all configured repository credential sets. Self-contained Naftiko capability covering one Argocd business surface.'
+  tags:
+  - Argocd
+  - RepoCredsService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ARGOCD_API_KEY: ARGOCD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: server-repocredsservice
+    baseUri: ''
+    description: Consolidate Services — RepoCredsService business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-repocreds
+      path: /api/v1/repocreds
+      operations:
+      - name: repocredsservicelistrepositorycredentials
+        method: GET
+        description: ListRepositoryCredentials gets a list of all configured repository credential sets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: url
+          in: query
+          type: string
+          description: Repo URL for query.
+      - name: repocredsservicecreaterepositorycredentials
+        method: POST
+        description: CreateRepositoryCredentials creates a new repository credential set
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: Repository definition
+          required: true
+        - name: upsert
+          in: query
+          type: boolean
+          description: Whether to create in upsert mode.
+    - name: api-v1-repocreds-creds.url
+      path: /api/v1/repocreds/{creds.url}
+      operations:
+      - name: repocredsserviceupdaterepositorycredentials
+        method: PUT
+        description: UpdateRepositoryCredentials updates a repository credential set
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: creds.url
+          in: path
+          type: string
+          description: URL is the URL to which these credentials match
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-repocreds-url
+      path: /api/v1/repocreds/{url}
+      operations:
+      - name: repocredsservicedeleterepositorycredentials
+        method: DELETE
+        description: DeleteRepositoryCredentials deletes a repository credential set from the configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: url
+          in: path
+          type: string
+          required: true
+    - name: api-v1-write-repocreds
+      path: /api/v1/write-repocreds
+      operations:
+      - name: repocredsservicelistwriterepositorycredentials
+        method: GET
+        description: ListWriteRepositoryCredentials gets a list of all configured repository credential sets that have write
+          access
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: url
+          in: query
+          type: string
+          description: Repo URL for query.
+      - name: repocredsservicecreatewriterepositorycredentials
+        method: POST
+        description: CreateWriteRepositoryCredentials creates a new repository credential set with write access
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: Repository definition
+          required: true
+        - name: upsert
+          in: query
+          type: boolean
+          description: Whether to create in upsert mode.
+    - name: api-v1-write-repocreds-creds.url
+      path: /api/v1/write-repocreds/{creds.url}
+      operations:
+      - name: repocredsserviceupdatewriterepositorycredentials
+        method: PUT
+        description: UpdateWriteRepositoryCredentials updates a repository credential set with write access
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: creds.url
+          in: path
+          type: string
+          description: URL is the URL to which these credentials match
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-write-repocreds-url
+      path: /api/v1/write-repocreds/{url}
+      operations:
+      - name: repocredsservicedeletewriterepositorycredentials
+        method: DELETE
+        description: DeleteWriteRepositoryCredentials deletes a repository credential set with write access from the configuration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: url
+          in: path
+          type: string
+          required: true
+  exposes:
+  - type: rest
+    namespace: server-repocredsservice-rest
+    port: 8080
+    description: REST adapter for Consolidate Services — RepoCredsService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/repocreds
+      name: api-v1-repocreds
+      description: REST surface for api-v1-repocreds.
+      operations:
+      - method: GET
+        name: repocredsservicelistrepositorycredentials
+        description: ListRepositoryCredentials gets a list of all configured repository credential sets
+        call: server-repocredsservice.repocredsservicelistrepositorycredentials
+        with:
+          url: rest.url
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: repocredsservicecreaterepositorycredentials
+        description: CreateRepositoryCredentials creates a new repository credential set
+        call: server-repocredsservice.repocredsservicecreaterepositorycredentials
+        with:
+          body: rest.body
+          upsert: rest.upsert
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/repocreds/{creds-url}
+      name: api-v1-repocreds-creds-url
+      description: REST surface for api-v1-repocreds-creds.url.
+      operations:
+      - method: PUT
+        name: repocredsserviceupdaterepositorycredentials
+        description: UpdateRepositoryCredentials updates a repository credential set
+        call: server-repocredsservice.repocredsserviceupdaterepositorycredentials
+        with:
+          creds.url: rest.creds.url
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/repocreds/{url}
+      name: api-v1-repocreds-url
+      description: REST surface for api-v1-repocreds-url.
+      operations:
+      - method: DELETE
+        name: repocredsservicedeleterepositorycredentials
+        description: DeleteRepositoryCredentials deletes a repository credential set from the configuration
+        call: server-repocredsservice.repocredsservicedeleterepositorycredentials
+        with:
+          url: rest.url
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/write-repocreds
+      name: api-v1-write-repocreds
+      description: REST surface for api-v1-write-repocreds.
+      operations:
+      - method: GET
+        name: repocredsservicelistwriterepositorycredentials
+        description: ListWriteRepositoryCredentials gets a list of all configured repository credential sets that have write
+          access
+        call: server-repocredsservice.repocredsservicelistwriterepositorycredentials
+        with:
+          url: rest.url
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: repocredsservicecreatewriterepositorycredentials
+        description: CreateWriteRepositoryCredentials creates a new repository credential set with write access
+        call: server-repocredsservice.repocredsservicecreatewriterepositorycredentials
+        with:
+          body: rest.body
+          upsert: rest.upsert
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/write-repocreds/{creds-url}
+      name: api-v1-write-repocreds-creds-url
+      description: REST surface for api-v1-write-repocreds-creds.url.
+      operations:
+      - method: PUT
+        name: repocredsserviceupdatewriterepositorycredentials
+        description: UpdateWriteRepositoryCredentials updates a repository credential set with write access
+        call: server-repocredsservice.repocredsserviceupdatewriterepositorycredentials
+        with:
+          creds.url: rest.creds.url
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/write-repocreds/{url}
+      name: api-v1-write-repocreds-url
+      description: REST surface for api-v1-write-repocreds-url.
+      operations:
+      - method: DELETE
+        name: repocredsservicedeletewriterepositorycredentials
+        description: DeleteWriteRepositoryCredentials deletes a repository credential set with write access from the configuration
+        call: server-repocredsservice.repocredsservicedeletewriterepositorycredentials
+        with:
+          url: rest.url
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-repocredsservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Consolidate Services — RepoCredsService. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: listrepositorycredentials-gets-list-all-configured
+      description: ListRepositoryCredentials gets a list of all configured repository credential sets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-repocredsservice.repocredsservicelistrepositorycredentials
+      with:
+        url: tools.url
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createrepositorycredentials-creates-new-repository-credential
+      description: CreateRepositoryCredentials creates a new repository credential set
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-repocredsservice.repocredsservicecreaterepositorycredentials
+      with:
+        body: tools.body
+        upsert: tools.upsert
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updaterepositorycredentials-updates-repository-credential-set
+      description: UpdateRepositoryCredentials updates a repository credential set
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: server-repocredsservice.repocredsserviceupdaterepositorycredentials
+      with:
+        creds.url: tools.creds.url
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleterepositorycredentials-deletes-repository-credential-set
+      description: DeleteRepositoryCredentials deletes a repository credential set from the configuration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: server-repocredsservice.repocredsservicedeleterepositorycredentials
+      with:
+        url: tools.url
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listwriterepositorycredentials-gets-list-all-configured
+      description: ListWriteRepositoryCredentials gets a list of all configured repository credential sets that have write
+        access
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-repocredsservice.repocredsservicelistwriterepositorycredentials
+      with:
+        url: tools.url
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createwriterepositorycredentials-creates-new-repository-credential
+      description: CreateWriteRepositoryCredentials creates a new repository credential set with write access
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-repocredsservice.repocredsservicecreatewriterepositorycredentials
+      with:
+        body: tools.body
+        upsert: tools.upsert
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatewriterepositorycredentials-updates-repository-credential-set
+      description: UpdateWriteRepositoryCredentials updates a repository credential set with write access
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: server-repocredsservice.repocredsserviceupdatewriterepositorycredentials
+      with:
+        creds.url: tools.creds.url
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletewriterepositorycredentials-deletes-repository-credential-set
+      description: DeleteWriteRepositoryCredentials deletes a repository credential set with write access from the configuration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: server-repocredsservice.repocredsservicedeletewriterepositorycredentials
+      with:
+        url: tools.url
+      outputParameters:
+      - type: object
+        mapping: $.

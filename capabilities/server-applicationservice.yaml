@@ -1,0 +1,2235 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Consolidate Services — ApplicationService
+  description: 'Consolidate Services — ApplicationService. 32 operations. Lead operation: List returns list of applications.
+    Self-contained Naftiko capability covering one Argocd business surface.'
+  tags:
+  - Argocd
+  - ApplicationService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ARGOCD_API_KEY: ARGOCD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: server-applicationservice
+    baseUri: ''
+    description: Consolidate Services — ApplicationService business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-applications
+      path: /api/v1/applications
+      operations:
+      - name: applicationservicelist
+        method: GET
+        description: List returns list of applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: the application's name.
+        - name: refresh
+          in: query
+          type: string
+          description: forces application reconciliation if set to 'hard'.
+        - name: projects
+          in: query
+          type: array
+          description: the project names to restrict returned list applications.
+        - name: resourceVersion
+          in: query
+          type: string
+          description: when specified with a watch call, shows changes that occur after that particular version of a resource.
+        - name: selector
+          in: query
+          type: string
+          description: the selector to restrict returned list to applications only with matched labels.
+        - name: repo
+          in: query
+          type: string
+          description: the repoURL to restrict returned list applications.
+        - name: appNamespace
+          in: query
+          type: string
+          description: the application's namespace.
+        - name: project
+          in: query
+          type: array
+          description: the project names to restrict returned list applications (legacy name for backwards-compatibility).
+      - name: applicationservicecreate
+        method: POST
+        description: Create creates an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          required: true
+        - name: upsert
+          in: query
+          type: boolean
+        - name: validate
+          in: query
+          type: boolean
+    - name: api-v1-applications-manifestsWithFiles
+      path: /api/v1/applications/manifestsWithFiles
+      operations:
+      - name: applicationservicegetmanifestswithfiles
+        method: POST
+        description: GetManifestsWithFiles returns application manifests using provided files to generate them
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          description: (streaming inputs)
+          required: true
+    - name: api-v1-applications-appName-server-side-diff
+      path: /api/v1/applications/{appName}/server-side-diff
+      operations:
+      - name: applicationserviceserversidediff
+        method: GET
+        description: ServerSideDiff performs server-side diff calculation using dry-run apply
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appName
+          in: path
+          type: string
+          required: true
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+        - name: targetManifests
+          in: query
+          type: array
+    - name: api-v1-applications-application.metadata.name
+      path: /api/v1/applications/{application.metadata.name}
+      operations:
+      - name: applicationserviceupdate
+        method: PUT
+        description: Update updates an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: application.metadata.name
+          in: path
+          type: string
+          description: Name must be unique within a namespace. Is required when creating resources, although
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+        - name: validate
+          in: query
+          type: boolean
+        - name: project
+          in: query
+          type: string
+    - name: api-v1-applications-applicationName-managed-resources
+      path: /api/v1/applications/{applicationName}/managed-resources
+      operations:
+      - name: applicationservicemanagedresources
+        method: GET
+        description: ManagedResources returns list of managed resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationName
+          in: path
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: name
+          in: query
+          type: string
+        - name: version
+          in: query
+          type: string
+        - name: group
+          in: query
+          type: string
+        - name: kind
+          in: query
+          type: string
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+    - name: api-v1-applications-applicationName-resource-tree
+      path: /api/v1/applications/{applicationName}/resource-tree
+      operations:
+      - name: applicationserviceresourcetree
+        method: GET
+        description: ResourceTree returns resource tree
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationName
+          in: path
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: name
+          in: query
+          type: string
+        - name: version
+          in: query
+          type: string
+        - name: group
+          in: query
+          type: string
+        - name: kind
+          in: query
+          type: string
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+    - name: api-v1-applications-name
+      path: /api/v1/applications/{name}
+      operations:
+      - name: applicationserviceget
+        method: GET
+        description: Get returns an application by name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: the application's name
+          required: true
+        - name: refresh
+          in: query
+          type: string
+          description: forces application reconciliation if set to 'hard'.
+        - name: projects
+          in: query
+          type: array
+          description: the project names to restrict returned list applications.
+        - name: resourceVersion
+          in: query
+          type: string
+          description: when specified with a watch call, shows changes that occur after that particular version of a resource.
+        - name: selector
+          in: query
+          type: string
+          description: the selector to restrict returned list to applications only with matched labels.
+        - name: repo
+          in: query
+          type: string
+          description: the repoURL to restrict returned list applications.
+        - name: appNamespace
+          in: query
+          type: string
+          description: the application's namespace.
+        - name: project
+          in: query
+          type: array
+          description: the project names to restrict returned list applications (legacy name for backwards-compatibility).
+      - name: applicationservicedelete
+        method: DELETE
+        description: Delete deletes an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: cascade
+          in: query
+          type: boolean
+        - name: propagationPolicy
+          in: query
+          type: string
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+      - name: applicationservicepatch
+        method: PATCH
+        description: Patch patch an application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-applications-name-events
+      path: /api/v1/applications/{name}/events
+      operations:
+      - name: applicationservicelistresourceevents
+        method: GET
+        description: ListResourceEvents returns a list of event resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: resourceNamespace
+          in: query
+          type: string
+        - name: resourceName
+          in: query
+          type: string
+        - name: resourceUID
+          in: query
+          type: string
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+    - name: api-v1-applications-name-links
+      path: /api/v1/applications/{name}/links
+      operations:
+      - name: applicationservicelistlinks
+        method: GET
+        description: ListLinks returns the list of all application deep links
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+    - name: api-v1-applications-name-logs
+      path: /api/v1/applications/{name}/logs
+      operations:
+      - name: applicationservicepodlogs2
+        method: GET
+        description: PodLogs returns stream of log entries for the specified pod. Pod
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: podName
+          in: query
+          type: string
+        - name: container
+          in: query
+          type: string
+        - name: sinceSeconds
+          in: query
+          type: string
+        - name: sinceTime.seconds
+          in: query
+          type: string
+          description: Represents seconds of UTC time since Unix epoch
+        - name: sinceTime.nanos
+          in: query
+          type: integer
+          description: Non-negative fractions of a second at nanosecond resolution. Negative
+        - name: tailLines
+          in: query
+          type: string
+        - name: follow
+          in: query
+          type: boolean
+        - name: untilTime
+          in: query
+          type: string
+        - name: filter
+          in: query
+          type: string
+        - name: kind
+          in: query
+          type: string
+        - name: group
+          in: query
+          type: string
+        - name: resourceName
+          in: query
+          type: string
+        - name: previous
+          in: query
+          type: boolean
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+        - name: matchCase
+          in: query
+          type: boolean
+    - name: api-v1-applications-name-manifests
+      path: /api/v1/applications/{name}/manifests
+      operations:
+      - name: applicationservicegetmanifests
+        method: GET
+        description: GetManifests returns application manifests
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: revision
+          in: query
+          type: string
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+        - name: sourcePositions
+          in: query
+          type: array
+        - name: revisions
+          in: query
+          type: array
+        - name: noCache
+          in: query
+          type: boolean
+    - name: api-v1-applications-name-operation
+      path: /api/v1/applications/{name}/operation
+      operations:
+      - name: applicationserviceterminateoperation
+        method: DELETE
+        description: TerminateOperation terminates the currently running operation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+    - name: api-v1-applications-name-pods-podName-logs
+      path: /api/v1/applications/{name}/pods/{podName}/logs
+      operations:
+      - name: applicationservicepodlogs
+        method: GET
+        description: PodLogs returns stream of log entries for the specified pod. Pod
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: podName
+          in: path
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: container
+          in: query
+          type: string
+        - name: sinceSeconds
+          in: query
+          type: string
+        - name: sinceTime.seconds
+          in: query
+          type: string
+          description: Represents seconds of UTC time since Unix epoch
+        - name: sinceTime.nanos
+          in: query
+          type: integer
+          description: Non-negative fractions of a second at nanosecond resolution. Negative
+        - name: tailLines
+          in: query
+          type: string
+        - name: follow
+          in: query
+          type: boolean
+        - name: untilTime
+          in: query
+          type: string
+        - name: filter
+          in: query
+          type: string
+        - name: kind
+          in: query
+          type: string
+        - name: group
+          in: query
+          type: string
+        - name: resourceName
+          in: query
+          type: string
+        - name: previous
+          in: query
+          type: boolean
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+        - name: matchCase
+          in: query
+          type: boolean
+    - name: api-v1-applications-name-resource
+      path: /api/v1/applications/{name}/resource
+      operations:
+      - name: applicationservicegetresource
+        method: GET
+        description: GetResource returns single application resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: resourceName
+          in: query
+          type: string
+        - name: version
+          in: query
+          type: string
+        - name: group
+          in: query
+          type: string
+        - name: kind
+          in: query
+          type: string
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+      - name: applicationservicepatchresource
+        method: POST
+        description: PatchResource patch single application resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: resourceName
+          in: query
+          type: string
+        - name: version
+          in: query
+          type: string
+        - name: group
+          in: query
+          type: string
+        - name: kind
+          in: query
+          type: string
+        - name: patchType
+          in: query
+          type: string
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+      - name: applicationservicedeleteresource
+        method: DELETE
+        description: DeleteResource deletes a single application resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: resourceName
+          in: query
+          type: string
+        - name: version
+          in: query
+          type: string
+        - name: group
+          in: query
+          type: string
+        - name: kind
+          in: query
+          type: string
+        - name: force
+          in: query
+          type: boolean
+        - name: orphan
+          in: query
+          type: boolean
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+    - name: api-v1-applications-name-resource-actions
+      path: /api/v1/applications/{name}/resource/actions
+      operations:
+      - name: applicationservicelistresourceactions
+        method: GET
+        description: ListResourceActions returns list of resource actions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: resourceName
+          in: query
+          type: string
+        - name: version
+          in: query
+          type: string
+        - name: group
+          in: query
+          type: string
+        - name: kind
+          in: query
+          type: string
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+      - name: applicationservicerunresourceaction
+        method: POST
+        description: RunResourceAction runs a resource action
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: resourceName
+          in: query
+          type: string
+        - name: version
+          in: query
+          type: string
+        - name: group
+          in: query
+          type: string
+        - name: kind
+          in: query
+          type: string
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+    - name: api-v1-applications-name-resource-actions-v2
+      path: /api/v1/applications/{name}/resource/actions/v2
+      operations:
+      - name: applicationservicerunresourceactionv2
+        method: POST
+        description: RunResourceActionV2 runs a resource action with parameters
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-applications-name-resource-links
+      path: /api/v1/applications/{name}/resource/links
+      operations:
+      - name: applicationservicelistresourcelinks
+        method: GET
+        description: ListResourceLinks returns the list of all resource deep links
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: resourceName
+          in: query
+          type: string
+        - name: version
+          in: query
+          type: string
+        - name: group
+          in: query
+          type: string
+        - name: kind
+          in: query
+          type: string
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+    - name: api-v1-applications-name-revisions-revision-chartdetails
+      path: /api/v1/applications/{name}/revisions/{revision}/chartdetails
+      operations:
+      - name: applicationservicerevisionchartdetails
+        method: GET
+        description: Get the chart metadata (description, maintainers, home) for a specific revision of the application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: the application's name
+          required: true
+        - name: revision
+          in: path
+          type: string
+          description: the revision of the app
+          required: true
+        - name: appNamespace
+          in: query
+          type: string
+          description: the application's namespace.
+        - name: project
+          in: query
+          type: string
+        - name: sourceIndex
+          in: query
+          type: integer
+          description: source index (for multi source apps).
+        - name: versionId
+          in: query
+          type: integer
+          description: versionId from historical data (for multi source apps).
+    - name: api-v1-applications-name-revisions-revision-metadata
+      path: /api/v1/applications/{name}/revisions/{revision}/metadata
+      operations:
+      - name: applicationservicerevisionmetadata
+        method: GET
+        description: Get the meta-data (author, date, tags, message) for a specific revision of the application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: the application's name
+          required: true
+        - name: revision
+          in: path
+          type: string
+          description: the revision of the app
+          required: true
+        - name: appNamespace
+          in: query
+          type: string
+          description: the application's namespace.
+        - name: project
+          in: query
+          type: string
+        - name: sourceIndex
+          in: query
+          type: integer
+          description: source index (for multi source apps).
+        - name: versionId
+          in: query
+          type: integer
+          description: versionId from historical data (for multi source apps).
+    - name: api-v1-applications-name-revisions-revision-ocimetadata
+      path: /api/v1/applications/{name}/revisions/{revision}/ocimetadata
+      operations:
+      - name: applicationservicegetocimetadata
+        method: GET
+        description: Get the chart metadata (description, maintainers, home) for a specific revision of the application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: the application's name
+          required: true
+        - name: revision
+          in: path
+          type: string
+          description: the revision of the app
+          required: true
+        - name: appNamespace
+          in: query
+          type: string
+          description: the application's namespace.
+        - name: project
+          in: query
+          type: string
+        - name: sourceIndex
+          in: query
+          type: integer
+          description: source index (for multi source apps).
+        - name: versionId
+          in: query
+          type: integer
+          description: versionId from historical data (for multi source apps).
+    - name: api-v1-applications-name-rollback
+      path: /api/v1/applications/{name}/rollback
+      operations:
+      - name: applicationservicerollback
+        method: POST
+        description: Rollback syncs an application to its target state
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-applications-name-spec
+      path: /api/v1/applications/{name}/spec
+      operations:
+      - name: applicationserviceupdatespec
+        method: PUT
+        description: UpdateSpec updates an application spec
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+        - name: validate
+          in: query
+          type: boolean
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+    - name: api-v1-applications-name-sync
+      path: /api/v1/applications/{name}/sync
+      operations:
+      - name: applicationservicesync
+        method: POST
+        description: Sync syncs an application to its target state
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-applications-name-syncwindows
+      path: /api/v1/applications/{name}/syncwindows
+      operations:
+      - name: applicationservicegetapplicationsyncwindows
+        method: GET
+        description: Get returns sync windows of the application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+    - name: api-v1-stream-applications
+      path: /api/v1/stream/applications
+      operations:
+      - name: applicationservicewatch
+        method: GET
+        description: Watch returns stream of application change events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: the application's name.
+        - name: refresh
+          in: query
+          type: string
+          description: forces application reconciliation if set to 'hard'.
+        - name: projects
+          in: query
+          type: array
+          description: the project names to restrict returned list applications.
+        - name: resourceVersion
+          in: query
+          type: string
+          description: when specified with a watch call, shows changes that occur after that particular version of a resource.
+        - name: selector
+          in: query
+          type: string
+          description: the selector to restrict returned list to applications only with matched labels.
+        - name: repo
+          in: query
+          type: string
+          description: the repoURL to restrict returned list applications.
+        - name: appNamespace
+          in: query
+          type: string
+          description: the application's namespace.
+        - name: project
+          in: query
+          type: array
+          description: the project names to restrict returned list applications (legacy name for backwards-compatibility).
+    - name: api-v1-stream-applications-applicationName-resource-tree
+      path: /api/v1/stream/applications/{applicationName}/resource-tree
+      operations:
+      - name: applicationservicewatchresourcetree
+        method: GET
+        description: Watch returns stream of application resource tree
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: applicationName
+          in: path
+          type: string
+          required: true
+        - name: namespace
+          in: query
+          type: string
+        - name: name
+          in: query
+          type: string
+        - name: version
+          in: query
+          type: string
+        - name: group
+          in: query
+          type: string
+        - name: kind
+          in: query
+          type: string
+        - name: appNamespace
+          in: query
+          type: string
+        - name: project
+          in: query
+          type: string
+  exposes:
+  - type: rest
+    namespace: server-applicationservice-rest
+    port: 8080
+    description: REST adapter for Consolidate Services — ApplicationService. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/applications
+      name: api-v1-applications
+      description: REST surface for api-v1-applications.
+      operations:
+      - method: GET
+        name: applicationservicelist
+        description: List returns list of applications
+        call: server-applicationservice.applicationservicelist
+        with:
+          name: rest.name
+          refresh: rest.refresh
+          projects: rest.projects
+          resourceVersion: rest.resourceVersion
+          selector: rest.selector
+          repo: rest.repo
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: applicationservicecreate
+        description: Create creates an application
+        call: server-applicationservice.applicationservicecreate
+        with:
+          body: rest.body
+          upsert: rest.upsert
+          validate: rest.validate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/manifestswithfiles
+      name: api-v1-applications-manifestswithfiles
+      description: REST surface for api-v1-applications-manifestsWithFiles.
+      operations:
+      - method: POST
+        name: applicationservicegetmanifestswithfiles
+        description: GetManifestsWithFiles returns application manifests using provided files to generate them
+        call: server-applicationservice.applicationservicegetmanifestswithfiles
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{appname}/server-side-diff
+      name: api-v1-applications-appname-server-side-diff
+      description: REST surface for api-v1-applications-appName-server-side-diff.
+      operations:
+      - method: GET
+        name: applicationserviceserversidediff
+        description: ServerSideDiff performs server-side diff calculation using dry-run apply
+        call: server-applicationservice.applicationserviceserversidediff
+        with:
+          appName: rest.appName
+          appNamespace: rest.appNamespace
+          project: rest.project
+          targetManifests: rest.targetManifests
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{application-metadata-name}
+      name: api-v1-applications-application-metadata-name
+      description: REST surface for api-v1-applications-application.metadata.name.
+      operations:
+      - method: PUT
+        name: applicationserviceupdate
+        description: Update updates an application
+        call: server-applicationservice.applicationserviceupdate
+        with:
+          application.metadata.name: rest.application.metadata.name
+          body: rest.body
+          validate: rest.validate
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{applicationname}/managed-resources
+      name: api-v1-applications-applicationname-managed-resources
+      description: REST surface for api-v1-applications-applicationName-managed-resources.
+      operations:
+      - method: GET
+        name: applicationservicemanagedresources
+        description: ManagedResources returns list of managed resources
+        call: server-applicationservice.applicationservicemanagedresources
+        with:
+          applicationName: rest.applicationName
+          namespace: rest.namespace
+          name: rest.name
+          version: rest.version
+          group: rest.group
+          kind: rest.kind
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{applicationname}/resource-tree
+      name: api-v1-applications-applicationname-resource-tree
+      description: REST surface for api-v1-applications-applicationName-resource-tree.
+      operations:
+      - method: GET
+        name: applicationserviceresourcetree
+        description: ResourceTree returns resource tree
+        call: server-applicationservice.applicationserviceresourcetree
+        with:
+          applicationName: rest.applicationName
+          namespace: rest.namespace
+          name: rest.name
+          version: rest.version
+          group: rest.group
+          kind: rest.kind
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}
+      name: api-v1-applications-name
+      description: REST surface for api-v1-applications-name.
+      operations:
+      - method: GET
+        name: applicationserviceget
+        description: Get returns an application by name
+        call: server-applicationservice.applicationserviceget
+        with:
+          name: rest.name
+          refresh: rest.refresh
+          projects: rest.projects
+          resourceVersion: rest.resourceVersion
+          selector: rest.selector
+          repo: rest.repo
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: applicationservicedelete
+        description: Delete deletes an application
+        call: server-applicationservice.applicationservicedelete
+        with:
+          name: rest.name
+          cascade: rest.cascade
+          propagationPolicy: rest.propagationPolicy
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: applicationservicepatch
+        description: Patch patch an application
+        call: server-applicationservice.applicationservicepatch
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/events
+      name: api-v1-applications-name-events
+      description: REST surface for api-v1-applications-name-events.
+      operations:
+      - method: GET
+        name: applicationservicelistresourceevents
+        description: ListResourceEvents returns a list of event resources
+        call: server-applicationservice.applicationservicelistresourceevents
+        with:
+          name: rest.name
+          resourceNamespace: rest.resourceNamespace
+          resourceName: rest.resourceName
+          resourceUID: rest.resourceUID
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/links
+      name: api-v1-applications-name-links
+      description: REST surface for api-v1-applications-name-links.
+      operations:
+      - method: GET
+        name: applicationservicelistlinks
+        description: ListLinks returns the list of all application deep links
+        call: server-applicationservice.applicationservicelistlinks
+        with:
+          name: rest.name
+          namespace: rest.namespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/logs
+      name: api-v1-applications-name-logs
+      description: REST surface for api-v1-applications-name-logs.
+      operations:
+      - method: GET
+        name: applicationservicepodlogs2
+        description: PodLogs returns stream of log entries for the specified pod. Pod
+        call: server-applicationservice.applicationservicepodlogs2
+        with:
+          name: rest.name
+          namespace: rest.namespace
+          podName: rest.podName
+          container: rest.container
+          sinceSeconds: rest.sinceSeconds
+          sinceTime.seconds: rest.sinceTime.seconds
+          sinceTime.nanos: rest.sinceTime.nanos
+          tailLines: rest.tailLines
+          follow: rest.follow
+          untilTime: rest.untilTime
+          filter: rest.filter
+          kind: rest.kind
+          group: rest.group
+          resourceName: rest.resourceName
+          previous: rest.previous
+          appNamespace: rest.appNamespace
+          project: rest.project
+          matchCase: rest.matchCase
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/manifests
+      name: api-v1-applications-name-manifests
+      description: REST surface for api-v1-applications-name-manifests.
+      operations:
+      - method: GET
+        name: applicationservicegetmanifests
+        description: GetManifests returns application manifests
+        call: server-applicationservice.applicationservicegetmanifests
+        with:
+          name: rest.name
+          revision: rest.revision
+          appNamespace: rest.appNamespace
+          project: rest.project
+          sourcePositions: rest.sourcePositions
+          revisions: rest.revisions
+          noCache: rest.noCache
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/operation
+      name: api-v1-applications-name-operation
+      description: REST surface for api-v1-applications-name-operation.
+      operations:
+      - method: DELETE
+        name: applicationserviceterminateoperation
+        description: TerminateOperation terminates the currently running operation
+        call: server-applicationservice.applicationserviceterminateoperation
+        with:
+          name: rest.name
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/pods/{podname}/logs
+      name: api-v1-applications-name-pods-podname-logs
+      description: REST surface for api-v1-applications-name-pods-podName-logs.
+      operations:
+      - method: GET
+        name: applicationservicepodlogs
+        description: PodLogs returns stream of log entries for the specified pod. Pod
+        call: server-applicationservice.applicationservicepodlogs
+        with:
+          name: rest.name
+          podName: rest.podName
+          namespace: rest.namespace
+          container: rest.container
+          sinceSeconds: rest.sinceSeconds
+          sinceTime.seconds: rest.sinceTime.seconds
+          sinceTime.nanos: rest.sinceTime.nanos
+          tailLines: rest.tailLines
+          follow: rest.follow
+          untilTime: rest.untilTime
+          filter: rest.filter
+          kind: rest.kind
+          group: rest.group
+          resourceName: rest.resourceName
+          previous: rest.previous
+          appNamespace: rest.appNamespace
+          project: rest.project
+          matchCase: rest.matchCase
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/resource
+      name: api-v1-applications-name-resource
+      description: REST surface for api-v1-applications-name-resource.
+      operations:
+      - method: GET
+        name: applicationservicegetresource
+        description: GetResource returns single application resource
+        call: server-applicationservice.applicationservicegetresource
+        with:
+          name: rest.name
+          namespace: rest.namespace
+          resourceName: rest.resourceName
+          version: rest.version
+          group: rest.group
+          kind: rest.kind
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: applicationservicepatchresource
+        description: PatchResource patch single application resource
+        call: server-applicationservice.applicationservicepatchresource
+        with:
+          name: rest.name
+          body: rest.body
+          namespace: rest.namespace
+          resourceName: rest.resourceName
+          version: rest.version
+          group: rest.group
+          kind: rest.kind
+          patchType: rest.patchType
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: applicationservicedeleteresource
+        description: DeleteResource deletes a single application resource
+        call: server-applicationservice.applicationservicedeleteresource
+        with:
+          name: rest.name
+          namespace: rest.namespace
+          resourceName: rest.resourceName
+          version: rest.version
+          group: rest.group
+          kind: rest.kind
+          force: rest.force
+          orphan: rest.orphan
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/resource/actions
+      name: api-v1-applications-name-resource-actions
+      description: REST surface for api-v1-applications-name-resource-actions.
+      operations:
+      - method: GET
+        name: applicationservicelistresourceactions
+        description: ListResourceActions returns list of resource actions
+        call: server-applicationservice.applicationservicelistresourceactions
+        with:
+          name: rest.name
+          namespace: rest.namespace
+          resourceName: rest.resourceName
+          version: rest.version
+          group: rest.group
+          kind: rest.kind
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: applicationservicerunresourceaction
+        description: RunResourceAction runs a resource action
+        call: server-applicationservice.applicationservicerunresourceaction
+        with:
+          name: rest.name
+          body: rest.body
+          namespace: rest.namespace
+          resourceName: rest.resourceName
+          version: rest.version
+          group: rest.group
+          kind: rest.kind
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/resource/actions/v2
+      name: api-v1-applications-name-resource-actions-v2
+      description: REST surface for api-v1-applications-name-resource-actions-v2.
+      operations:
+      - method: POST
+        name: applicationservicerunresourceactionv2
+        description: RunResourceActionV2 runs a resource action with parameters
+        call: server-applicationservice.applicationservicerunresourceactionv2
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/resource/links
+      name: api-v1-applications-name-resource-links
+      description: REST surface for api-v1-applications-name-resource-links.
+      operations:
+      - method: GET
+        name: applicationservicelistresourcelinks
+        description: ListResourceLinks returns the list of all resource deep links
+        call: server-applicationservice.applicationservicelistresourcelinks
+        with:
+          name: rest.name
+          namespace: rest.namespace
+          resourceName: rest.resourceName
+          version: rest.version
+          group: rest.group
+          kind: rest.kind
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/revisions/{revision}/chartdetails
+      name: api-v1-applications-name-revisions-revision-chartdetails
+      description: REST surface for api-v1-applications-name-revisions-revision-chartdetails.
+      operations:
+      - method: GET
+        name: applicationservicerevisionchartdetails
+        description: Get the chart metadata (description, maintainers, home) for a specific revision of the application
+        call: server-applicationservice.applicationservicerevisionchartdetails
+        with:
+          name: rest.name
+          revision: rest.revision
+          appNamespace: rest.appNamespace
+          project: rest.project
+          sourceIndex: rest.sourceIndex
+          versionId: rest.versionId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/revisions/{revision}/metadata
+      name: api-v1-applications-name-revisions-revision-metadata
+      description: REST surface for api-v1-applications-name-revisions-revision-metadata.
+      operations:
+      - method: GET
+        name: applicationservicerevisionmetadata
+        description: Get the meta-data (author, date, tags, message) for a specific revision of the application
+        call: server-applicationservice.applicationservicerevisionmetadata
+        with:
+          name: rest.name
+          revision: rest.revision
+          appNamespace: rest.appNamespace
+          project: rest.project
+          sourceIndex: rest.sourceIndex
+          versionId: rest.versionId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/revisions/{revision}/ocimetadata
+      name: api-v1-applications-name-revisions-revision-ocimetadata
+      description: REST surface for api-v1-applications-name-revisions-revision-ocimetadata.
+      operations:
+      - method: GET
+        name: applicationservicegetocimetadata
+        description: Get the chart metadata (description, maintainers, home) for a specific revision of the application
+        call: server-applicationservice.applicationservicegetocimetadata
+        with:
+          name: rest.name
+          revision: rest.revision
+          appNamespace: rest.appNamespace
+          project: rest.project
+          sourceIndex: rest.sourceIndex
+          versionId: rest.versionId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/rollback
+      name: api-v1-applications-name-rollback
+      description: REST surface for api-v1-applications-name-rollback.
+      operations:
+      - method: POST
+        name: applicationservicerollback
+        description: Rollback syncs an application to its target state
+        call: server-applicationservice.applicationservicerollback
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/spec
+      name: api-v1-applications-name-spec
+      description: REST surface for api-v1-applications-name-spec.
+      operations:
+      - method: PUT
+        name: applicationserviceupdatespec
+        description: UpdateSpec updates an application spec
+        call: server-applicationservice.applicationserviceupdatespec
+        with:
+          name: rest.name
+          body: rest.body
+          validate: rest.validate
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/sync
+      name: api-v1-applications-name-sync
+      description: REST surface for api-v1-applications-name-sync.
+      operations:
+      - method: POST
+        name: applicationservicesync
+        description: Sync syncs an application to its target state
+        call: server-applicationservice.applicationservicesync
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applications/{name}/syncwindows
+      name: api-v1-applications-name-syncwindows
+      description: REST surface for api-v1-applications-name-syncwindows.
+      operations:
+      - method: GET
+        name: applicationservicegetapplicationsyncwindows
+        description: Get returns sync windows of the application
+        call: server-applicationservice.applicationservicegetapplicationsyncwindows
+        with:
+          name: rest.name
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/stream/applications
+      name: api-v1-stream-applications
+      description: REST surface for api-v1-stream-applications.
+      operations:
+      - method: GET
+        name: applicationservicewatch
+        description: Watch returns stream of application change events
+        call: server-applicationservice.applicationservicewatch
+        with:
+          name: rest.name
+          refresh: rest.refresh
+          projects: rest.projects
+          resourceVersion: rest.resourceVersion
+          selector: rest.selector
+          repo: rest.repo
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/stream/applications/{applicationname}/resource-tree
+      name: api-v1-stream-applications-applicationname-resource-tree
+      description: REST surface for api-v1-stream-applications-applicationName-resource-tree.
+      operations:
+      - method: GET
+        name: applicationservicewatchresourcetree
+        description: Watch returns stream of application resource tree
+        call: server-applicationservice.applicationservicewatchresourcetree
+        with:
+          applicationName: rest.applicationName
+          namespace: rest.namespace
+          name: rest.name
+          version: rest.version
+          group: rest.group
+          kind: rest.kind
+          appNamespace: rest.appNamespace
+          project: rest.project
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-applicationservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Consolidate Services — ApplicationService. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-returns-list-applications
+      description: List returns list of applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicelist
+      with:
+        name: tools.name
+        refresh: tools.refresh
+        projects: tools.projects
+        resourceVersion: tools.resourceVersion
+        selector: tools.selector
+        repo: tools.repo
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-creates-application
+      description: Create creates an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-applicationservice.applicationservicecreate
+      with:
+        body: tools.body
+        upsert: tools.upsert
+        validate: tools.validate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getmanifestswithfiles-returns-application-manifests-using
+      description: GetManifestsWithFiles returns application manifests using provided files to generate them
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-applicationservice.applicationservicegetmanifestswithfiles
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: serversidediff-performs-server-side-diff
+      description: ServerSideDiff performs server-side diff calculation using dry-run apply
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationserviceserversidediff
+      with:
+        appName: tools.appName
+        appNamespace: tools.appNamespace
+        project: tools.project
+        targetManifests: tools.targetManifests
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-updates-application
+      description: Update updates an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationserviceupdate
+      with:
+        application.metadata.name: tools.application.metadata.name
+        body: tools.body
+        validate: tools.validate
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: managedresources-returns-list-managed-resources
+      description: ManagedResources returns list of managed resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicemanagedresources
+      with:
+        applicationName: tools.applicationName
+        namespace: tools.namespace
+        name: tools.name
+        version: tools.version
+        group: tools.group
+        kind: tools.kind
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: resourcetree-returns-resource-tree
+      description: ResourceTree returns resource tree
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationserviceresourcetree
+      with:
+        applicationName: tools.applicationName
+        namespace: tools.namespace
+        name: tools.name
+        version: tools.version
+        group: tools.group
+        kind: tools.kind
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-returns-application-name
+      description: Get returns an application by name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationserviceget
+      with:
+        name: tools.name
+        refresh: tools.refresh
+        projects: tools.projects
+        resourceVersion: tools.resourceVersion
+        selector: tools.selector
+        repo: tools.repo
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-deletes-application
+      description: Delete deletes an application
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: server-applicationservice.applicationservicedelete
+      with:
+        name: tools.name
+        cascade: tools.cascade
+        propagationPolicy: tools.propagationPolicy
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-patch-application
+      description: Patch patch an application
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicepatch
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listresourceevents-returns-list-event-resources
+      description: ListResourceEvents returns a list of event resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicelistresourceevents
+      with:
+        name: tools.name
+        resourceNamespace: tools.resourceNamespace
+        resourceName: tools.resourceName
+        resourceUID: tools.resourceUID
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listlinks-returns-list-all-application
+      description: ListLinks returns the list of all application deep links
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicelistlinks
+      with:
+        name: tools.name
+        namespace: tools.namespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: podlogs-returns-stream-log-entries
+      description: PodLogs returns stream of log entries for the specified pod. Pod
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicepodlogs2
+      with:
+        name: tools.name
+        namespace: tools.namespace
+        podName: tools.podName
+        container: tools.container
+        sinceSeconds: tools.sinceSeconds
+        sinceTime.seconds: tools.sinceTime.seconds
+        sinceTime.nanos: tools.sinceTime.nanos
+        tailLines: tools.tailLines
+        follow: tools.follow
+        untilTime: tools.untilTime
+        filter: tools.filter
+        kind: tools.kind
+        group: tools.group
+        resourceName: tools.resourceName
+        previous: tools.previous
+        appNamespace: tools.appNamespace
+        project: tools.project
+        matchCase: tools.matchCase
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getmanifests-returns-application-manifests
+      description: GetManifests returns application manifests
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicegetmanifests
+      with:
+        name: tools.name
+        revision: tools.revision
+        appNamespace: tools.appNamespace
+        project: tools.project
+        sourcePositions: tools.sourcePositions
+        revisions: tools.revisions
+        noCache: tools.noCache
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: terminateoperation-terminates-currently-running-operation
+      description: TerminateOperation terminates the currently running operation
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: server-applicationservice.applicationserviceterminateoperation
+      with:
+        name: tools.name
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: podlogs-returns-stream-log-entries-2
+      description: PodLogs returns stream of log entries for the specified pod. Pod
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicepodlogs
+      with:
+        name: tools.name
+        podName: tools.podName
+        namespace: tools.namespace
+        container: tools.container
+        sinceSeconds: tools.sinceSeconds
+        sinceTime.seconds: tools.sinceTime.seconds
+        sinceTime.nanos: tools.sinceTime.nanos
+        tailLines: tools.tailLines
+        follow: tools.follow
+        untilTime: tools.untilTime
+        filter: tools.filter
+        kind: tools.kind
+        group: tools.group
+        resourceName: tools.resourceName
+        previous: tools.previous
+        appNamespace: tools.appNamespace
+        project: tools.project
+        matchCase: tools.matchCase
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getresource-returns-single-application-resource
+      description: GetResource returns single application resource
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicegetresource
+      with:
+        name: tools.name
+        namespace: tools.namespace
+        resourceName: tools.resourceName
+        version: tools.version
+        group: tools.group
+        kind: tools.kind
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patchresource-patch-single-application-resource
+      description: PatchResource patch single application resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-applicationservice.applicationservicepatchresource
+      with:
+        name: tools.name
+        body: tools.body
+        namespace: tools.namespace
+        resourceName: tools.resourceName
+        version: tools.version
+        group: tools.group
+        kind: tools.kind
+        patchType: tools.patchType
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteresource-deletes-single-application-resource
+      description: DeleteResource deletes a single application resource
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: server-applicationservice.applicationservicedeleteresource
+      with:
+        name: tools.name
+        namespace: tools.namespace
+        resourceName: tools.resourceName
+        version: tools.version
+        group: tools.group
+        kind: tools.kind
+        force: tools.force
+        orphan: tools.orphan
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listresourceactions-returns-list-resource-actions
+      description: ListResourceActions returns list of resource actions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicelistresourceactions
+      with:
+        name: tools.name
+        namespace: tools.namespace
+        resourceName: tools.resourceName
+        version: tools.version
+        group: tools.group
+        kind: tools.kind
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: runresourceaction-runs-resource-action
+      description: RunResourceAction runs a resource action
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-applicationservice.applicationservicerunresourceaction
+      with:
+        name: tools.name
+        body: tools.body
+        namespace: tools.namespace
+        resourceName: tools.resourceName
+        version: tools.version
+        group: tools.group
+        kind: tools.kind
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: runresourceactionv2-runs-resource-action-parameters
+      description: RunResourceActionV2 runs a resource action with parameters
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-applicationservice.applicationservicerunresourceactionv2
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listresourcelinks-returns-list-all-resource
+      description: ListResourceLinks returns the list of all resource deep links
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicelistresourcelinks
+      with:
+        name: tools.name
+        namespace: tools.namespace
+        resourceName: tools.resourceName
+        version: tools.version
+        group: tools.group
+        kind: tools.kind
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-chart-metadata-description-maintainers
+      description: Get the chart metadata (description, maintainers, home) for a specific revision of the application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicerevisionchartdetails
+      with:
+        name: tools.name
+        revision: tools.revision
+        appNamespace: tools.appNamespace
+        project: tools.project
+        sourceIndex: tools.sourceIndex
+        versionId: tools.versionId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-meta-data-author-date
+      description: Get the meta-data (author, date, tags, message) for a specific revision of the application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicerevisionmetadata
+      with:
+        name: tools.name
+        revision: tools.revision
+        appNamespace: tools.appNamespace
+        project: tools.project
+        sourceIndex: tools.sourceIndex
+        versionId: tools.versionId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-chart-metadata-description-maintainers-2
+      description: Get the chart metadata (description, maintainers, home) for a specific revision of the application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicegetocimetadata
+      with:
+        name: tools.name
+        revision: tools.revision
+        appNamespace: tools.appNamespace
+        project: tools.project
+        sourceIndex: tools.sourceIndex
+        versionId: tools.versionId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rollback-syncs-application-its-target
+      description: Rollback syncs an application to its target state
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: server-applicationservice.applicationservicerollback
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatespec-updates-application-spec
+      description: UpdateSpec updates an application spec
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationserviceupdatespec
+      with:
+        name: tools.name
+        body: tools.body
+        validate: tools.validate
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sync-syncs-application-its-target
+      description: Sync syncs an application to its target state
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: server-applicationservice.applicationservicesync
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-returns-sync-windows-application
+      description: Get returns sync windows of the application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicegetapplicationsyncwindows
+      with:
+        name: tools.name
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: watch-returns-stream-application-change
+      description: Watch returns stream of application change events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicewatch
+      with:
+        name: tools.name
+        refresh: tools.refresh
+        projects: tools.projects
+        resourceVersion: tools.resourceVersion
+        selector: tools.selector
+        repo: tools.repo
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: watch-returns-stream-application-resource
+      description: Watch returns stream of application resource tree
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationservice.applicationservicewatchresourcetree
+      with:
+        applicationName: tools.applicationName
+        namespace: tools.namespace
+        name: tools.name
+        version: tools.version
+        group: tools.group
+        kind: tools.kind
+        appNamespace: tools.appNamespace
+        project: tools.project
+      outputParameters:
+      - type: object
+        mapping: $.

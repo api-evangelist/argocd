@@ -1,0 +1,99 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Consolidate Services — SettingsService
+  description: 'Consolidate Services — SettingsService. 2 operations. Lead operation: Get returns Argo CD settings. Self-contained
+    Naftiko capability covering one Argocd business surface.'
+  tags:
+  - Argocd
+  - SettingsService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ARGOCD_API_KEY: ARGOCD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: server-settingsservice
+    baseUri: ''
+    description: Consolidate Services — SettingsService business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-settings
+      path: /api/v1/settings
+      operations:
+      - name: settingsserviceget
+        method: GET
+        description: Get returns Argo CD settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-v1-settings-plugins
+      path: /api/v1/settings/plugins
+      operations:
+      - name: settingsservicegetplugins
+        method: GET
+        description: Get returns Argo CD plugins
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: server-settingsservice-rest
+    port: 8080
+    description: REST adapter for Consolidate Services — SettingsService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/settings
+      name: api-v1-settings
+      description: REST surface for api-v1-settings.
+      operations:
+      - method: GET
+        name: settingsserviceget
+        description: Get returns Argo CD settings
+        call: server-settingsservice.settingsserviceget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/settings/plugins
+      name: api-v1-settings-plugins
+      description: REST surface for api-v1-settings-plugins.
+      operations:
+      - method: GET
+        name: settingsservicegetplugins
+        description: Get returns Argo CD plugins
+        call: server-settingsservice.settingsservicegetplugins
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-settingsservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Consolidate Services — SettingsService. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: get-returns-argo-cd-settings
+      description: Get returns Argo CD settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-settingsservice.settingsserviceget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-returns-argo-cd-plugins
+      description: Get returns Argo CD plugins
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-settingsservice.settingsservicegetplugins
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,417 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Consolidate Services — ApplicationSetService
+  description: 'Consolidate Services — ApplicationSetService. 8 operations. Lead operation: List returns list of applicationset.
+    Self-contained Naftiko capability covering one Argocd business surface.'
+  tags:
+  - Argocd
+  - ApplicationSetService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ARGOCD_API_KEY: ARGOCD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: server-applicationsetservice
+    baseUri: ''
+    description: Consolidate Services — ApplicationSetService business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-applicationsets
+      path: /api/v1/applicationsets
+      operations:
+      - name: applicationsetservicelist
+        method: GET
+        description: List returns list of applicationset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: projects
+          in: query
+          type: array
+          description: the project names to restrict returned list applicationsets.
+        - name: selector
+          in: query
+          type: string
+          description: the selector to restrict returned list to applications only with matched labels.
+        - name: appsetNamespace
+          in: query
+          type: string
+          description: The application set namespace. Default empty is argocd control plane namespace.
+      - name: applicationsetservicecreate
+        method: POST
+        description: Create creates an applicationset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          required: true
+        - name: upsert
+          in: query
+          type: boolean
+        - name: dryRun
+          in: query
+          type: boolean
+    - name: api-v1-applicationsets-generate
+      path: /api/v1/applicationsets/generate
+      operations:
+      - name: applicationsetservicegenerate
+        method: POST
+        description: Generate generates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-applicationsets-name
+      path: /api/v1/applicationsets/{name}
+      operations:
+      - name: applicationsetserviceget
+        method: GET
+        description: Get returns an applicationset by name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: the applicationsets's name
+          required: true
+        - name: appsetNamespace
+          in: query
+          type: string
+          description: The application set namespace. Default empty is argocd control plane namespace.
+      - name: applicationsetservicedelete
+        method: DELETE
+        description: Delete deletes an application set
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: appsetNamespace
+          in: query
+          type: string
+          description: The application set namespace. Default empty is argocd control plane namespace.
+    - name: api-v1-applicationsets-name-events
+      path: /api/v1/applicationsets/{name}/events
+      operations:
+      - name: applicationsetservicelistresourceevents
+        method: GET
+        description: ListResourceEvents returns a list of event resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: the applicationsets's name
+          required: true
+        - name: appsetNamespace
+          in: query
+          type: string
+          description: The application set namespace. Default empty is argocd control plane namespace.
+    - name: api-v1-applicationsets-name-resource-tree
+      path: /api/v1/applicationsets/{name}/resource-tree
+      operations:
+      - name: applicationsetserviceresourcetree
+        method: GET
+        description: ResourceTree returns resource tree
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+        - name: appsetNamespace
+          in: query
+          type: string
+          description: The application set namespace. Default empty is argocd control plane namespace.
+    - name: api-v1-stream-applicationsets
+      path: /api/v1/stream/applicationsets
+      operations:
+      - name: applicationsetservicewatch
+        method: GET
+        description: ''
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+        - name: projects
+          in: query
+          type: array
+        - name: selector
+          in: query
+          type: string
+        - name: appSetNamespace
+          in: query
+          type: string
+        - name: resourceVersion
+          in: query
+          type: string
+          description: when specified with a watch call, shows changes that occur after that particular version of a resource.
+  exposes:
+  - type: rest
+    namespace: server-applicationsetservice-rest
+    port: 8080
+    description: REST adapter for Consolidate Services — ApplicationSetService. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/applicationsets
+      name: api-v1-applicationsets
+      description: REST surface for api-v1-applicationsets.
+      operations:
+      - method: GET
+        name: applicationsetservicelist
+        description: List returns list of applicationset
+        call: server-applicationsetservice.applicationsetservicelist
+        with:
+          projects: rest.projects
+          selector: rest.selector
+          appsetNamespace: rest.appsetNamespace
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: applicationsetservicecreate
+        description: Create creates an applicationset
+        call: server-applicationsetservice.applicationsetservicecreate
+        with:
+          body: rest.body
+          upsert: rest.upsert
+          dryRun: rest.dryRun
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applicationsets/generate
+      name: api-v1-applicationsets-generate
+      description: REST surface for api-v1-applicationsets-generate.
+      operations:
+      - method: POST
+        name: applicationsetservicegenerate
+        description: Generate generates
+        call: server-applicationsetservice.applicationsetservicegenerate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applicationsets/{name}
+      name: api-v1-applicationsets-name
+      description: REST surface for api-v1-applicationsets-name.
+      operations:
+      - method: GET
+        name: applicationsetserviceget
+        description: Get returns an applicationset by name
+        call: server-applicationsetservice.applicationsetserviceget
+        with:
+          name: rest.name
+          appsetNamespace: rest.appsetNamespace
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: applicationsetservicedelete
+        description: Delete deletes an application set
+        call: server-applicationsetservice.applicationsetservicedelete
+        with:
+          name: rest.name
+          appsetNamespace: rest.appsetNamespace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applicationsets/{name}/events
+      name: api-v1-applicationsets-name-events
+      description: REST surface for api-v1-applicationsets-name-events.
+      operations:
+      - method: GET
+        name: applicationsetservicelistresourceevents
+        description: ListResourceEvents returns a list of event resources
+        call: server-applicationsetservice.applicationsetservicelistresourceevents
+        with:
+          name: rest.name
+          appsetNamespace: rest.appsetNamespace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/applicationsets/{name}/resource-tree
+      name: api-v1-applicationsets-name-resource-tree
+      description: REST surface for api-v1-applicationsets-name-resource-tree.
+      operations:
+      - method: GET
+        name: applicationsetserviceresourcetree
+        description: ResourceTree returns resource tree
+        call: server-applicationsetservice.applicationsetserviceresourcetree
+        with:
+          name: rest.name
+          appsetNamespace: rest.appsetNamespace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/stream/applicationsets
+      name: api-v1-stream-applicationsets
+      description: REST surface for api-v1-stream-applicationsets.
+      operations:
+      - method: GET
+        name: applicationsetservicewatch
+        description: applicationsetservicewatch
+        call: server-applicationsetservice.applicationsetservicewatch
+        with:
+          name: rest.name
+          projects: rest.projects
+          selector: rest.selector
+          appSetNamespace: rest.appSetNamespace
+          resourceVersion: rest.resourceVersion
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-applicationsetservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Consolidate Services — ApplicationSetService. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-returns-list-applicationset
+      description: List returns list of applicationset
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationsetservice.applicationsetservicelist
+      with:
+        projects: tools.projects
+        selector: tools.selector
+        appsetNamespace: tools.appsetNamespace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-creates-applicationset
+      description: Create creates an applicationset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-applicationsetservice.applicationsetservicecreate
+      with:
+        body: tools.body
+        upsert: tools.upsert
+        dryRun: tools.dryRun
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generate-generates
+      description: Generate generates
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-applicationsetservice.applicationsetservicegenerate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-returns-applicationset-name
+      description: Get returns an applicationset by name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationsetservice.applicationsetserviceget
+      with:
+        name: tools.name
+        appsetNamespace: tools.appsetNamespace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-deletes-application-set
+      description: Delete deletes an application set
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: server-applicationsetservice.applicationsetservicedelete
+      with:
+        name: tools.name
+        appsetNamespace: tools.appsetNamespace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listresourceevents-returns-list-event-resources
+      description: ListResourceEvents returns a list of event resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationsetservice.applicationsetservicelistresourceevents
+      with:
+        name: tools.name
+        appsetNamespace: tools.appsetNamespace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: resourcetree-returns-resource-tree
+      description: ResourceTree returns resource tree
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationsetservice.applicationsetserviceresourcetree
+      with:
+        name: tools.name
+        appsetNamespace: tools.appsetNamespace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: applicationsetservicewatch
+      description: applicationsetservicewatch
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-applicationsetservice.applicationsetservicewatch
+      with:
+        name: tools.name
+        projects: tools.projects
+        selector: tools.selector
+        appSetNamespace: tools.appSetNamespace
+        resourceVersion: tools.resourceVersion
+      outputParameters:
+      - type: object
+        mapping: $.

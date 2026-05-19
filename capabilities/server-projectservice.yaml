@@ -1,0 +1,548 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Consolidate Services — ProjectService
+  description: 'Consolidate Services — ProjectService. 12 operations. Lead operation: List returns list of projects. Self-contained
+    Naftiko capability covering one Argocd business surface.'
+  tags:
+  - Argocd
+  - ProjectService
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ARGOCD_API_KEY: ARGOCD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: server-projectservice
+    baseUri: ''
+    description: Consolidate Services — ProjectService business capability. Self-contained, no shared references.
+    resources:
+    - name: api-v1-projects
+      path: /api/v1/projects
+      operations:
+      - name: projectservicelist
+        method: GET
+        description: List returns list of projects
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+      - name: projectservicecreate
+        method: POST
+        description: Create a new project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-projects-name
+      path: /api/v1/projects/{name}
+      operations:
+      - name: projectserviceget
+        method: GET
+        description: Get returns a project by name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+      - name: projectservicedelete
+        method: DELETE
+        description: Delete deletes a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+    - name: api-v1-projects-name-detailed
+      path: /api/v1/projects/{name}/detailed
+      operations:
+      - name: projectservicegetdetailedproject
+        method: GET
+        description: GetDetailedProject returns a project that include project, global project and scoped resources by name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+    - name: api-v1-projects-name-events
+      path: /api/v1/projects/{name}/events
+      operations:
+      - name: projectservicelistevents
+        method: GET
+        description: ListEvents returns a list of project events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+    - name: api-v1-projects-name-globalprojects
+      path: /api/v1/projects/{name}/globalprojects
+      operations:
+      - name: projectservicegetglobalprojects
+        method: GET
+        description: Get returns a virtual project by name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+    - name: api-v1-projects-name-links
+      path: /api/v1/projects/{name}/links
+      operations:
+      - name: projectservicelistlinks
+        method: GET
+        description: ListLinks returns all deep links for the particular project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+    - name: api-v1-projects-name-syncwindows
+      path: /api/v1/projects/{name}/syncwindows
+      operations:
+      - name: projectservicegetsyncwindowsstate
+        method: GET
+        description: GetSchedulesState returns true if there are any active sync syncWindows
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+    - name: api-v1-projects-project.metadata.name
+      path: /api/v1/projects/{project.metadata.name}
+      operations:
+      - name: projectserviceupdate
+        method: PUT
+        description: Update updates a project
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project.metadata.name
+          in: path
+          type: string
+          description: Name must be unique within a namespace. Is required when creating resources, although
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-projects-project-roles-role-token
+      path: /api/v1/projects/{project}/roles/{role}/token
+      operations:
+      - name: projectservicecreatetoken
+        method: POST
+        description: Create a new project token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: role
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: string
+          required: true
+    - name: api-v1-projects-project-roles-role-token-iat
+      path: /api/v1/projects/{project}/roles/{role}/token/{iat}
+      operations:
+      - name: projectservicedeletetoken
+        method: DELETE
+        description: Delete a new project token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: project
+          in: path
+          type: string
+          required: true
+        - name: role
+          in: path
+          type: string
+          required: true
+        - name: iat
+          in: path
+          type: string
+          required: true
+        - name: id
+          in: query
+          type: string
+  exposes:
+  - type: rest
+    namespace: server-projectservice-rest
+    port: 8080
+    description: REST adapter for Consolidate Services — ProjectService. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/v1/projects
+      name: api-v1-projects
+      description: REST surface for api-v1-projects.
+      operations:
+      - method: GET
+        name: projectservicelist
+        description: List returns list of projects
+        call: server-projectservice.projectservicelist
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: projectservicecreate
+        description: Create a new project
+        call: server-projectservice.projectservicecreate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/projects/{name}
+      name: api-v1-projects-name
+      description: REST surface for api-v1-projects-name.
+      operations:
+      - method: GET
+        name: projectserviceget
+        description: Get returns a project by name
+        call: server-projectservice.projectserviceget
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: projectservicedelete
+        description: Delete deletes a project
+        call: server-projectservice.projectservicedelete
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/projects/{name}/detailed
+      name: api-v1-projects-name-detailed
+      description: REST surface for api-v1-projects-name-detailed.
+      operations:
+      - method: GET
+        name: projectservicegetdetailedproject
+        description: GetDetailedProject returns a project that include project, global project and scoped resources by name
+        call: server-projectservice.projectservicegetdetailedproject
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/projects/{name}/events
+      name: api-v1-projects-name-events
+      description: REST surface for api-v1-projects-name-events.
+      operations:
+      - method: GET
+        name: projectservicelistevents
+        description: ListEvents returns a list of project events
+        call: server-projectservice.projectservicelistevents
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/projects/{name}/globalprojects
+      name: api-v1-projects-name-globalprojects
+      description: REST surface for api-v1-projects-name-globalprojects.
+      operations:
+      - method: GET
+        name: projectservicegetglobalprojects
+        description: Get returns a virtual project by name
+        call: server-projectservice.projectservicegetglobalprojects
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/projects/{name}/links
+      name: api-v1-projects-name-links
+      description: REST surface for api-v1-projects-name-links.
+      operations:
+      - method: GET
+        name: projectservicelistlinks
+        description: ListLinks returns all deep links for the particular project
+        call: server-projectservice.projectservicelistlinks
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/projects/{name}/syncwindows
+      name: api-v1-projects-name-syncwindows
+      description: REST surface for api-v1-projects-name-syncwindows.
+      operations:
+      - method: GET
+        name: projectservicegetsyncwindowsstate
+        description: GetSchedulesState returns true if there are any active sync syncWindows
+        call: server-projectservice.projectservicegetsyncwindowsstate
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/projects/{project-metadata-name}
+      name: api-v1-projects-project-metadata-name
+      description: REST surface for api-v1-projects-project.metadata.name.
+      operations:
+      - method: PUT
+        name: projectserviceupdate
+        description: Update updates a project
+        call: server-projectservice.projectserviceupdate
+        with:
+          project.metadata.name: rest.project.metadata.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/projects/{project}/roles/{role}/token
+      name: api-v1-projects-project-roles-role-token
+      description: REST surface for api-v1-projects-project-roles-role-token.
+      operations:
+      - method: POST
+        name: projectservicecreatetoken
+        description: Create a new project token
+        call: server-projectservice.projectservicecreatetoken
+        with:
+          project: rest.project
+          role: rest.role
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/v1/projects/{project}/roles/{role}/token/{iat}
+      name: api-v1-projects-project-roles-role-token-iat
+      description: REST surface for api-v1-projects-project-roles-role-token-iat.
+      operations:
+      - method: DELETE
+        name: projectservicedeletetoken
+        description: Delete a new project token
+        call: server-projectservice.projectservicedeletetoken
+        with:
+          project: rest.project
+          role: rest.role
+          iat: rest.iat
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: server-projectservice-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Consolidate Services — ProjectService. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-returns-list-projects
+      description: List returns list of projects
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-projectservice.projectservicelist
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-project
+      description: Create a new project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-projectservice.projectservicecreate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-returns-project-name
+      description: Get returns a project by name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-projectservice.projectserviceget
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-deletes-project
+      description: Delete deletes a project
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: server-projectservice.projectservicedelete
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getdetailedproject-returns-project-that-include
+      description: GetDetailedProject returns a project that include project, global project and scoped resources by name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-projectservice.projectservicegetdetailedproject
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listevents-returns-list-project-events
+      description: ListEvents returns a list of project events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-projectservice.projectservicelistevents
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-returns-virtual-project-name
+      description: Get returns a virtual project by name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-projectservice.projectservicegetglobalprojects
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listlinks-returns-all-deep-links
+      description: ListLinks returns all deep links for the particular project
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-projectservice.projectservicelistlinks
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getschedulesstate-returns-true-if-there
+      description: GetSchedulesState returns true if there are any active sync syncWindows
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: server-projectservice.projectservicegetsyncwindowsstate
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-updates-project
+      description: Update updates a project
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: server-projectservice.projectserviceupdate
+      with:
+        project.metadata.name: tools.project.metadata.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-project-token
+      description: Create a new project token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: server-projectservice.projectservicecreatetoken
+      with:
+        project: tools.project
+        role: tools.role
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-new-project-token
+      description: Delete a new project token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: server-projectservice.projectservicedeletetoken
+      with:
+        project: tools.project
+        role: tools.role
+        iat: tools.iat
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
