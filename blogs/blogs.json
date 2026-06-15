@@ -2,10 +2,10 @@
   "repo": "argocd",
   "feeds": [
     {
-      "source": "https://blog.argoproj.io/feed/",
-      "feed_url": "https://blog.argoproj.io/feed/",
+      "source": "https://medium.com/feed/argo-project",
+      "feed_url": "https://medium.com/feed/argo-project",
       "title": "",
-      "saved": 0,
+      "saved": 1,
       "method": "feed"
     },
     {
@@ -16,6 +16,6 @@
       "method": "none"
     }
   ],
-  "fetched": "2026-06-01T23:35:02Z",
-  "post_count": 10
+  "post_count": 12,
+  "fetched": "2026-06-14T20:42:17Z"
 }

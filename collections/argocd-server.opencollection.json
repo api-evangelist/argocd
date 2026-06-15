@@ -1,0 +1,3437 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Consolidate Services",
+    "version": "version not set"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AccountService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListAccounts returns the list of accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/account"
+          },
+          "docs": "ListAccounts returns the list of accounts"
+        },
+        {
+          "info": {
+            "name": "CanI checks if the current account has permission to perform an action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/account/can-i/:resource/:action/:subresource",
+            "params": [
+              {
+                "name": "resource",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "subresource",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "CanI checks if the current account has permission to perform an action"
+        },
+        {
+          "info": {
+            "name": "UpdatePassword updates an account's password to a new value",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/account/password"
+          },
+          "docs": "UpdatePassword updates an account's password to a new value"
+        },
+        {
+          "info": {
+            "name": "GetAccount returns an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/account/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetAccount returns an account"
+        },
+        {
+          "info": {
+            "name": "CreateToken creates a token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/account/:name/token",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "CreateToken creates a token"
+        },
+        {
+          "info": {
+            "name": "DeleteToken deletes a token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/account/:name/token/:id",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeleteToken deletes a token"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ApplicationService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List returns list of applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "the application's name."
+              },
+              {
+                "name": "refresh",
+                "value": "",
+                "type": "query",
+                "description": "forces application reconciliation if set to 'hard'."
+              },
+              {
+                "name": "projects",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications."
+              },
+              {
+                "name": "resourceVersion",
+                "value": "",
+                "type": "query",
+                "description": "when specified with a watch call, shows changes that occur after that particular version of a resource."
+              },
+              {
+                "name": "selector",
+                "value": "",
+                "type": "query",
+                "description": "the selector to restrict returned list to applications only with matched labels."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "the repoURL to restrict returned list applications."
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications (legacy name for backwards-compatibility)."
+              }
+            ]
+          },
+          "docs": "List returns list of applications"
+        },
+        {
+          "info": {
+            "name": "Create creates an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "validate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Create creates an application"
+        },
+        {
+          "info": {
+            "name": "GetManifestsWithFiles returns application manifests using provided files to generate them",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/manifestsWithFiles"
+          },
+          "docs": "GetManifestsWithFiles returns application manifests using provided files to generate them"
+        },
+        {
+          "info": {
+            "name": "ServerSideDiff performs server-side diff calculation using dry-run apply",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:appName/server-side-diff",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "targetManifests",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ServerSideDiff performs server-side diff calculation using dry-run apply"
+        },
+        {
+          "info": {
+            "name": "Update updates an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/applications/:application.metadata.name",
+            "params": [
+              {
+                "name": "application.metadata.name",
+                "value": "",
+                "type": "path",
+                "description": "Name must be unique within a namespace. Is required when creating resources, although\nsome resources may allow a client to request the generation of an appropriate name\nautomatically. Name is primarily intended for creation idempotence and configuration\ndefinition.\nCannot be updated.\nMore info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names\n+optional"
+              },
+              {
+                "name": "validate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Update updates an application"
+        },
+        {
+          "info": {
+            "name": "ManagedResources returns list of managed resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:applicationName/managed-resources",
+            "params": [
+              {
+                "name": "applicationName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ManagedResources returns list of managed resources"
+        },
+        {
+          "info": {
+            "name": "ResourceTree returns resource tree",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:applicationName/resource-tree",
+            "params": [
+              {
+                "name": "applicationName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ResourceTree returns resource tree"
+        },
+        {
+          "info": {
+            "name": "Get returns an application by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "the application's name"
+              },
+              {
+                "name": "refresh",
+                "value": "",
+                "type": "query",
+                "description": "forces application reconciliation if set to 'hard'."
+              },
+              {
+                "name": "projects",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications."
+              },
+              {
+                "name": "resourceVersion",
+                "value": "",
+                "type": "query",
+                "description": "when specified with a watch call, shows changes that occur after that particular version of a resource."
+              },
+              {
+                "name": "selector",
+                "value": "",
+                "type": "query",
+                "description": "the selector to restrict returned list to applications only with matched labels."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "the repoURL to restrict returned list applications."
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications (legacy name for backwards-compatibility)."
+              }
+            ]
+          },
+          "docs": "Get returns an application by name"
+        },
+        {
+          "info": {
+            "name": "Patch patch an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/applications/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Patch patch an application"
+        },
+        {
+          "info": {
+            "name": "Delete deletes an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/applications/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cascade",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "propagationPolicy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete deletes an application"
+        },
+        {
+          "info": {
+            "name": "ListResourceEvents returns a list of event resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/events",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resourceNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceUID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListResourceEvents returns a list of event resources"
+        },
+        {
+          "info": {
+            "name": "ListLinks returns the list of all application deep links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/links",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListLinks returns the list of all application deep links"
+        },
+        {
+          "info": {
+            "name": "PodLogs returns stream of log entries for the specified pod. Pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/logs",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "podName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sinceSeconds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sinceTime.seconds",
+                "value": "",
+                "type": "query",
+                "description": "Represents seconds of UTC time since Unix epoch\n1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to\n9999-12-31T23:59:59Z inclusive."
+              },
+              {
+                "name": "sinceTime.nanos",
+                "value": "",
+                "type": "query",
+                "description": "Non-negative fractions of a second at nanosecond resolution. Negative\nsecond values with fractions must still have non-negative nanos values\nthat count forward in time. Must be from 0 to 999,999,999\ninclusive. This field may be limited in precision depending on context."
+              },
+              {
+                "name": "tailLines",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "follow",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "untilTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "previous",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "matchCase",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "PodLogs returns stream of log entries for the specified pod. Pod"
+        },
+        {
+          "info": {
+            "name": "GetManifests returns application manifests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/manifests",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourcePositions",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "revisions",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "noCache",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetManifests returns application manifests"
+        },
+        {
+          "info": {
+            "name": "TerminateOperation terminates the currently running operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/applications/:name/operation",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "TerminateOperation terminates the currently running operation"
+        },
+        {
+          "info": {
+            "name": "PodLogs returns stream of log entries for the specified pod. Pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/pods/:podName/logs",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "podName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sinceSeconds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sinceTime.seconds",
+                "value": "",
+                "type": "query",
+                "description": "Represents seconds of UTC time since Unix epoch\n1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to\n9999-12-31T23:59:59Z inclusive."
+              },
+              {
+                "name": "sinceTime.nanos",
+                "value": "",
+                "type": "query",
+                "description": "Non-negative fractions of a second at nanosecond resolution. Negative\nsecond values with fractions must still have non-negative nanos values\nthat count forward in time. Must be from 0 to 999,999,999\ninclusive. This field may be limited in precision depending on context."
+              },
+              {
+                "name": "tailLines",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "follow",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "untilTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "previous",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "matchCase",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "PodLogs returns stream of log entries for the specified pod. Pod"
+        },
+        {
+          "info": {
+            "name": "GetResource returns single application resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetResource returns single application resource"
+        },
+        {
+          "info": {
+            "name": "PatchResource patch single application resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patchType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "PatchResource patch single application resource"
+        },
+        {
+          "info": {
+            "name": "DeleteResource deletes a single application resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orphan",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "DeleteResource deletes a single application resource"
+        },
+        {
+          "info": {
+            "name": "ListResourceActions returns list of resource actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource/actions",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListResourceActions returns list of resource actions"
+        },
+        {
+          "info": {
+            "name": "RunResourceAction runs a resource action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource/actions",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deprecated: use RunResourceActionV2 instead. This version does not support resource action parameters but is\nmaintained for backward compatibility. It will be removed in a future release."
+        },
+        {
+          "info": {
+            "name": "RunResourceActionV2 runs a resource action with parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource/actions/v2",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "RunResourceActionV2 runs a resource action with parameters"
+        },
+        {
+          "info": {
+            "name": "ListResourceLinks returns the list of all resource deep links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource/links",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListResourceLinks returns the list of all resource deep links"
+        },
+        {
+          "info": {
+            "name": "Get the chart metadata (description, maintainers, home) for a specific revision of the application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/revisions/:revision/chartdetails",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "the application's name"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "path",
+                "description": "the revision of the app"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceIndex",
+                "value": "",
+                "type": "query",
+                "description": "source index (for multi source apps)."
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "query",
+                "description": "versionId from historical data (for multi source apps)."
+              }
+            ]
+          },
+          "docs": "Get the chart metadata (description, maintainers, home) for a specific revision of the application"
+        },
+        {
+          "info": {
+            "name": "Get the meta-data (author, date, tags, message) for a specific revision of the application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/revisions/:revision/metadata",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "the application's name"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "path",
+                "description": "the revision of the app"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceIndex",
+                "value": "",
+                "type": "query",
+                "description": "source index (for multi source apps)."
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "query",
+                "description": "versionId from historical data (for multi source apps)."
+              }
+            ]
+          },
+          "docs": "Get the meta-data (author, date, tags, message) for a specific revision of the application"
+        },
+        {
+          "info": {
+            "name": "Get the chart metadata (description, maintainers, home) for a specific revision of the application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/revisions/:revision/ocimetadata",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "the application's name"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "path",
+                "description": "the revision of the app"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceIndex",
+                "value": "",
+                "type": "query",
+                "description": "source index (for multi source apps)."
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "query",
+                "description": "versionId from historical data (for multi source apps)."
+              }
+            ]
+          },
+          "docs": "Get the chart metadata (description, maintainers, home) for a specific revision of the application"
+        },
+        {
+          "info": {
+            "name": "Rollback syncs an application to its target state",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/:name/rollback",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Rollback syncs an application to its target state"
+        },
+        {
+          "info": {
+            "name": "UpdateSpec updates an application spec",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/applications/:name/spec",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "validate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "UpdateSpec updates an application spec"
+        },
+        {
+          "info": {
+            "name": "Sync syncs an application to its target state",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/:name/sync",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Sync syncs an application to its target state"
+        },
+        {
+          "info": {
+            "name": "Get returns sync windows of the application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/syncwindows",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get returns sync windows of the application"
+        },
+        {
+          "info": {
+            "name": "Watch returns stream of application change events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/stream/applications",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "the application's name."
+              },
+              {
+                "name": "refresh",
+                "value": "",
+                "type": "query",
+                "description": "forces application reconciliation if set to 'hard'."
+              },
+              {
+                "name": "projects",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications."
+              },
+              {
+                "name": "resourceVersion",
+                "value": "",
+                "type": "query",
+                "description": "when specified with a watch call, shows changes that occur after that particular version of a resource."
+              },
+              {
+                "name": "selector",
+                "value": "",
+                "type": "query",
+                "description": "the selector to restrict returned list to applications only with matched labels."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "the repoURL to restrict returned list applications."
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications (legacy name for backwards-compatibility)."
+              }
+            ]
+          },
+          "docs": "Watch returns stream of application change events"
+        },
+        {
+          "info": {
+            "name": "Watch returns stream of application resource tree",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/stream/applications/:applicationName/resource-tree",
+            "params": [
+              {
+                "name": "applicationName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Watch returns stream of application resource tree"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ApplicationSetService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List returns list of applicationset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applicationsets",
+            "params": [
+              {
+                "name": "projects",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applicationsets."
+              },
+              {
+                "name": "selector",
+                "value": "",
+                "type": "query",
+                "description": "the selector to restrict returned list to applications only with matched labels."
+              },
+              {
+                "name": "appsetNamespace",
+                "value": "",
+                "type": "query",
+                "description": "The application set namespace. Default empty is argocd control plane namespace."
+              }
+            ]
+          },
+          "docs": "List returns list of applicationset"
+        },
+        {
+          "info": {
+            "name": "Create creates an applicationset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applicationsets",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dryRun",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Create creates an applicationset"
+        },
+        {
+          "info": {
+            "name": "Generate generates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applicationsets/generate"
+          },
+          "docs": "Generate generates"
+        },
+        {
+          "info": {
+            "name": "Get returns an applicationset by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applicationsets/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "the applicationsets's name"
+              },
+              {
+                "name": "appsetNamespace",
+                "value": "",
+                "type": "query",
+                "description": "The application set namespace. Default empty is argocd control plane namespace."
+              }
+            ]
+          },
+          "docs": "Get returns an applicationset by name"
+        },
+        {
+          "info": {
+            "name": "Delete deletes an application set",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/applicationsets/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appsetNamespace",
+                "value": "",
+                "type": "query",
+                "description": "The application set namespace. Default empty is argocd control plane namespace."
+              }
+            ]
+          },
+          "docs": "Delete deletes an application set"
+        },
+        {
+          "info": {
+            "name": "ListResourceEvents returns a list of event resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applicationsets/:name/events",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "the applicationsets's name"
+              },
+              {
+                "name": "appsetNamespace",
+                "value": "",
+                "type": "query",
+                "description": "The application set namespace. Default empty is argocd control plane namespace."
+              }
+            ]
+          },
+          "docs": "ListResourceEvents returns a list of event resources"
+        },
+        {
+          "info": {
+            "name": "ResourceTree returns resource tree",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applicationsets/:name/resource-tree",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appsetNamespace",
+                "value": "",
+                "type": "query",
+                "description": "The application set namespace. Default empty is argocd control plane namespace."
+              }
+            ]
+          },
+          "docs": "ResourceTree returns resource tree"
+        },
+        {
+          "info": {
+            "name": "ApplicationSetService_Watch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/stream/applicationsets",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "projects",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "selector",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appSetNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceVersion",
+                "value": "",
+                "type": "query",
+                "description": "when specified with a watch call, shows changes that occur after that particular version of a resource."
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "CertificateService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all available repository certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/certificates",
+            "params": [
+              {
+                "name": "hostNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "A file-glob pattern (not regular expression) the host name has to match."
+              },
+              {
+                "name": "certType",
+                "value": "",
+                "type": "query",
+                "description": "The type of the certificate to match (ssh or https)."
+              },
+              {
+                "name": "certSubType",
+                "value": "",
+                "type": "query",
+                "description": "The sub type of the certificate to match (protocol dependent, usually only used for ssh certs)."
+              }
+            ]
+          },
+          "docs": "List all available repository certificates"
+        },
+        {
+          "info": {
+            "name": "Creates repository certificates on the server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/certificates",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to upsert already existing certificates."
+              }
+            ]
+          },
+          "docs": "Creates repository certificates on the server"
+        },
+        {
+          "info": {
+            "name": "Delete the certificates that match the RepositoryCertificateQuery",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/certificates",
+            "params": [
+              {
+                "name": "hostNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "A file-glob pattern (not regular expression) the host name has to match."
+              },
+              {
+                "name": "certType",
+                "value": "",
+                "type": "query",
+                "description": "The type of the certificate to match (ssh or https)."
+              },
+              {
+                "name": "certSubType",
+                "value": "",
+                "type": "query",
+                "description": "The sub type of the certificate to match (protocol dependent, usually only used for ssh certs)."
+              }
+            ]
+          },
+          "docs": "Delete the certificates that match the RepositoryCertificateQuery"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ClusterService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List returns list of clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/clusters",
+            "params": [
+              {
+                "name": "server",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id.type",
+                "value": "",
+                "type": "query",
+                "description": "type is the type of the specified cluster identifier ( \"server\" - default, \"name\" )."
+              },
+              {
+                "name": "id.value",
+                "value": "",
+                "type": "query",
+                "description": "value holds the cluster server URL or cluster name."
+              }
+            ]
+          },
+          "docs": "List returns list of clusters"
+        },
+        {
+          "info": {
+            "name": "Create creates a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/clusters",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Create creates a cluster"
+        },
+        {
+          "info": {
+            "name": "Get returns a cluster by server address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/clusters/:id.value",
+            "params": [
+              {
+                "name": "id.value",
+                "value": "",
+                "type": "path",
+                "description": "value holds the cluster server URL or cluster name"
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id.type",
+                "value": "",
+                "type": "query",
+                "description": "type is the type of the specified cluster identifier ( \"server\" - default, \"name\" )."
+              }
+            ]
+          },
+          "docs": "Get returns a cluster by server address"
+        },
+        {
+          "info": {
+            "name": "Update updates a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/clusters/:id.value",
+            "params": [
+              {
+                "name": "id.value",
+                "value": "",
+                "type": "path",
+                "description": "value holds the cluster server URL or cluster name"
+              },
+              {
+                "name": "updatedFields",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id.type",
+                "value": "",
+                "type": "query",
+                "description": "type is the type of the specified cluster identifier ( \"server\" - default, \"name\" )."
+              }
+            ]
+          },
+          "docs": "Update updates a cluster"
+        },
+        {
+          "info": {
+            "name": "Delete deletes a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/clusters/:id.value",
+            "params": [
+              {
+                "name": "id.value",
+                "value": "",
+                "type": "path",
+                "description": "value holds the cluster server URL or cluster name"
+              },
+              {
+                "name": "server",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "id.type",
+                "value": "",
+                "type": "query",
+                "description": "type is the type of the specified cluster identifier ( \"server\" - default, \"name\" )."
+              }
+            ]
+          },
+          "docs": "Delete deletes a cluster"
+        },
+        {
+          "info": {
+            "name": "InvalidateCache invalidates cluster cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/clusters/:id.value/invalidate-cache",
+            "params": [
+              {
+                "name": "id.value",
+                "value": "",
+                "type": "path",
+                "description": "value holds the cluster server URL or cluster name"
+              }
+            ]
+          },
+          "docs": "InvalidateCache invalidates cluster cache"
+        },
+        {
+          "info": {
+            "name": "RotateAuth rotates the bearer token used for a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/clusters/:id.value/rotate-auth",
+            "params": [
+              {
+                "name": "id.value",
+                "value": "",
+                "type": "path",
+                "description": "value holds the cluster server URL or cluster name"
+              }
+            ]
+          },
+          "docs": "RotateAuth rotates the bearer token used for a cluster"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "GPGKeyService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all available repository certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/gpgkeys",
+            "params": [
+              {
+                "name": "keyID",
+                "value": "",
+                "type": "query",
+                "description": "The GPG key ID to query for."
+              }
+            ]
+          },
+          "docs": "List all available repository certificates"
+        },
+        {
+          "info": {
+            "name": "Create one or more GPG public keys in the server's configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/gpgkeys",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to upsert already existing public keys."
+              }
+            ]
+          },
+          "docs": "Create one or more GPG public keys in the server's configuration"
+        },
+        {
+          "info": {
+            "name": "Delete specified GPG public key from the server's configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/gpgkeys",
+            "params": [
+              {
+                "name": "keyID",
+                "value": "",
+                "type": "query",
+                "description": "The GPG key ID to query for."
+              }
+            ]
+          },
+          "docs": "Delete specified GPG public key from the server's configuration"
+        },
+        {
+          "info": {
+            "name": "Get information about specified GPG public key from the server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/gpgkeys/:keyID",
+            "params": [
+              {
+                "name": "keyID",
+                "value": "",
+                "type": "path",
+                "description": "The GPG key ID to query for"
+              }
+            ]
+          },
+          "docs": "Get information about specified GPG public key from the server"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "NotificationService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List returns list of services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/notifications/services"
+          },
+          "docs": "List returns list of services"
+        },
+        {
+          "info": {
+            "name": "List returns list of templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/notifications/templates"
+          },
+          "docs": "List returns list of templates"
+        },
+        {
+          "info": {
+            "name": "List returns list of triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/notifications/triggers"
+          },
+          "docs": "List returns list of triggers"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ProjectService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List returns list of projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List returns list of projects"
+        },
+        {
+          "info": {
+            "name": "Create a new project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/projects"
+          },
+          "docs": "Create a new project"
+        },
+        {
+          "info": {
+            "name": "Get returns a project by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get returns a project by name"
+        },
+        {
+          "info": {
+            "name": "Delete deletes a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/projects/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete deletes a project"
+        },
+        {
+          "info": {
+            "name": "GetDetailedProject returns a project that include project, global project and scoped resources by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects/:name/detailed",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetDetailedProject returns a project that include project, global project and scoped resources by name"
+        },
+        {
+          "info": {
+            "name": "ListEvents returns a list of project events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects/:name/events",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "ListEvents returns a list of project events"
+        },
+        {
+          "info": {
+            "name": "Get returns a virtual project by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects/:name/globalprojects",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get returns a virtual project by name"
+        },
+        {
+          "info": {
+            "name": "ListLinks returns all deep links for the particular project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects/:name/links",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "ListLinks returns all deep links for the particular project"
+        },
+        {
+          "info": {
+            "name": "GetSchedulesState returns true if there are any active sync syncWindows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/projects/:name/syncwindows",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetSchedulesState returns true if there are any active sync syncWindows"
+        },
+        {
+          "info": {
+            "name": "Update updates a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/projects/:project.metadata.name",
+            "params": [
+              {
+                "name": "project.metadata.name",
+                "value": "",
+                "type": "path",
+                "description": "Name must be unique within a namespace. Is required when creating resources, although\nsome resources may allow a client to request the generation of an appropriate name\nautomatically. Name is primarily intended for creation idempotence and configuration\ndefinition.\nCannot be updated.\nMore info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names\n+optional"
+              }
+            ]
+          },
+          "docs": "Update updates a project"
+        },
+        {
+          "info": {
+            "name": "Create a new project token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/projects/:project/roles/:role/token",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a new project token"
+        },
+        {
+          "info": {
+            "name": "Delete a new project token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/projects/:project/roles/:role/token/:iat",
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "iat",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete a new project token"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RepoCredsService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListRepositoryCredentials gets a list of all configured repository credential sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repocreds",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "Repo URL for query."
+              }
+            ]
+          },
+          "docs": "ListRepositoryCredentials gets a list of all configured repository credential sets"
+        },
+        {
+          "info": {
+            "name": "CreateRepositoryCredentials creates a new repository credential set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/repocreds",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to create in upsert mode."
+              }
+            ]
+          },
+          "docs": "CreateRepositoryCredentials creates a new repository credential set"
+        },
+        {
+          "info": {
+            "name": "UpdateRepositoryCredentials updates a repository credential set",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/repocreds/:creds.url",
+            "params": [
+              {
+                "name": "creds.url",
+                "value": "",
+                "type": "path",
+                "description": "URL is the URL to which these credentials match"
+              }
+            ]
+          },
+          "docs": "UpdateRepositoryCredentials updates a repository credential set"
+        },
+        {
+          "info": {
+            "name": "DeleteRepositoryCredentials deletes a repository credential set from the configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/repocreds/:url",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeleteRepositoryCredentials deletes a repository credential set from the configuration"
+        },
+        {
+          "info": {
+            "name": "ListWriteRepositoryCredentials gets a list of all configured repository credential sets that have write access",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/write-repocreds",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "Repo URL for query."
+              }
+            ]
+          },
+          "docs": "ListWriteRepositoryCredentials gets a list of all configured repository credential sets that have write access"
+        },
+        {
+          "info": {
+            "name": "CreateWriteRepositoryCredentials creates a new repository credential set with write access",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/write-repocreds",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to create in upsert mode."
+              }
+            ]
+          },
+          "docs": "CreateWriteRepositoryCredentials creates a new repository credential set with write access"
+        },
+        {
+          "info": {
+            "name": "UpdateWriteRepositoryCredentials updates a repository credential set with write access",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/write-repocreds/:creds.url",
+            "params": [
+              {
+                "name": "creds.url",
+                "value": "",
+                "type": "path",
+                "description": "URL is the URL to which these credentials match"
+              }
+            ]
+          },
+          "docs": "UpdateWriteRepositoryCredentials updates a repository credential set with write access"
+        },
+        {
+          "info": {
+            "name": "DeleteWriteRepositoryCredentials deletes a repository credential set with write access from the configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/write-repocreds/:url",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeleteWriteRepositoryCredentials deletes a repository credential set with write access from the configuration"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "RepositoryService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListRepositories gets a list of all configured repositories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "Repo URL for query."
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "ListRepositories gets a list of all configured repositories"
+        },
+        {
+          "info": {
+            "name": "CreateRepository creates a new repository configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/repositories",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to create in upsert mode."
+              },
+              {
+                "name": "credsOnly",
+                "value": "",
+                "type": "query",
+                "description": "Whether to operate on credential set instead of repository."
+              }
+            ]
+          },
+          "docs": "CreateRepository creates a new repository configuration"
+        },
+        {
+          "info": {
+            "name": "UpdateRepository updates a repository configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo.repo",
+            "params": [
+              {
+                "name": "repo.repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo contains the URL to the remote repository"
+              }
+            ]
+          },
+          "docs": "UpdateRepository updates a repository configuration"
+        },
+        {
+          "info": {
+            "name": "Get returns a repository or its credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "Get returns a repository or its credentials"
+        },
+        {
+          "info": {
+            "name": "DeleteRepository deletes a repository from the configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "DeleteRepository deletes a repository from the configuration"
+        },
+        {
+          "info": {
+            "name": "ListApps returns list of apps in the repo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo/apps",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListApps returns list of apps in the repo"
+        },
+        {
+          "info": {
+            "name": "GetHelmCharts returns list of helm charts in the specified repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo/helmcharts",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "GetHelmCharts returns list of helm charts in the specified repository"
+        },
+        {
+          "info": {
+            "name": "RepositoryService_ListOCITags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo/oci-tags",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "RepositoryService_ListRefs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo/refs",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "ValidateAccess validates access to a repository with given parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo/validate",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The URL to the repo"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "Username for accessing repo."
+              },
+              {
+                "name": "password",
+                "value": "",
+                "type": "query",
+                "description": "Password for accessing repo."
+              },
+              {
+                "name": "sshPrivateKey",
+                "value": "",
+                "type": "query",
+                "description": "Private key data for accessing SSH repository."
+              },
+              {
+                "name": "insecure",
+                "value": "",
+                "type": "query",
+                "description": "Whether to skip certificate or host key validation."
+              },
+              {
+                "name": "tlsClientCertData",
+                "value": "",
+                "type": "query",
+                "description": "TLS client cert data for accessing HTTPS repository."
+              },
+              {
+                "name": "tlsClientCertKey",
+                "value": "",
+                "type": "query",
+                "description": "TLS client cert key for accessing HTTPS repository."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the repo."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the repo."
+              },
+              {
+                "name": "enableOci",
+                "value": "",
+                "type": "query",
+                "description": "Whether helm-oci support should be enabled for this repo."
+              },
+              {
+                "name": "githubAppPrivateKey",
+                "value": "",
+                "type": "query",
+                "description": "Github App Private Key PEM data."
+              },
+              {
+                "name": "githubAppID",
+                "value": "",
+                "type": "query",
+                "description": "Github App ID of the app used to access the repo."
+              },
+              {
+                "name": "githubAppInstallationID",
+                "value": "",
+                "type": "query",
+                "description": "Github App Installation ID of the installed GitHub App."
+              },
+              {
+                "name": "githubAppEnterpriseBaseUrl",
+                "value": "",
+                "type": "query",
+                "description": "Github App Enterprise base url if empty will default to https://api.github.com."
+              },
+              {
+                "name": "proxy",
+                "value": "",
+                "type": "query",
+                "description": "HTTP/HTTPS proxy to access the repository."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Reference between project and repository that allow you automatically to be added as item inside SourceRepos project entity."
+              },
+              {
+                "name": "gcpServiceAccountKey",
+                "value": "",
+                "type": "query",
+                "description": "Google Cloud Platform service account key."
+              },
+              {
+                "name": "forceHttpBasicAuth",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force HTTP basic auth."
+              },
+              {
+                "name": "useAzureWorkloadIdentity",
+                "value": "",
+                "type": "query",
+                "description": "Whether to use azure workload identity for authentication."
+              },
+              {
+                "name": "bearerToken",
+                "value": "",
+                "type": "query",
+                "description": "BearerToken contains the bearer token used for Git auth at the repo server."
+              },
+              {
+                "name": "insecureOciForceHttp",
+                "value": "",
+                "type": "query",
+                "description": "Whether https should be disabled for an OCI repo."
+              },
+              {
+                "name": "azureServicePrincipalClientId",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Client ID."
+              },
+              {
+                "name": "azureServicePrincipalClientSecret",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Client Secret."
+              },
+              {
+                "name": "azureServicePrincipalTenantId",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Tenant ID."
+              },
+              {
+                "name": "azureActiveDirectoryEndpoint",
+                "value": "",
+                "type": "query",
+                "description": "Azure Active Directory Endpoint."
+              }
+            ]
+          },
+          "docs": "ValidateAccess validates access to a repository with given parameters"
+        },
+        {
+          "info": {
+            "name": "GetAppDetails returns application details by given path",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/repositories/:source.repoURL/appdetails",
+            "params": [
+              {
+                "name": "source.repoURL",
+                "value": "",
+                "type": "path",
+                "description": "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+              }
+            ]
+          },
+          "docs": "GetAppDetails returns application details by given path"
+        },
+        {
+          "info": {
+            "name": "ListWriteRepositories gets a list of all configured write repositories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/write-repositories",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "Repo URL for query."
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "ListWriteRepositories gets a list of all configured write repositories"
+        },
+        {
+          "info": {
+            "name": "CreateWriteRepository creates a new write repository configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/write-repositories",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to create in upsert mode."
+              },
+              {
+                "name": "credsOnly",
+                "value": "",
+                "type": "query",
+                "description": "Whether to operate on credential set instead of repository."
+              }
+            ]
+          },
+          "docs": "CreateWriteRepository creates a new write repository configuration"
+        },
+        {
+          "info": {
+            "name": "UpdateWriteRepository updates a write repository configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/write-repositories/:repo.repo",
+            "params": [
+              {
+                "name": "repo.repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo contains the URL to the remote repository"
+              }
+            ]
+          },
+          "docs": "UpdateWriteRepository updates a write repository configuration"
+        },
+        {
+          "info": {
+            "name": "GetWrite returns a repository or its write credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/write-repositories/:repo",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "GetWrite returns a repository or its write credentials"
+        },
+        {
+          "info": {
+            "name": "DeleteWriteRepository deletes a write repository from the configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/write-repositories/:repo",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "DeleteWriteRepository deletes a write repository from the configuration"
+        },
+        {
+          "info": {
+            "name": "ValidateWriteAccess validates write access to a repository with given parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/write-repositories/:repo/validate",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The URL to the repo"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "Username for accessing repo."
+              },
+              {
+                "name": "password",
+                "value": "",
+                "type": "query",
+                "description": "Password for accessing repo."
+              },
+              {
+                "name": "sshPrivateKey",
+                "value": "",
+                "type": "query",
+                "description": "Private key data for accessing SSH repository."
+              },
+              {
+                "name": "insecure",
+                "value": "",
+                "type": "query",
+                "description": "Whether to skip certificate or host key validation."
+              },
+              {
+                "name": "tlsClientCertData",
+                "value": "",
+                "type": "query",
+                "description": "TLS client cert data for accessing HTTPS repository."
+              },
+              {
+                "name": "tlsClientCertKey",
+                "value": "",
+                "type": "query",
+                "description": "TLS client cert key for accessing HTTPS repository."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the repo."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the repo."
+              },
+              {
+                "name": "enableOci",
+                "value": "",
+                "type": "query",
+                "description": "Whether helm-oci support should be enabled for this repo."
+              },
+              {
+                "name": "githubAppPrivateKey",
+                "value": "",
+                "type": "query",
+                "description": "Github App Private Key PEM data."
+              },
+              {
+                "name": "githubAppID",
+                "value": "",
+                "type": "query",
+                "description": "Github App ID of the app used to access the repo."
+              },
+              {
+                "name": "githubAppInstallationID",
+                "value": "",
+                "type": "query",
+                "description": "Github App Installation ID of the installed GitHub App."
+              },
+              {
+                "name": "githubAppEnterpriseBaseUrl",
+                "value": "",
+                "type": "query",
+                "description": "Github App Enterprise base url if empty will default to https://api.github.com."
+              },
+              {
+                "name": "proxy",
+                "value": "",
+                "type": "query",
+                "description": "HTTP/HTTPS proxy to access the repository."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Reference between project and repository that allow you automatically to be added as item inside SourceRepos project entity."
+              },
+              {
+                "name": "gcpServiceAccountKey",
+                "value": "",
+                "type": "query",
+                "description": "Google Cloud Platform service account key."
+              },
+              {
+                "name": "forceHttpBasicAuth",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force HTTP basic auth."
+              },
+              {
+                "name": "useAzureWorkloadIdentity",
+                "value": "",
+                "type": "query",
+                "description": "Whether to use azure workload identity for authentication."
+              },
+              {
+                "name": "bearerToken",
+                "value": "",
+                "type": "query",
+                "description": "BearerToken contains the bearer token used for Git auth at the repo server."
+              },
+              {
+                "name": "insecureOciForceHttp",
+                "value": "",
+                "type": "query",
+                "description": "Whether https should be disabled for an OCI repo."
+              },
+              {
+                "name": "azureServicePrincipalClientId",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Client ID."
+              },
+              {
+                "name": "azureServicePrincipalClientSecret",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Client Secret."
+              },
+              {
+                "name": "azureServicePrincipalTenantId",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Tenant ID."
+              },
+              {
+                "name": "azureActiveDirectoryEndpoint",
+                "value": "",
+                "type": "query",
+                "description": "Azure Active Directory Endpoint."
+              }
+            ]
+          },
+          "docs": "ValidateWriteAccess validates write access to a repository with given parameters"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SessionService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new JWT for authentication and set a cookie if using HTTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/session"
+          },
+          "docs": "Create a new JWT for authentication and set a cookie if using HTTP"
+        },
+        {
+          "info": {
+            "name": "Delete an existing JWT cookie if using HTTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/session"
+          },
+          "docs": "Delete an existing JWT cookie if using HTTP"
+        },
+        {
+          "info": {
+            "name": "Get the current user's info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/session/userinfo"
+          },
+          "docs": "Get the current user's info"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SettingsService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get returns Argo CD settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/settings"
+          },
+          "docs": "Get returns Argo CD settings"
+        },
+        {
+          "info": {
+            "name": "Get returns Argo CD plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/settings/plugins"
+          },
+          "docs": "Get returns Argo CD plugins"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "VersionService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Version returns version information of the API server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/version"
+          },
+          "docs": "Version returns version information of the API server"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
