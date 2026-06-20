@@ -10,7 +10,7 @@ description: >-
   AppProject) — those CRDs are themselves a Kubernetes-native API. Argo CD is open-source under the Apache 2.0 license;
   commercial offerings are provided by third parties (notably Akuity, founded by the Argo project's creators) rather
   than the Argo CD project itself.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - DevOps
   - GitOps
