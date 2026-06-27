@@ -252,7 +252,7 @@ common:
     url: https://x.com/argoproj
   - type: YouTube
     url: https://www.youtube.com/@ArgoProj
-  - type: Releases
+  - type: ReleaseNotes
     url: https://github.com/argoproj/argo-cd/releases
   - type: RoadMap
     url: https://github.com/argoproj/argo-cd/blob/master/docs/roadmap.md
