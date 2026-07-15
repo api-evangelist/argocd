@@ -224,6 +224,8 @@ apis:
       Argo CD defines an AppProject Custom Resource Definition (argoproj.io/v1alpha1, kind=AppProject) which scopes
       which sources, destinations, and resource kinds Applications inside the project may use, plus per-project RBAC.
 common:
+  - type: AgenticAccess
+    url: agentic-access/argocd-agentic-access.yml
   - type: DomainSecurity
     url: security/argocd-domain-security.yml
   - type: LinkedIn
