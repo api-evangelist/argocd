@@ -1,0 +1,229 @@
+swagger: '2.0'
+info:
+  description: Description of all APIs
+  title: Consolidate Services AccountService GPGKeyService API
+  version: version not set
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: GPGKeyService
+paths:
+  /api/v1/gpgkeys:
+    get:
+      tags:
+      - GPGKeyService
+      summary: List all available repository certificates
+      operationId: GPGKeyService_List
+      parameters:
+      - type: string
+        description: The GPG key ID to query for.
+        name: keyID
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1GnuPGPublicKeyList'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+    post:
+      tags:
+      - GPGKeyService
+      summary: Create one or more GPG public keys in the server's configuration
+      operationId: GPGKeyService_Create
+      parameters:
+      - description: Raw key data of the GPG key(s) to create
+        name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1alpha1GnuPGPublicKey'
+      - type: boolean
+        description: Whether to upsert already existing public keys.
+        name: upsert
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/gpgkeyGnuPGPublicKeyCreateResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+    delete:
+      tags:
+      - GPGKeyService
+      summary: Delete specified GPG public key from the server's configuration
+      operationId: GPGKeyService_Delete
+      parameters:
+      - type: string
+        description: The GPG key ID to query for.
+        name: keyID
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/gpgkeyGnuPGPublicKeyResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/gpgkeys/{keyID}:
+    get:
+      tags:
+      - GPGKeyService
+      summary: Get information about specified GPG public key from the server
+      operationId: GPGKeyService_Get
+      parameters:
+      - type: string
+        description: The GPG key ID to query for
+        name: keyID
+        in: path
+        required: true
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1GnuPGPublicKey'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+definitions:
+  protobufAny:
+    type: object
+    properties:
+      type_url:
+        type: string
+      value:
+        type: string
+        format: byte
+  v1ListMeta:
+    description: 'ListMeta describes metadata that synthetic resources must have, including lists and
+
+      various status objects. A resource may have only one of {ObjectMeta, ListMeta}.'
+    type: object
+    properties:
+      continue:
+        description: 'continue may be set if the user set a limit on the number of items returned, and indicates that
+
+          the server has more data available. The value is opaque and may be used to issue another request
+
+          to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+
+          consistent list may not be possible if the server configuration has changed or more than a few
+
+          minutes have passed. The resourceVersion field returned when using this continue value will be
+
+          identical to the value in the first response, unless you have received this token from an error
+
+          message.'
+        type: string
+      remainingItemCount:
+        type: integer
+        format: int64
+        title: 'remainingItemCount is the number of subsequent items in the list which are not included in this
+
+          list response. If the list request contained label or field selectors, then the number of
+
+          remaining items is unknown and the field will be left unset and omitted during serialization.
+
+          If the list is complete (either because it is not chunking or because this is the last chunk),
+
+          then there are no more remaining items and this field will be left unset and omitted during
+
+          serialization.
+
+          Servers older than v1.15 do not set this field.
+
+          The intended use of the remainingItemCount is *estimating* the size of a collection. Clients
+
+          should not rely on the remainingItemCount to be set or to be exact.
+
+          +optional'
+      resourceVersion:
+        type: string
+        title: 'String that identifies the server''s internal version of this object that
+
+          can be used by clients to determine when objects have changed.
+
+          Value must be treated as opaque by clients and passed unmodified back to the server.
+
+          Populated by the system.
+
+          Read-only.
+
+          More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+          +optional'
+      selfLink:
+        type: string
+        title: 'Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
+
+          +optional'
+  runtimeError:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+      error:
+        type: string
+      message:
+        type: string
+  gpgkeyGnuPGPublicKeyResponse:
+    type: object
+    title: Generic (empty) response for GPG public key CRUD requests
+  v1alpha1GnuPGPublicKeyList:
+    type: object
+    title: GnuPGPublicKeyList is a collection of GnuPGPublicKey objects
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/v1alpha1GnuPGPublicKey'
+      metadata:
+        $ref: '#/definitions/v1ListMeta'
+  gpgkeyGnuPGPublicKeyCreateResponse:
+    type: object
+    title: Response to a public key creation request
+    properties:
+      created:
+        $ref: '#/definitions/v1alpha1GnuPGPublicKeyList'
+      skipped:
+        type: array
+        title: List of key IDs that haven been skipped because they already exist on the server
+        items:
+          type: string
+  v1alpha1GnuPGPublicKey:
+    type: object
+    title: GnuPGPublicKey is a representation of a GnuPG public key
+    properties:
+      fingerprint:
+        type: string
+        title: Fingerprint is the fingerprint of the key
+      keyData:
+        type: string
+        title: KeyData holds the raw key data, in base64 encoded format
+      keyID:
+        type: string
+        title: KeyID specifies the key ID, in hexadecimal string format
+      owner:
+        type: string
+        title: Owner holds the owner identification, e.g. a name and e-mail address
+      subType:
+        type: string
+        title: SubType holds the key's subtype (e.g. rsa4096)
+      trust:
+        type: string
+        title: Trust holds the level of trust assigned to this key

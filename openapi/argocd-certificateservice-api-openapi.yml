@@ -1,0 +1,209 @@
+swagger: '2.0'
+info:
+  description: Description of all APIs
+  title: Consolidate Services AccountService CertificateService API
+  version: version not set
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: CertificateService
+paths:
+  /api/v1/certificates:
+    get:
+      tags:
+      - CertificateService
+      summary: List all available repository certificates
+      operationId: CertificateService_ListCertificates
+      parameters:
+      - type: string
+        description: A file-glob pattern (not regular expression) the host name has to match.
+        name: hostNamePattern
+        in: query
+      - type: string
+        description: The type of the certificate to match (ssh or https).
+        name: certType
+        in: query
+      - type: string
+        description: The sub type of the certificate to match (protocol dependent, usually only used for ssh certs).
+        name: certSubType
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1RepositoryCertificateList'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+    post:
+      tags:
+      - CertificateService
+      summary: Creates repository certificates on the server
+      operationId: CertificateService_CreateCertificate
+      parameters:
+      - description: List of certificates to be created
+        name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1alpha1RepositoryCertificateList'
+      - type: boolean
+        description: Whether to upsert already existing certificates.
+        name: upsert
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1RepositoryCertificateList'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+    delete:
+      tags:
+      - CertificateService
+      summary: Delete the certificates that match the RepositoryCertificateQuery
+      operationId: CertificateService_DeleteCertificate
+      parameters:
+      - type: string
+        description: A file-glob pattern (not regular expression) the host name has to match.
+        name: hostNamePattern
+        in: query
+      - type: string
+        description: The type of the certificate to match (ssh or https).
+        name: certType
+        in: query
+      - type: string
+        description: The sub type of the certificate to match (protocol dependent, usually only used for ssh certs).
+        name: certSubType
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1RepositoryCertificateList'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+definitions:
+  protobufAny:
+    type: object
+    properties:
+      type_url:
+        type: string
+      value:
+        type: string
+        format: byte
+  v1ListMeta:
+    description: 'ListMeta describes metadata that synthetic resources must have, including lists and
+
+      various status objects. A resource may have only one of {ObjectMeta, ListMeta}.'
+    type: object
+    properties:
+      continue:
+        description: 'continue may be set if the user set a limit on the number of items returned, and indicates that
+
+          the server has more data available. The value is opaque and may be used to issue another request
+
+          to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+
+          consistent list may not be possible if the server configuration has changed or more than a few
+
+          minutes have passed. The resourceVersion field returned when using this continue value will be
+
+          identical to the value in the first response, unless you have received this token from an error
+
+          message.'
+        type: string
+      remainingItemCount:
+        type: integer
+        format: int64
+        title: 'remainingItemCount is the number of subsequent items in the list which are not included in this
+
+          list response. If the list request contained label or field selectors, then the number of
+
+          remaining items is unknown and the field will be left unset and omitted during serialization.
+
+          If the list is complete (either because it is not chunking or because this is the last chunk),
+
+          then there are no more remaining items and this field will be left unset and omitted during
+
+          serialization.
+
+          Servers older than v1.15 do not set this field.
+
+          The intended use of the remainingItemCount is *estimating* the size of a collection. Clients
+
+          should not rely on the remainingItemCount to be set or to be exact.
+
+          +optional'
+      resourceVersion:
+        type: string
+        title: 'String that identifies the server''s internal version of this object that
+
+          can be used by clients to determine when objects have changed.
+
+          Value must be treated as opaque by clients and passed unmodified back to the server.
+
+          Populated by the system.
+
+          Read-only.
+
+          More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+          +optional'
+      selfLink:
+        type: string
+        title: 'Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
+
+          +optional'
+  runtimeError:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+      error:
+        type: string
+      message:
+        type: string
+  v1alpha1RepositoryCertificateList:
+    type: object
+    title: RepositoryCertificateList is a collection of RepositoryCertificates
+    properties:
+      items:
+        type: array
+        title: List of certificates to be processed
+        items:
+          $ref: '#/definitions/v1alpha1RepositoryCertificate'
+      metadata:
+        $ref: '#/definitions/v1ListMeta'
+  v1alpha1RepositoryCertificate:
+    type: object
+    title: A RepositoryCertificate is either SSH known hosts entry or TLS certificate
+    properties:
+      certData:
+        type: string
+        format: byte
+        title: CertData contains the actual certificate data, dependent on the certificate type
+      certInfo:
+        type: string
+        title: CertInfo will hold additional certificate info, depdendent on the certificate type (e.g. SSH fingerprint, X509 CommonName)
+      certSubType:
+        type: string
+        title: CertSubType specifies the sub type of the cert, i.e. "ssh-rsa"
+      certType:
+        type: string
+        title: CertType specifies the type of the certificate - currently one of "https" or "ssh"
+      serverName:
+        type: string
+        title: ServerName specifies the DNS name of the server this certificate is intended for

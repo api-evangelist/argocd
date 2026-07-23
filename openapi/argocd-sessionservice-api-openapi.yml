@@ -1,0 +1,115 @@
+swagger: '2.0'
+info:
+  description: Description of all APIs
+  title: Consolidate Services AccountService SessionService API
+  version: version not set
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: SessionService
+paths:
+  /api/v1/session:
+    post:
+      tags:
+      - SessionService
+      summary: Create a new JWT for authentication and set a cookie if using HTTP
+      operationId: SessionService_Create
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/sessionSessionCreateRequest'
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/sessionSessionResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+    delete:
+      tags:
+      - SessionService
+      summary: Delete an existing JWT cookie if using HTTP
+      operationId: SessionService_Delete
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/sessionSessionResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/session/userinfo:
+    get:
+      tags:
+      - SessionService
+      summary: Get the current user's info
+      operationId: SessionService_GetUserInfo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/sessionGetUserInfoResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+definitions:
+  sessionSessionResponse:
+    description: SessionResponse wraps the created token or returns an empty string if deleted.
+    type: object
+    properties:
+      token:
+        type: string
+  protobufAny:
+    type: object
+    properties:
+      type_url:
+        type: string
+      value:
+        type: string
+        format: byte
+  runtimeError:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+      error:
+        type: string
+      message:
+        type: string
+  sessionGetUserInfoResponse:
+    type: object
+    title: The current user's userInfo info
+    properties:
+      groups:
+        type: array
+        items:
+          type: string
+      iss:
+        type: string
+      loggedIn:
+        type: boolean
+      username:
+        type: string
+  sessionSessionCreateRequest:
+    description: SessionCreateRequest is for logging in.
+    type: object
+    properties:
+      password:
+        type: string
+      token:
+        type: string
+      username:
+        type: string

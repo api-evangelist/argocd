@@ -1,0 +1,80 @@
+swagger: '2.0'
+info:
+  description: Description of all APIs
+  title: Consolidate Services AccountService VersionService API
+  version: version not set
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: VersionService
+paths:
+  /api/version:
+    get:
+      tags:
+      - VersionService
+      summary: Version returns version information of the API server
+      operationId: VersionService_Version
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/versionVersionMessage'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+definitions:
+  versionVersionMessage:
+    type: object
+    title: VersionMessage represents version of the Argo CD API server
+    properties:
+      BuildDate:
+        type: string
+      Compiler:
+        type: string
+      ExtraBuildInfo:
+        type: string
+      GitCommit:
+        type: string
+      GitTag:
+        type: string
+      GitTreeState:
+        type: string
+      GoVersion:
+        type: string
+      HelmVersion:
+        type: string
+      JsonnetVersion:
+        type: string
+      KubectlVersion:
+        type: string
+      KustomizeVersion:
+        type: string
+      Platform:
+        type: string
+      Version:
+        type: string
+  protobufAny:
+    type: object
+    properties:
+      type_url:
+        type: string
+      value:
+        type: string
+        format: byte
+  runtimeError:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+      error:
+        type: string
+      message:
+        type: string

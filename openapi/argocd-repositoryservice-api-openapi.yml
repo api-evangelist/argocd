@@ -1,0 +1,1440 @@
+swagger: '2.0'
+info:
+  description: Description of all APIs
+  title: Consolidate Services AccountService RepositoryService API
+  version: version not set
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: RepositoryService
+paths:
+  /api/v1/repositories:
+    get:
+      tags:
+      - RepositoryService
+      summary: ListRepositories gets a list of all configured repositories
+      operationId: RepositoryService_ListRepositories
+      parameters:
+      - type: string
+        description: Repo URL for query.
+        name: repo
+        in: query
+      - type: boolean
+        description: Whether to force a cache refresh on repo's connection state.
+        name: forceRefresh
+        in: query
+      - type: string
+        description: App project for query.
+        name: appProject
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1RepositoryList'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+    post:
+      tags:
+      - RepositoryService
+      summary: CreateRepository creates a new repository configuration
+      operationId: RepositoryService_CreateRepository
+      parameters:
+      - description: Repository definition
+        name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1alpha1Repository'
+      - type: boolean
+        description: Whether to create in upsert mode.
+        name: upsert
+        in: query
+      - type: boolean
+        description: Whether to operate on credential set instead of repository.
+        name: credsOnly
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1Repository'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/repositories/{repo.repo}:
+    put:
+      tags:
+      - RepositoryService
+      summary: UpdateRepository updates a repository configuration
+      operationId: RepositoryService_UpdateRepository
+      parameters:
+      - type: string
+        description: Repo contains the URL to the remote repository
+        name: repo.repo
+        in: path
+        required: true
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1alpha1Repository'
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1Repository'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/repositories/{repo}:
+    get:
+      tags:
+      - RepositoryService
+      summary: Get returns a repository or its credentials
+      operationId: RepositoryService_Get
+      parameters:
+      - type: string
+        description: Repo URL for query
+        name: repo
+        in: path
+        required: true
+      - type: boolean
+        description: Whether to force a cache refresh on repo's connection state.
+        name: forceRefresh
+        in: query
+      - type: string
+        description: App project for query.
+        name: appProject
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1Repository'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+    delete:
+      tags:
+      - RepositoryService
+      summary: DeleteRepository deletes a repository from the configuration
+      operationId: RepositoryService_DeleteRepository
+      parameters:
+      - type: string
+        description: Repo URL for query
+        name: repo
+        in: path
+        required: true
+      - type: boolean
+        description: Whether to force a cache refresh on repo's connection state.
+        name: forceRefresh
+        in: query
+      - type: string
+        description: App project for query.
+        name: appProject
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/repositoryRepoResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/repositories/{repo}/apps:
+    get:
+      tags:
+      - RepositoryService
+      summary: ListApps returns list of apps in the repo
+      operationId: RepositoryService_ListApps
+      parameters:
+      - type: string
+        name: repo
+        in: path
+        required: true
+      - type: string
+        name: revision
+        in: query
+      - type: string
+        name: appName
+        in: query
+      - type: string
+        name: appProject
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/repositoryRepoAppsResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/repositories/{repo}/helmcharts:
+    get:
+      tags:
+      - RepositoryService
+      summary: GetHelmCharts returns list of helm charts in the specified repository
+      operationId: RepositoryService_GetHelmCharts
+      parameters:
+      - type: string
+        description: Repo URL for query
+        name: repo
+        in: path
+        required: true
+      - type: boolean
+        description: Whether to force a cache refresh on repo's connection state.
+        name: forceRefresh
+        in: query
+      - type: string
+        description: App project for query.
+        name: appProject
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/repositoryHelmChartsResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/repositories/{repo}/oci-tags:
+    get:
+      tags:
+      - RepositoryService
+      operationId: RepositoryService_ListOCITags
+      parameters:
+      - type: string
+        description: Repo URL for query
+        name: repo
+        in: path
+        required: true
+      - type: boolean
+        description: Whether to force a cache refresh on repo's connection state.
+        name: forceRefresh
+        in: query
+      - type: string
+        description: App project for query.
+        name: appProject
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/repositoryRefs'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/repositories/{repo}/refs:
+    get:
+      tags:
+      - RepositoryService
+      operationId: RepositoryService_ListRefs
+      parameters:
+      - type: string
+        description: Repo URL for query
+        name: repo
+        in: path
+        required: true
+      - type: boolean
+        description: Whether to force a cache refresh on repo's connection state.
+        name: forceRefresh
+        in: query
+      - type: string
+        description: App project for query.
+        name: appProject
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/repositoryRefs'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/repositories/{repo}/validate:
+    post:
+      tags:
+      - RepositoryService
+      summary: ValidateAccess validates access to a repository with given parameters
+      operationId: RepositoryService_ValidateAccess
+      parameters:
+      - type: string
+        description: The URL to the repo
+        name: repo
+        in: path
+        required: true
+      - description: The URL to the repo
+        name: body
+        in: body
+        required: true
+        schema:
+          type: string
+      - type: string
+        description: Username for accessing repo.
+        name: username
+        in: query
+      - type: string
+        description: Password for accessing repo.
+        name: password
+        in: query
+      - type: string
+        description: Private key data for accessing SSH repository.
+        name: sshPrivateKey
+        in: query
+      - type: boolean
+        description: Whether to skip certificate or host key validation.
+        name: insecure
+        in: query
+      - type: string
+        description: TLS client cert data for accessing HTTPS repository.
+        name: tlsClientCertData
+        in: query
+      - type: string
+        description: TLS client cert key for accessing HTTPS repository.
+        name: tlsClientCertKey
+        in: query
+      - type: string
+        description: The type of the repo.
+        name: type
+        in: query
+      - type: string
+        description: The name of the repo.
+        name: name
+        in: query
+      - type: boolean
+        description: Whether helm-oci support should be enabled for this repo.
+        name: enableOci
+        in: query
+      - type: string
+        description: Github App Private Key PEM data.
+        name: githubAppPrivateKey
+        in: query
+      - type: string
+        format: int64
+        description: Github App ID of the app used to access the repo.
+        name: githubAppID
+        in: query
+      - type: string
+        format: int64
+        description: Github App Installation ID of the installed GitHub App.
+        name: githubAppInstallationID
+        in: query
+      - type: string
+        description: Github App Enterprise base url if empty will default to https://api.github.com.
+        name: githubAppEnterpriseBaseUrl
+        in: query
+      - type: string
+        description: HTTP/HTTPS proxy to access the repository.
+        name: proxy
+        in: query
+      - type: string
+        description: Reference between project and repository that allow you automatically to be added as item inside SourceRepos project entity.
+        name: project
+        in: query
+      - type: string
+        description: Google Cloud Platform service account key.
+        name: gcpServiceAccountKey
+        in: query
+      - type: boolean
+        description: Whether to force HTTP basic auth.
+        name: forceHttpBasicAuth
+        in: query
+      - type: boolean
+        description: Whether to use azure workload identity for authentication.
+        name: useAzureWorkloadIdentity
+        in: query
+      - type: string
+        description: BearerToken contains the bearer token used for Git auth at the repo server.
+        name: bearerToken
+        in: query
+      - type: boolean
+        description: Whether https should be disabled for an OCI repo.
+        name: insecureOciForceHttp
+        in: query
+      - type: string
+        description: Azure Service Principal Client ID.
+        name: azureServicePrincipalClientId
+        in: query
+      - type: string
+        description: Azure Service Principal Client Secret.
+        name: azureServicePrincipalClientSecret
+        in: query
+      - type: string
+        description: Azure Service Principal Tenant ID.
+        name: azureServicePrincipalTenantId
+        in: query
+      - type: string
+        description: Azure Active Directory Endpoint.
+        name: azureActiveDirectoryEndpoint
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/repositoryRepoResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/repositories/{source.repoURL}/appdetails:
+    post:
+      tags:
+      - RepositoryService
+      summary: GetAppDetails returns application details by given path
+      operationId: RepositoryService_GetAppDetails
+      parameters:
+      - type: string
+        description: RepoURL is the URL to the repository (Git or Helm) that contains the application manifests
+        name: source.repoURL
+        in: path
+        required: true
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/repositoryRepoAppDetailsQuery'
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/repositoryRepoAppDetailsResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/write-repositories:
+    get:
+      tags:
+      - RepositoryService
+      summary: ListWriteRepositories gets a list of all configured write repositories
+      operationId: RepositoryService_ListWriteRepositories
+      parameters:
+      - type: string
+        description: Repo URL for query.
+        name: repo
+        in: query
+      - type: boolean
+        description: Whether to force a cache refresh on repo's connection state.
+        name: forceRefresh
+        in: query
+      - type: string
+        description: App project for query.
+        name: appProject
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1RepositoryList'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+    post:
+      tags:
+      - RepositoryService
+      summary: CreateWriteRepository creates a new write repository configuration
+      operationId: RepositoryService_CreateWriteRepository
+      parameters:
+      - description: Repository definition
+        name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1alpha1Repository'
+      - type: boolean
+        description: Whether to create in upsert mode.
+        name: upsert
+        in: query
+      - type: boolean
+        description: Whether to operate on credential set instead of repository.
+        name: credsOnly
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1Repository'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/write-repositories/{repo.repo}:
+    put:
+      tags:
+      - RepositoryService
+      summary: UpdateWriteRepository updates a write repository configuration
+      operationId: RepositoryService_UpdateWriteRepository
+      parameters:
+      - type: string
+        description: Repo contains the URL to the remote repository
+        name: repo.repo
+        in: path
+        required: true
+      - name: body
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1alpha1Repository'
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1Repository'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/write-repositories/{repo}:
+    get:
+      tags:
+      - RepositoryService
+      summary: GetWrite returns a repository or its write credentials
+      operationId: RepositoryService_GetWrite
+      parameters:
+      - type: string
+        description: Repo URL for query
+        name: repo
+        in: path
+        required: true
+      - type: boolean
+        description: Whether to force a cache refresh on repo's connection state.
+        name: forceRefresh
+        in: query
+      - type: string
+        description: App project for query.
+        name: appProject
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/v1alpha1Repository'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+    delete:
+      tags:
+      - RepositoryService
+      summary: DeleteWriteRepository deletes a write repository from the configuration
+      operationId: RepositoryService_DeleteWriteRepository
+      parameters:
+      - type: string
+        description: Repo URL for query
+        name: repo
+        in: path
+        required: true
+      - type: boolean
+        description: Whether to force a cache refresh on repo's connection state.
+        name: forceRefresh
+        in: query
+      - type: string
+        description: App project for query.
+        name: appProject
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/repositoryRepoResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/write-repositories/{repo}/validate:
+    post:
+      tags:
+      - RepositoryService
+      summary: ValidateWriteAccess validates write access to a repository with given parameters
+      operationId: RepositoryService_ValidateWriteAccess
+      parameters:
+      - type: string
+        description: The URL to the repo
+        name: repo
+        in: path
+        required: true
+      - description: The URL to the repo
+        name: body
+        in: body
+        required: true
+        schema:
+          type: string
+      - type: string
+        description: Username for accessing repo.
+        name: username
+        in: query
+      - type: string
+        description: Password for accessing repo.
+        name: password
+        in: query
+      - type: string
+        description: Private key data for accessing SSH repository.
+        name: sshPrivateKey
+        in: query
+      - type: boolean
+        description: Whether to skip certificate or host key validation.
+        name: insecure
+        in: query
+      - type: string
+        description: TLS client cert data for accessing HTTPS repository.
+        name: tlsClientCertData
+        in: query
+      - type: string
+        description: TLS client cert key for accessing HTTPS repository.
+        name: tlsClientCertKey
+        in: query
+      - type: string
+        description: The type of the repo.
+        name: type
+        in: query
+      - type: string
+        description: The name of the repo.
+        name: name
+        in: query
+      - type: boolean
+        description: Whether helm-oci support should be enabled for this repo.
+        name: enableOci
+        in: query
+      - type: string
+        description: Github App Private Key PEM data.
+        name: githubAppPrivateKey
+        in: query
+      - type: string
+        format: int64
+        description: Github App ID of the app used to access the repo.
+        name: githubAppID
+        in: query
+      - type: string
+        format: int64
+        description: Github App Installation ID of the installed GitHub App.
+        name: githubAppInstallationID
+        in: query
+      - type: string
+        description: Github App Enterprise base url if empty will default to https://api.github.com.
+        name: githubAppEnterpriseBaseUrl
+        in: query
+      - type: string
+        description: HTTP/HTTPS proxy to access the repository.
+        name: proxy
+        in: query
+      - type: string
+        description: Reference between project and repository that allow you automatically to be added as item inside SourceRepos project entity.
+        name: project
+        in: query
+      - type: string
+        description: Google Cloud Platform service account key.
+        name: gcpServiceAccountKey
+        in: query
+      - type: boolean
+        description: Whether to force HTTP basic auth.
+        name: forceHttpBasicAuth
+        in: query
+      - type: boolean
+        description: Whether to use azure workload identity for authentication.
+        name: useAzureWorkloadIdentity
+        in: query
+      - type: string
+        description: BearerToken contains the bearer token used for Git auth at the repo server.
+        name: bearerToken
+        in: query
+      - type: boolean
+        description: Whether https should be disabled for an OCI repo.
+        name: insecureOciForceHttp
+        in: query
+      - type: string
+        description: Azure Service Principal Client ID.
+        name: azureServicePrincipalClientId
+        in: query
+      - type: string
+        description: Azure Service Principal Client Secret.
+        name: azureServicePrincipalClientSecret
+        in: query
+      - type: string
+        description: Azure Service Principal Tenant ID.
+        name: azureServicePrincipalTenantId
+        in: query
+      - type: string
+        description: Azure Active Directory Endpoint.
+        name: azureActiveDirectoryEndpoint
+        in: query
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/repositoryRepoResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+definitions:
+  repositoryDirectoryAppSpec:
+    type: object
+    title: DirectoryAppSpec contains directory
+  v1alpha1Repository:
+    type: object
+    title: Repository is a repository holding application configurations
+    properties:
+      azureActiveDirectoryEndpoint:
+        type: string
+        title: AzureActiveDirectoryEndpoint specifies the Azure Active Directory endpoint used for Service Principal authentication. If empty will default to https://login.microsoftonline.com
+      azureServicePrincipalClientId:
+        type: string
+        title: AzureServicePrincipalClientId specifies the client ID of the Azure Service Principal used to access the repo
+      azureServicePrincipalClientSecret:
+        type: string
+        title: AzureServicePrincipalClientSecret specifies the client secret of the Azure Service Principal used to access the repo
+      azureServicePrincipalTenantId:
+        type: string
+        title: AzureServicePrincipalTenantId specifies the tenant ID of the Azure Service Principal used to access the repo
+      bearerToken:
+        type: string
+        title: BearerToken contains the bearer token used for Git BitBucket Data Center auth at the repo server
+      connectionState:
+        $ref: '#/definitions/v1alpha1ConnectionState'
+      depth:
+        description: Depth specifies the depth for shallow clones. A value of 0 or omitting the field indicates a full clone.
+        type: integer
+        format: int64
+      enableLfs:
+        description: EnableLFS specifies whether git-lfs support should be enabled for this repo. Only valid for Git repositories.
+        type: boolean
+      enableOCI:
+        type: boolean
+        title: EnableOCI specifies whether helm-oci support should be enabled for this repo
+      forceHttpBasicAuth:
+        type: boolean
+        title: ForceHttpBasicAuth specifies whether Argo CD should attempt to force basic auth for HTTP connections
+      gcpServiceAccountKey:
+        type: string
+        title: GCPServiceAccountKey specifies the service account key in JSON format to be used for getting credentials to Google Cloud Source repos
+      githubAppEnterpriseBaseUrl:
+        type: string
+        title: GithubAppEnterpriseBaseURL specifies the base URL of GitHub Enterprise installation. If empty will default to https://api.github.com
+      githubAppID:
+        type: integer
+        format: int64
+        title: GithubAppId specifies the ID of the GitHub app used to access the repo
+      githubAppInstallationID:
+        type: integer
+        format: int64
+        title: GithubAppInstallationId specifies the installation ID of the GitHub App used to access the repo
+      githubAppPrivateKey:
+        type: string
+        title: Github App Private Key PEM data
+      inheritedCreds:
+        type: boolean
+        title: Whether credentials were inherited from a credential set
+      insecure:
+        type: boolean
+        title: Insecure specifies whether the connection to the repository ignores any errors when verifying TLS certificates or SSH host keys
+      insecureIgnoreHostKey:
+        type: boolean
+        title: 'InsecureIgnoreHostKey should not be used anymore, Insecure is favoured
+
+          Used only for Git repos'
+      insecureOCIForceHttp:
+        description: InsecureOCIForceHttp specifies whether the connection to the repository uses TLS at _all_. If true, no TLS. This flag is applicable for OCI repos only.
+        type: boolean
+      name:
+        type: string
+        title: Name specifies a name to be used for this repo. Only used with Helm repos
+      noProxy:
+        type: string
+        title: NoProxy specifies a list of targets where the proxy isn't used, applies only in cases where the proxy is applied
+      password:
+        type: string
+        title: Password contains the password or PAT used for authenticating at the remote repository
+      project:
+        type: string
+        title: Reference between project and repository that allows it to be automatically added as an item inside SourceRepos project entity
+      proxy:
+        type: string
+        title: Proxy specifies the HTTP/HTTPS proxy used to access the repo
+      repo:
+        type: string
+        title: Repo contains the URL to the remote repository
+      sshPrivateKey:
+        description: SSHPrivateKey contains the PEM data for authenticating at the repo server. Only used with Git repos.
+        type: string
+      tlsClientCertData:
+        type: string
+        title: TLSClientCertData contains a certificate in PEM format for authenticating at the repo server
+      tlsClientCertKey:
+        type: string
+        title: TLSClientCertKey contains a private key in PEM format for authenticating at the repo server
+      type:
+        description: Type specifies the type of the repo. Can be either "git" or "helm. "git" is assumed if empty or absent.
+        type: string
+      useAzureWorkloadIdentity:
+        type: boolean
+        title: UseAzureWorkloadIdentity specifies whether to use Azure Workload Identity for authentication
+      username:
+        type: string
+        title: Username contains the user name used for authenticating at the remote repository
+      webhookManifestCacheWarmDisabled:
+        description: 'WebhookManifestCacheWarmDisabled disables manifest cache warming during webhook processing for this repository.
+
+          When set, webhook handlers will only trigger reconciliation for affected applications and skip Redis cache
+
+          operations for unaffected ones. Recommended for large monorepos with plain YAML manifests.'
+        type: boolean
+  v1alpha1KustomizeReplica:
+    type: object
+    properties:
+      count:
+        $ref: '#/definitions/intstrIntOrString'
+      name:
+        type: string
+        title: Name of Deployment or StatefulSet
+  repositoryHelmAppSpec:
+    type: object
+    title: HelmAppSpec contains helm app name  in source repo
+    properties:
+      fileParameters:
+        type: array
+        title: helm file parameters
+        items:
+          $ref: '#/definitions/v1alpha1HelmFileParameter'
+      name:
+        type: string
+      parameters:
+        type: array
+        title: the output of `helm inspect values`
+        items:
+          $ref: '#/definitions/v1alpha1HelmParameter'
+      valueFiles:
+        type: array
+        items:
+          type: string
+      values:
+        type: string
+        title: the contents of values.yaml
+  v1alpha1ApplicationSourceHelm:
+    type: object
+    title: ApplicationSourceHelm holds helm specific options
+    properties:
+      apiVersions:
+        description: 'APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+
+          Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.'
+        type: array
+        items:
+          type: string
+      fileParameters:
+        type: array
+        title: FileParameters are file parameters to the helm template
+        items:
+          $ref: '#/definitions/v1alpha1HelmFileParameter'
+      ignoreMissingValueFiles:
+        type: boolean
+        title: IgnoreMissingValueFiles prevents helm template from failing when valueFiles do not exist locally by not appending them to helm template --values
+      kubeVersion:
+        description: 'KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+
+          uses the Kubernetes version of the target cluster.'
+        type: string
+      namespace:
+        description: Namespace is an optional namespace to template with. If left empty, defaults to the app's destination namespace.
+        type: string
+      parameters:
+        type: array
+        title: Parameters is a list of Helm parameters which are passed to the helm template command upon manifest generation
+        items:
+          $ref: '#/definitions/v1alpha1HelmParameter'
+      passCredentials:
+        type: boolean
+        title: PassCredentials pass credentials to all domains (Helm's --pass-credentials)
+      releaseName:
+        type: string
+        title: ReleaseName is the Helm release name to use. If omitted it will use the application name
+      skipCrds:
+        type: boolean
+        title: SkipCrds skips custom resource definition installation step (Helm's --skip-crds)
+      skipSchemaValidation:
+        type: boolean
+        title: SkipSchemaValidation skips JSON schema validation (Helm's --skip-schema-validation)
+      skipTests:
+        description: SkipTests skips test manifest installation step (Helm's --skip-tests).
+        type: boolean
+      valueFiles:
+        type: array
+        title: ValuesFiles is a list of Helm value files to use when generating a template
+        items:
+          type: string
+      values:
+        type: string
+        title: 'Values specifies Helm values to be passed to helm template, typically defined as a block. ValuesObject takes precedence over Values, so use one or the other.
+
+          +patchStrategy=replace'
+      valuesObject:
+        $ref: '#/definitions/runtimeRawExtension'
+      version:
+        type: string
+        title: Version is the Helm version to use for templating ("3")
+  intstrIntOrString:
+    description: '+protobuf=true
+
+      +protobuf.options.(gogoproto.goproto_stringer)=false
+
+      +k8s:openapi-gen=true'
+    type: object
+    title: 'IntOrString is a type that can hold an int32 or a string.  When used in
+
+      JSON or YAML marshalling and unmarshalling, it produces or consumes the
+
+      inner type.  This allows you to have, for example, a JSON field that can
+
+      accept a name or number.
+
+      TODO: Rename to Int32OrString'
+    properties:
+      intVal:
+        type: integer
+        format: int32
+      strVal:
+        type: string
+      type:
+        type: integer
+        format: int64
+  repositoryRepoAppDetailsResponse:
+    type: object
+    title: RepoAppDetailsResponse application details
+    properties:
+      directory:
+        $ref: '#/definitions/repositoryDirectoryAppSpec'
+      helm:
+        $ref: '#/definitions/repositoryHelmAppSpec'
+      kustomize:
+        $ref: '#/definitions/repositoryKustomizeAppSpec'
+      plugin:
+        $ref: '#/definitions/repositoryPluginAppSpec'
+      type:
+        type: string
+  repositoryKustomizeAppSpec:
+    type: object
+    title: KustomizeAppSpec contains kustomize images
+    properties:
+      images:
+        description: images is a list of available images.
+        type: array
+        items:
+          type: string
+  v1alpha1ApplicationSourcePluginParameter:
+    type: object
+    properties:
+      array:
+        description: Array is the value of an array type parameter.
+        type: array
+        items:
+          type: string
+      map:
+        description: Map is the value of a map type parameter.
+        type: object
+        additionalProperties:
+          type: string
+      name:
+        description: Name is the name identifying a parameter.
+        type: string
+      string:
+        description: String_ is the value of a string type parameter.
+        type: string
+  v1alpha1ApplicationSource:
+    type: object
+    title: ApplicationSource contains all required information about the source of an application
+    properties:
+      chart:
+        description: Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo.
+        type: string
+      directory:
+        $ref: '#/definitions/v1alpha1ApplicationSourceDirectory'
+      helm:
+        $ref: '#/definitions/v1alpha1ApplicationSourceHelm'
+      kustomize:
+        $ref: '#/definitions/v1alpha1ApplicationSourceKustomize'
+      name:
+        description: Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.
+        type: string
+      path:
+        description: Path is a directory path within the Git repository, and is only valid for applications sourced from Git.
+        type: string
+      plugin:
+        $ref: '#/definitions/v1alpha1ApplicationSourcePlugin'
+      ref:
+        description: Ref is reference to another source within sources field. This field will not be used if used with a `source` tag.
+        type: string
+      repoURL:
+        type: string
+        title: RepoURL is the URL to the repository (Git or Helm) that contains the application manifests
+      targetRevision:
+        description: 'TargetRevision defines the revision of the source to sync the application to.
+
+          In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD.
+
+          In case of Helm, this is a semver tag for the Chart''s version.'
+        type: string
+  v1alpha1KustomizeGvk:
+    type: object
+    properties:
+      group:
+        type: string
+      kind:
+        type: string
+      version:
+        type: string
+  protobufAny:
+    type: object
+    properties:
+      type_url:
+        type: string
+      value:
+        type: string
+        format: byte
+  runtimeError:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+      error:
+        type: string
+      message:
+        type: string
+  v1alpha1ConnectionState:
+    type: object
+    title: ConnectionState contains information about remote resource connection state, currently used for clusters and repositories
+    properties:
+      attemptedAt:
+        $ref: '#/definitions/v1Time'
+      message:
+        type: string
+        title: Message contains human readable information about the connection status
+      status:
+        type: string
+        title: Status contains the current status indicator for the connection
+  v1alpha1KustomizePatch:
+    type: object
+    properties:
+      options:
+        type: object
+        additionalProperties:
+          type: boolean
+      patch:
+        type: string
+      path:
+        type: string
+      target:
+        $ref: '#/definitions/v1alpha1KustomizeSelector'
+  v1alpha1HelmParameter:
+    type: object
+    title: HelmParameter is a parameter that's passed to helm template during manifest generation
+    properties:
+      forceString:
+        type: boolean
+        title: ForceString determines whether to tell Helm to interpret booleans and numbers as strings
+      name:
+        type: string
+        title: Name is the name of the Helm parameter
+      value:
+        type: string
+        title: Value is the value for the Helm parameter
+  applicationv1alpha1EnvEntry:
+    type: object
+    title: EnvEntry represents an entry in the application's environment
+    properties:
+      name:
+        type: string
+        title: Name is the name of the variable, usually expressed in uppercase
+      value:
+        type: string
+        title: Value is the value of the variable
+  v1alpha1KustomizeResId:
+    type: object
+    properties:
+      gvk:
+        $ref: '#/definitions/v1alpha1KustomizeGvk'
+      name:
+        type: string
+      namespace:
+        type: string
+  v1alpha1ApplicationSourceDirectory:
+    type: object
+    title: ApplicationSourceDirectory holds options for applications of type plain YAML or Jsonnet
+    properties:
+      exclude:
+        type: string
+        title: Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation
+      include:
+        type: string
+        title: Include contains a glob pattern to match paths against that should be explicitly included during manifest generation
+      jsonnet:
+        $ref: '#/definitions/v1alpha1ApplicationSourceJsonnet'
+      recurse:
+        type: boolean
+        title: Recurse specifies whether to scan a directory recursively for manifests
+  v1alpha1HelmFileParameter:
+    type: object
+    title: HelmFileParameter is a file parameter that's passed to helm template during manifest generation
+    properties:
+      name:
+        type: string
+        title: Name is the name of the Helm parameter
+      path:
+        type: string
+        title: Path is the path to the file containing the values for the Helm parameter
+  repositoryAppInfo:
+    type: object
+    title: AppInfo contains application type and app file path
+    properties:
+      path:
+        type: string
+      type:
+        type: string
+  repositoryParameterAnnouncement:
+    type: object
+    properties:
+      array:
+        description: array is the default value of the parameter if the parameter is an array.
+        type: array
+        items:
+          type: string
+      collectionType:
+        description: 'collectionType is the type of value this parameter holds - either a single value (a string) or a collection
+
+          (array or map). If collectionType is set, only the field with that type will be used. If collectionType is not
+
+          set, `string` is the default. If collectionType is set to an invalid value, a validation error is thrown.'
+        type: string
+      itemType:
+        description: 'itemType determines the primitive data type represented by the parameter. Parameters are always encoded as
+
+          strings, but this field lets them be interpreted as other primitive types.'
+        type: string
+      map:
+        description: map is the default value of the parameter if the parameter is a map.
+        type: object
+        additionalProperties:
+          type: string
+      name:
+        description: name is the name identifying a parameter.
+        type: string
+      required:
+        description: required defines if this given parameter is mandatory.
+        type: boolean
+      string:
+        description: string is the default value of the parameter if the parameter is a string.
+        type: string
+      title:
+        description: title is a human-readable text of the parameter name.
+        type: string
+      tooltip:
+        description: tooltip is a human-readable description of the parameter.
+        type: string
+  v1alpha1ApplicationSourceKustomize:
+    type: object
+    title: ApplicationSourceKustomize holds options specific to an Application source specific to Kustomize
+    properties:
+      apiVersions:
+        description: 'APIVersions specifies the Kubernetes resource API versions to pass to Helm when templating manifests. By default,
+
+          Argo CD uses the API versions of the target cluster. The format is [group/]version/kind.'
+        type: array
+        items:
+          type: string
+      commonAnnotations:
+        type: object
+        title: CommonAnnotations is a list of additional annotations to add to rendered manifests
+        additionalProperties:
+          type: string
+      commonAnnotationsEnvsubst:
+        type: boolean
+        title: CommonAnnotationsEnvsubst specifies whether to apply env variables substitution for annotation values
+      commonLabels:
+        type: object
+        title: CommonLabels is a list of additional labels to add to rendered manifests
+        additionalProperties:
+          type: string
+      components:
+        type: array
+        title: Components specifies a list of kustomize components to add to the kustomization before building
+        items:
+          type: string
+      forceCommonAnnotations:
+        type: boolean
+        title: ForceCommonAnnotations specifies whether to force applying common annotations to resources for Kustomize apps
+      forceCommonLabels:
+        type: boolean
+        title: ForceCommonLabels specifies whether to force applying common labels to resources for Kustomize apps
+      ignoreMissingComponents:
+        type: boolean
+        title: IgnoreMissingComponents prevents kustomize from failing when components do not exist locally by not appending them to kustomization file
+      images:
+        type: array
+        title: Images is a list of Kustomize image override specifications
+        items:
+          type: string
+      kubeVersion:
+        description: 'KubeVersion specifies the Kubernetes API version to pass to Helm when templating manifests. By default, Argo CD
+
+          uses the Kubernetes version of the target cluster.'
+        type: string
+      labelIncludeTemplates:
+        type: boolean
+        title: LabelIncludeTemplates specifies whether to apply common labels to resource templates or not
+      labelWithoutSelector:
+        type: boolean
+        title: LabelWithoutSelector specifies whether to apply common labels to resource selectors or not
+      namePrefix:
+        type: string
+        title: NamePrefix overrides the namePrefix in the kustomization.yaml for Kustomize apps
+      nameSuffix:
+        type: string
+        title: NameSuffix overrides the nameSuffix in the kustomization.yaml for Kustomize apps
+      namespace:
+        type: string
+        title: Namespace sets the namespace that Kustomize adds to all resources
+      patches:
+        type: array
+        title: Patches is a list of Kustomize patches
+        items:
+          $ref: '#/definitions/v1alpha1KustomizePatch'
+      replicas:
+        type: array
+        title: Replicas is a list of Kustomize Replicas override specifications
+        items:
+          $ref: '#/definitions/v1alpha1KustomizeReplica'
+      version:
+        type: string
+        title: Version controls which version of Kustomize to use for rendering manifests
+  v1alpha1RepositoryList:
+    description: RepositoryList is a collection of Repositories.
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/v1alpha1Repository'
+      metadata:
+        $ref: '#/definitions/v1ListMeta'
+  repositoryRepoResponse:
+    type: object
+  v1Time:
+    description: 'Time is a wrapper around time.Time which supports correct
+
+      marshaling to YAML and JSON.  Wrappers are provided for many
+
+      of the factory methods that the time package offers.
+
+
+      +protobuf.options.marshal=false
+
+      +protobuf.as=Timestamp
+
+      +protobuf.options.(gogoproto.goproto_stringer)=false'
+    type: string
+    format: date-time
+  repositoryPluginAppSpec:
+    type: object
+    title: PluginAppSpec contains details about a plugin-type Application
+    properties:
+      parametersAnnouncement:
+        type: array
+        items:
+          $ref: '#/definitions/repositoryParameterAnnouncement'
+  v1alpha1JsonnetVar:
+    type: object
+    title: JsonnetVar represents a variable to be passed to jsonnet during manifest generation
+    properties:
+      code:
+        type: boolean
+      name:
+        type: string
+      value:
+        type: string
+  v1alpha1ApplicationSourcePlugin:
+    type: object
+    title: ApplicationSourcePlugin holds options specific to config management plugins
+    properties:
+      env:
+        type: array
+        items:
+          $ref: '#/definitions/applicationv1alpha1EnvEntry'
+      name:
+        type: string
+      parameters:
+        type: array
+        items:
+          $ref: '#/definitions/v1alpha1ApplicationSourcePluginParameter'
+  repositoryRepoAppsResponse:
+    type: object
+    title: RepoAppsResponse contains applications of specified repository
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/repositoryAppInfo'
+  runtimeRawExtension:
+    description: "RawExtension is used to hold extensions in external versions.\n\nTo use this, make a field which has RawExtension as its type in your external, versioned\nstruct, and Object in your internal struct. You also need to register your\nvarious plugin types.\n\n// Internal package:\n\n\ttype MyAPIObject struct {\n\t\truntime.TypeMeta `json:\",inline\"`\n\t\tMyPlugin runtime.Object `json:\"myPlugin\"`\n\t}\n\n\ttype PluginA struct {\n\t\tAOption string `json:\"aOption\"`\n\t}\n\n// External package:\n\n\ttype MyAPIObject struct {\n\t\truntime.TypeMeta `json:\",inline\"`\n\t\tMyPlugin runtime.RawExtension `json:\"myPlugin\"`\n\t}\n\n\ttype PluginA struct {\n\t\tAOption string `json:\"aOption\"`\n\t}\n\n// On the wire, the JSON will look something like this:\n\n\t{\n\t\t\"kind\":\"MyAPIObject\",\n\t\t\"apiVersion\":\"v1\",\n\t\t\"myPlugin\": {\n\t\t\t\"kind\":\"PluginA\",\n\t\t\t\"aOption\":\"foo\",\n\t\t},\n\t}\n\nSo what happens? Decode first uses json or yaml to unmarshal the serialized data into\nyour external MyAPIObject. That causes the raw JSON to be stored, but not unpacked.\nThe next step is to copy (using pkg/conversion) into the internal struct. The runtime\npackage's DefaultScheme has conversion functions installed which will unpack the\nJSON stored in RawExtension, turning it into the correct object type, and storing it\nin the Object. (TODO: In the case where the object is of an unknown type, a\nruntime.Unknown object will be created and stored.)\n\n+k8s:deepcopy-gen=true\n+protobuf=true\n+k8s:openapi-gen=true"
+    type: object
+    properties:
+      raw:
+        description: 'Raw is the underlying serialization of this object.
+
+
+          TODO: Determine how to detect ContentType and ContentEncoding of ''Raw'' data.'
+        type: string
+        format: byte
+  v1ListMeta:
+    description: 'ListMeta describes metadata that synthetic resources must have, including lists and
+
+      various status objects. A resource may have only one of {ObjectMeta, ListMeta}.'
+    type: object
+    properties:
+      continue:
+        description: 'continue may be set if the user set a limit on the number of items returned, and indicates that
+
+          the server has more data available. The value is opaque and may be used to issue another request
+
+          to the endpoint that served this list to retrieve the next set of available objects. Continuing a
+
+          consistent list may not be possible if the server configuration has changed or more than a few
+
+          minutes have passed. The resourceVersion field returned when using this continue value will be
+
+          identical to the value in the first response, unless you have received this token from an error
+
+          message.'
+        type: string
+      remainingItemCount:
+        type: integer
+        format: int64
+        title: 'remainingItemCount is the number of subsequent items in the list which are not included in this
+
+          list response. If the list request contained label or field selectors, then the number of
+
+          remaining items is unknown and the field will be left unset and omitted during serialization.
+
+          If the list is complete (either because it is not chunking or because this is the last chunk),
+
+          then there are no more remaining items and this field will be left unset and omitted during
+
+          serialization.
+
+          Servers older than v1.15 do not set this field.
+
+          The intended use of the remainingItemCount is *estimating* the size of a collection. Clients
+
+          should not rely on the remainingItemCount to be set or to be exact.
+
+          +optional'
+      resourceVersion:
+        type: string
+        title: 'String that identifies the server''s internal version of this object that
+
+          can be used by clients to determine when objects have changed.
+
+          Value must be treated as opaque by clients and passed unmodified back to the server.
+
+          Populated by the system.
+
+          Read-only.
+
+          More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
+
+          +optional'
+      selfLink:
+        type: string
+        title: 'Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
+
+          +optional'
+  repositoryHelmChart:
+    type: object
+    properties:
+      name:
+        type: string
+      versions:
+        type: array
+        items:
+          type: string
+  v1alpha1KustomizeSelector:
+    type: object
+    properties:
+      annotationSelector:
+        type: string
+      labelSelector:
+        type: string
+      resId:
+        $ref: '#/definitions/v1alpha1KustomizeResId'
+  repositoryRepoAppDetailsQuery:
+    type: object
+    title: RepoAppDetailsQuery contains query information for app details request
+    properties:
+      appName:
+        type: string
+      appProject:
+        type: string
+      source:
+        $ref: '#/definitions/v1alpha1ApplicationSource'
+      sourceIndex:
+        type: integer
+        format: int32
+        title: source index (for multi source apps)
+      versionId:
+        type: integer
+        format: int32
+        title: versionId from historical data (for multi source apps)
+  repositoryHelmChartsResponse:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/repositoryHelmChart'
+  repositoryRefs:
+    type: object
+    title: A subset of the repository's named refs
+    properties:
+      branches:
+        type: array
+        items:
+          type: string
+      tags:
+        type: array
+        items:
+          type: string
+  v1alpha1ApplicationSourceJsonnet:
+    type: object
+    title: ApplicationSourceJsonnet holds options specific to applications of type Jsonnet
+    properties:
+      extVars:
+        type: array
+        title: ExtVars is a list of Jsonnet External Variables
+        items:
+          $ref: '#/definitions/v1alpha1JsonnetVar'
+      libs:
+        type: array
+        title: Additional library search dirs
+        items:
+          type: string
+      tlas:
+        type: array
+        title: TLAS is a list of Jsonnet Top-level Arguments
+        items:
+          $ref: '#/definitions/v1alpha1JsonnetVar'

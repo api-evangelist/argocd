@@ -1,0 +1,116 @@
+swagger: '2.0'
+info:
+  description: Description of all APIs
+  title: Consolidate Services AccountService NotificationService API
+  version: version not set
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: NotificationService
+paths:
+  /api/v1/notifications/services:
+    get:
+      tags:
+      - NotificationService
+      summary: List returns list of services
+      operationId: NotificationService_ListServices
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/notificationServiceList'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/notifications/templates:
+    get:
+      tags:
+      - NotificationService
+      summary: List returns list of templates
+      operationId: NotificationService_ListTemplates
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/notificationTemplateList'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+  /api/v1/notifications/triggers:
+    get:
+      tags:
+      - NotificationService
+      summary: List returns list of triggers
+      operationId: NotificationService_ListTriggers
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/notificationTriggerList'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/runtimeError'
+definitions:
+  protobufAny:
+    type: object
+    properties:
+      type_url:
+        type: string
+      value:
+        type: string
+        format: byte
+  runtimeError:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+      error:
+        type: string
+      message:
+        type: string
+  notificationTemplateList:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/notificationTemplate'
+  notificationTriggerList:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/notificationTrigger'
+  notificationTrigger:
+    type: object
+    properties:
+      name:
+        type: string
+  notificationTemplate:
+    type: object
+    properties:
+      name:
+        type: string
+  notificationService:
+    type: object
+    properties:
+      name:
+        type: string
+  notificationServiceList:
+    type: object
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/notificationService'
