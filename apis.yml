@@ -10,7 +10,19 @@ description: >-
   AppProject) — those CRDs are themselves a Kubernetes-native API. Argo CD is open-source under the Apache 2.0 license;
   commercial offerings are provided by third parties (notably Akuity, founded by the Argo project's creators) rather
   than the Argo CD project itself.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/argocd.png
 tags:
   - DevOps
   - GitOps
@@ -23,206 +35,346 @@ created: '2026-05-08'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: argocd:argocd-applications-api
-    name: Argo CD Applications API
-    tags:
-      - Applications
-      - Sync
-      - GitOps
-      - Lifecycle
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
-        type: Documentation
-      - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
-        type: APIReference
-      - url: openapi/argocd-server-openapi.json
-        type: OpenAPI
-    description: >-
-      The Argo CD Applications API (/api/v1/applications) creates, updates, deletes, syncs, refreshes, and rolls back
-      applications, surfaces application resource trees, manifests, events, logs, and pod terminal access. All endpoints
-      accept an optional `project` query parameter to scope by AppProject.
-  - aid: argocd:argocd-applicationsets-api
-    name: Argo CD ApplicationSets API
-    tags:
-      - ApplicationSets
-      - Generators
-      - GitOps
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
-        type: Documentation
-    description: >-
-      The Argo CD ApplicationSets API (/api/v1/applicationsets) manages ApplicationSet resources — templated app
-      generators (List, Cluster, Git, Matrix, Merge, Pull Request, SCM Provider) used to programmatically scale Argo CD
-      across many clusters and tenants.
-  - aid: argocd:argocd-projects-api
-    name: Argo CD Projects API
-    tags:
-      - Projects
-      - AppProjects
-      - RBAC
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/user-guide/projects/
-        type: Documentation
-    description: >-
-      The Argo CD Projects API (/api/v1/projects) manages AppProject resources — multi-tenant boundaries that restrict
-      the source repos, destination clusters/namespaces, and resource kinds available to a group of applications, plus
-      per-project RBAC and JWT tokens.
-  - aid: argocd:argocd-clusters-api
-    name: Argo CD Clusters API
-    tags:
-      - Clusters
-      - Targets
-      - Kubernetes
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
-        type: Documentation
-    description: >-
-      The Argo CD Clusters API (/api/v1/clusters) registers, updates, lists, and removes target Kubernetes clusters that
-      Argo CD deploys into, including cluster credentials, sharding hints, and namespace scoping.
-  - aid: argocd:argocd-repositories-api
-    name: Argo CD Repositories API
-    tags:
-      - Repositories
-      - Git
-      - Helm
-      - OCI
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/
-        type: Documentation
-    description: >-
-      The Argo CD Repositories API (/api/v1/repositories and /api/v1/repocreds) manages Git, Helm chart, and
-      OCI-registry source repositories with credentials, certificates, and per-repo settings used by the Application
-      controller.
-  - aid: argocd:argocd-accounts-api
-    name: Argo CD Accounts API
-    tags:
-      - Accounts
-      - Authentication
-      - Tokens
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/
-        type: Documentation
-    description: >-
-      The Argo CD Accounts API (/api/v1/account) manages local accounts and their API tokens (capability for service
-      accounts), including password rotation and token issuance/revocation.
-  - aid: argocd:argocd-sessions-api
-    name: Argo CD Sessions API
-    tags:
-      - Sessions
-      - Authentication
-      - JWT
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
-        type: Documentation
-    description: >-
-      The Argo CD Sessions API (/api/v1/session) issues bearer tokens for username/password and OIDC-authenticated
-      sessions used by all other API endpoints.
-  - aid: argocd:argocd-settings-api
-    name: Argo CD Settings API
-    tags:
-      - Settings
-      - Configuration
-      - Plugins
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/argocd-cm-yaml/
-        type: Documentation
-    description: >-
-      The Argo CD Settings API (/api/v1/settings) returns the active server configuration — UI banner, OIDC config,
-      Helm/Kustomize plugin defaults, resource exclusions, application instance label key, and similar runtime settings.
-  - aid: argocd:argocd-certificates-api
-    name: Argo CD Certificates API
-    tags:
-      - Certificates
-      - TLS
-      - SSH
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
-        type: Documentation
-    description: >-
-      The Argo CD Certificates API (/api/v1/certificates) manages TLS certificates and SSH known_hosts entries used to
-      securely connect to private Git, Helm, and OCI repositories.
-  - aid: argocd:argocd-gpgkeys-api
-    name: Argo CD GPG Keys API
-    tags:
-      - GPG
-      - Signed Commits
-      - Security
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/user-guide/gpg-verification/
-        type: Documentation
-    description: >-
-      The Argo CD GPG Keys API (/api/v1/gpgkeys) registers and removes GPG public keys used to verify signed commits
-      before they are deployed.
-  - aid: argocd:argocd-notifications-api
-    name: Argo CD Notifications API
-    tags:
-      - Notifications
-      - Webhooks
-      - Slack
-      - Email
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/
-        type: Documentation
-    description: >-
-      The Argo CD Notifications subsystem delivers app lifecycle events (sync, health, deploy) to webhooks, Slack, MS
-      Teams, email, GitHub commit status, and other channels via templated triggers.
-  - aid: argocd:argocd-version-api
-    name: Argo CD Version API
-    tags:
-      - Version
-      - Build Info
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
-        type: Documentation
-    description: >-
-      The Argo CD Version API (/api/version) returns the running argocd-server build version, Kustomize/Helm/Jsonnet
-      versions, and Kubernetes server version.
-  - aid: argocd:argocd-application-crd
-    name: Argo CD Application CRD
-    tags:
-      - CRD
-      - Kubernetes
-      - Application
-      - GitOps
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/application.yaml/
-        type: Documentation
-      - url: https://github.com/argoproj/argo-cd/blob/master/manifests/crds/application-crd.yaml
-        type: Source
-    description: >-
-      Argo CD defines an Application Custom Resource Definition (argoproj.io/v1alpha1, kind=Application) describing a
-      desired sync of a single source (Git/Helm/OCI) to a destination cluster/namespace, with sync policy,
-      automated/manual sync, and ignore/diff rules.
-  - aid: argocd:argocd-applicationset-crd
-    name: Argo CD ApplicationSet CRD
-    tags:
-      - CRD
-      - Kubernetes
-      - ApplicationSet
-      - Generators
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
-        type: Documentation
-      - url: https://github.com/argoproj/argo-cd/blob/master/manifests/crds/applicationset-crd.yaml
-        type: Source
-    description: >-
-      Argo CD defines an ApplicationSet Custom Resource Definition (argoproj.io/v1alpha1, kind=ApplicationSet) which
-      templatizes Application creation across many targets via pluggable generators.
-  - aid: argocd:argocd-appproject-crd
-    name: Argo CD AppProject CRD
-    tags:
-      - CRD
-      - Kubernetes
-      - AppProject
-      - RBAC
-    properties:
-      - url: https://argo-cd.readthedocs.io/en/stable/user-guide/projects/
-        type: Documentation
-      - url: https://github.com/argoproj/argo-cd/blob/master/manifests/crds/appproject-crd.yaml
-        type: Source
-    description: >-
-      Argo CD defines an AppProject Custom Resource Definition (argoproj.io/v1alpha1, kind=AppProject) which scopes
-      which sources, destinations, and resource kinds Applications inside the project may use, plus per-project RBAC.
+- aid: argocd:argocd-applicationsets-api
+  name: Argo CD ApplicationSets API
+  tags:
+  - ApplicationSets
+  - Generators
+  - GitOps
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
+    type: Documentation
+  description: >-
+    The Argo CD ApplicationSets API (/api/v1/applicationsets) manages ApplicationSet resources — templated
+    app generators (List, Cluster, Git, Matrix, Merge, Pull Request, SCM Provider) used to programmatically
+    scale Argo CD across many clusters and tenants.
+- aid: argocd:argocd-projects-api
+  name: Argo CD Projects API
+  tags:
+  - Projects
+  - AppProjects
+  - RBAC
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/user-guide/projects/
+    type: Documentation
+  description: >-
+    The Argo CD Projects API (/api/v1/projects) manages AppProject resources — multi-tenant boundaries
+    that restrict the source repos, destination clusters/namespaces, and resource kinds available to a
+    group of applications, plus per-project RBAC and JWT tokens.
+- aid: argocd:argocd-clusters-api
+  name: Argo CD Clusters API
+  tags:
+  - Clusters
+  - Targets
+  - Kubernetes
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
+    type: Documentation
+  description: >-
+    The Argo CD Clusters API (/api/v1/clusters) registers, updates, lists, and removes target Kubernetes
+    clusters that Argo CD deploys into, including cluster credentials, sharding hints, and namespace scoping.
+- aid: argocd:argocd-repositories-api
+  name: Argo CD Repositories API
+  tags:
+  - Repositories
+  - Git
+  - Helm
+  - OCI
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/
+    type: Documentation
+  description: >-
+    The Argo CD Repositories API (/api/v1/repositories and /api/v1/repocreds) manages Git, Helm chart,
+    and OCI-registry source repositories with credentials, certificates, and per-repo settings used by
+    the Application controller.
+- aid: argocd:argocd-accounts-api
+  name: Argo CD Accounts API
+  tags:
+  - Accounts
+  - Authentication
+  - Tokens
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/
+    type: Documentation
+  description: >-
+    The Argo CD Accounts API (/api/v1/account) manages local accounts and their API tokens (capability
+    for service accounts), including password rotation and token issuance/revocation.
+- aid: argocd:argocd-sessions-api
+  name: Argo CD Sessions API
+  tags:
+  - Sessions
+  - Authentication
+  - JWT
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+    type: Documentation
+  description: >-
+    The Argo CD Sessions API (/api/v1/session) issues bearer tokens for username/password and OIDC-authenticated
+    sessions used by all other API endpoints.
+- aid: argocd:argocd-settings-api
+  name: Argo CD Settings API
+  tags:
+  - Settings
+  - Configuration
+  - Plugins
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/argocd-cm-yaml/
+    type: Documentation
+  description: >-
+    The Argo CD Settings API (/api/v1/settings) returns the active server configuration — UI banner, OIDC
+    config, Helm/Kustomize plugin defaults, resource exclusions, application instance label key, and similar
+    runtime settings.
+- aid: argocd:argocd-certificates-api
+  name: Argo CD Certificates API
+  tags:
+  - Certificates
+  - TLS
+  - SSH
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
+    type: Documentation
+  description: >-
+    The Argo CD Certificates API (/api/v1/certificates) manages TLS certificates and SSH known_hosts entries
+    used to securely connect to private Git, Helm, and OCI repositories.
+- aid: argocd:argocd-gpgkeys-api
+  name: Argo CD GPG Keys API
+  tags:
+  - GPG
+  - Signed Commits
+  - Security
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/user-guide/gpg-verification/
+    type: Documentation
+  description: >-
+    The Argo CD GPG Keys API (/api/v1/gpgkeys) registers and removes GPG public keys used to verify signed
+    commits before they are deployed.
+- aid: argocd:argocd-notifications-api
+  name: Argo CD Notifications API
+  tags:
+  - Notifications
+  - Webhooks
+  - Slack
+  - Email
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/
+    type: Documentation
+  description: >-
+    The Argo CD Notifications subsystem delivers app lifecycle events (sync, health, deploy) to webhooks,
+    Slack, MS Teams, email, GitHub commit status, and other channels via templated triggers.
+- aid: argocd:argocd-version-api
+  name: Argo CD Version API
+  tags:
+  - Version
+  - Build Info
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+    type: Documentation
+  description: >-
+    The Argo CD Version API (/api/version) returns the running argocd-server build version, Kustomize/Helm/Jsonnet
+    versions, and Kubernetes server version.
+- aid: argocd:argocd-application-crd
+  name: Argo CD Application CRD
+  tags:
+  - CRD
+  - Kubernetes
+  - Application
+  - GitOps
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/application.yaml/
+    type: Documentation
+  - url: https://github.com/argoproj/argo-cd/blob/master/manifests/crds/application-crd.yaml
+    type: Source
+  description: >-
+    Argo CD defines an Application Custom Resource Definition (argoproj.io/v1alpha1, kind=Application)
+    describing a desired sync of a single source (Git/Helm/OCI) to a destination cluster/namespace, with
+    sync policy, automated/manual sync, and ignore/diff rules.
+- aid: argocd:argocd-applicationset-crd
+  name: Argo CD ApplicationSet CRD
+  tags:
+  - CRD
+  - Kubernetes
+  - ApplicationSet
+  - Generators
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
+    type: Documentation
+  - url: https://github.com/argoproj/argo-cd/blob/master/manifests/crds/applicationset-crd.yaml
+    type: Source
+  description: >-
+    Argo CD defines an ApplicationSet Custom Resource Definition (argoproj.io/v1alpha1, kind=ApplicationSet)
+    which templatizes Application creation across many targets via pluggable generators.
+- aid: argocd:argocd-appproject-crd
+  name: Argo CD AppProject CRD
+  tags:
+  - CRD
+  - Kubernetes
+  - AppProject
+  - RBAC
+  properties:
+  - url: https://argo-cd.readthedocs.io/en/stable/user-guide/projects/
+    type: Documentation
+  - url: https://github.com/argoproj/argo-cd/blob/master/manifests/crds/appproject-crd.yaml
+    type: Source
+  description: >-
+    Argo CD defines an AppProject Custom Resource Definition (argoproj.io/v1alpha1, kind=AppProject) which
+    scopes which sources, destinations, and resource kinds Applications inside the project may use, plus
+    per-project RBAC.
+- aid: argocd:argocd-accountservice-api
+  name: Argo CD AccountService API
+  description: The AccountService API from Argo CD — 6 operation(s) for accountservice.
+  tags:
+  - AccountService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-accountservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-applicationservice-api
+  name: Argo CD ApplicationService API
+  description: The ApplicationService API from Argo CD — 26 operation(s) for applicationservice.
+  tags:
+  - ApplicationService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-applicationservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-applicationsetservice-api
+  name: Argo CD ApplicationSetService API
+  description: The ApplicationSetService API from Argo CD — 6 operation(s) for applicationsetservice.
+  tags:
+  - ApplicationSetService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-applicationsetservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-certificateservice-api
+  name: Argo CD CertificateService API
+  description: The CertificateService API from Argo CD — 1 operation(s) for certificateservice.
+  tags:
+  - CertificateService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-certificateservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-clusterservice-api
+  name: Argo CD ClusterService API
+  description: The ClusterService API from Argo CD — 4 operation(s) for clusterservice.
+  tags:
+  - ClusterService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-clusterservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-gpgkeyservice-api
+  name: Argo CD GPGKeyService API
+  description: The GPGKeyService API from Argo CD — 2 operation(s) for gpgkeyservice.
+  tags:
+  - GPGKeyService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-gpgkeyservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-notificationservice-api
+  name: Argo CD NotificationService API
+  description: The NotificationService API from Argo CD — 3 operation(s) for notificationservice.
+  tags:
+  - NotificationService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-notificationservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-projectservice-api
+  name: Argo CD ProjectService API
+  description: The ProjectService API from Argo CD — 10 operation(s) for projectservice.
+  tags:
+  - ProjectService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-projectservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-repocredsservice-api
+  name: Argo CD RepoCredsService API
+  description: The RepoCredsService API from Argo CD — 6 operation(s) for repocredsservice.
+  tags:
+  - RepoCredsService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-repocredsservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-repositoryservice-api
+  name: Argo CD RepositoryService API
+  description: The RepositoryService API from Argo CD — 13 operation(s) for repositoryservice.
+  tags:
+  - RepositoryService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-repositoryservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-sessionservice-api
+  name: Argo CD SessionService API
+  description: The SessionService API from Argo CD — 2 operation(s) for sessionservice.
+  tags:
+  - SessionService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-sessionservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-settingsservice-api
+  name: Argo CD SettingsService API
+  description: The SettingsService API from Argo CD — 2 operation(s) for settingsservice.
+  tags:
+  - SettingsService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-settingsservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-versionservice-api
+  name: Argo CD VersionService API
+  description: The VersionService API from Argo CD — 1 operation(s) for versionservice.
+  tags:
+  - VersionService
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-versionservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
 common:
   - type: AgenticAccess
     url: agentic-access/argocd-agentic-access.yml
