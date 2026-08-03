@@ -1,0 +1,38 @@
+{
+  "provider": "argocd",
+  "sources": [
+    "argocd-accountservice-api-openapi.yml",
+    "argocd-applicationservice-api-openapi.yml",
+    "argocd-applicationsetservice-api-openapi.yml",
+    "argocd-certificateservice-api-openapi.yml",
+    "argocd-clusterservice-api-openapi.yml",
+    "argocd-gpgkeyservice-api-openapi.yml",
+    "argocd-notificationservice-api-openapi.yml",
+    "argocd-projectservice-api-openapi.yml",
+    "argocd-repocredsservice-api-openapi.yml",
+    "argocd-repositoryservice-api-openapi.yml",
+    "argocd-sessionservice-api-openapi.yml",
+    "argocd-settingsservice-api-openapi.yml",
+    "argocd-versionservice-api-openapi.yml"
+  ],
+  "outputs": [
+    "argocd-accountservice-api-openapi.yml",
+    "argocd-applicationservice-api-openapi.yml",
+    "argocd-applicationsetservice-api-openapi.yml",
+    "argocd-certificateservice-api-openapi.yml",
+    "argocd-clusterservice-api-openapi.yml",
+    "argocd-gpgkeyservice-api-openapi.yml",
+    "argocd-notificationservice-api-openapi.yml",
+    "argocd-projectservice-api-openapi.yml",
+    "argocd-repocredsservice-api-openapi.yml",
+    "argocd-repositoryservice-api-openapi.yml",
+    "argocd-sessionservice-api-openapi.yml",
+    "argocd-settingsservice-api-openapi.yml",
+    "argocd-versionservice-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
