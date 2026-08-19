@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Consolidate Services AccountService GPGKeyService API",
+    "version": "version not set"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GPGKeyService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all available repository certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/gpgkeys",
+            "params": [
+              {
+                "name": "keyID",
+                "value": "",
+                "type": "query",
+                "description": "The GPG key ID to query for."
+              }
+            ]
+          },
+          "docs": "List all available repository certificates"
+        },
+        {
+          "info": {
+            "name": "Create one or more GPG public keys in the server's configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/gpgkeys",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to upsert already existing public keys."
+              }
+            ]
+          },
+          "docs": "Create one or more GPG public keys in the server's configuration"
+        },
+        {
+          "info": {
+            "name": "Delete specified GPG public key from the server's configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/gpgkeys",
+            "params": [
+              {
+                "name": "keyID",
+                "value": "",
+                "type": "query",
+                "description": "The GPG key ID to query for."
+              }
+            ]
+          },
+          "docs": "Delete specified GPG public key from the server's configuration"
+        },
+        {
+          "info": {
+            "name": "Get information about specified GPG public key from the server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/gpgkeys/:keyID",
+            "params": [
+              {
+                "name": "keyID",
+                "value": "",
+                "type": "path",
+                "description": "The GPG key ID to query for"
+              }
+            ]
+          },
+          "docs": "Get information about specified GPG public key from the server"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

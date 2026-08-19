@@ -1,0 +1,1461 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Consolidate Services AccountService ApplicationService API",
+    "version": "version not set"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ApplicationService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List returns list of applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "the application's name."
+              },
+              {
+                "name": "refresh",
+                "value": "",
+                "type": "query",
+                "description": "forces application reconciliation if set to 'hard'."
+              },
+              {
+                "name": "projects",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications."
+              },
+              {
+                "name": "resourceVersion",
+                "value": "",
+                "type": "query",
+                "description": "when specified with a watch call, shows changes that occur after that particular version of a resource."
+              },
+              {
+                "name": "selector",
+                "value": "",
+                "type": "query",
+                "description": "the selector to restrict returned list to applications only with matched labels."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "the repoURL to restrict returned list applications."
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications (legacy name for backwards-compatibility)."
+              }
+            ]
+          },
+          "docs": "List returns list of applications"
+        },
+        {
+          "info": {
+            "name": "Create creates an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "validate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Create creates an application"
+        },
+        {
+          "info": {
+            "name": "GetManifestsWithFiles returns application manifests using provided files to generate them",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/manifestsWithFiles"
+          },
+          "docs": "GetManifestsWithFiles returns application manifests using provided files to generate them"
+        },
+        {
+          "info": {
+            "name": "ServerSideDiff performs server-side diff calculation using dry-run apply",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:appName/server-side-diff",
+            "params": [
+              {
+                "name": "appName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "targetManifests",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ServerSideDiff performs server-side diff calculation using dry-run apply"
+        },
+        {
+          "info": {
+            "name": "Update updates an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/applications/:application.metadata.name",
+            "params": [
+              {
+                "name": "application.metadata.name",
+                "value": "",
+                "type": "path",
+                "description": "Name must be unique within a namespace. Is required when creating resources, although\nsome resources may allow a client to request the generation of an appropriate name\nautomatically. Name is primarily intended for creation idempotence and configuration\ndefinition.\nCannot be updated.\nMore info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names\n+optional"
+              },
+              {
+                "name": "validate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Update updates an application"
+        },
+        {
+          "info": {
+            "name": "ManagedResources returns list of managed resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:applicationName/managed-resources",
+            "params": [
+              {
+                "name": "applicationName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ManagedResources returns list of managed resources"
+        },
+        {
+          "info": {
+            "name": "ResourceTree returns resource tree",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:applicationName/resource-tree",
+            "params": [
+              {
+                "name": "applicationName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ResourceTree returns resource tree"
+        },
+        {
+          "info": {
+            "name": "Get returns an application by name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "the application's name"
+              },
+              {
+                "name": "refresh",
+                "value": "",
+                "type": "query",
+                "description": "forces application reconciliation if set to 'hard'."
+              },
+              {
+                "name": "projects",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications."
+              },
+              {
+                "name": "resourceVersion",
+                "value": "",
+                "type": "query",
+                "description": "when specified with a watch call, shows changes that occur after that particular version of a resource."
+              },
+              {
+                "name": "selector",
+                "value": "",
+                "type": "query",
+                "description": "the selector to restrict returned list to applications only with matched labels."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "the repoURL to restrict returned list applications."
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications (legacy name for backwards-compatibility)."
+              }
+            ]
+          },
+          "docs": "Get returns an application by name"
+        },
+        {
+          "info": {
+            "name": "Patch patch an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/api/v1/applications/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Patch patch an application"
+        },
+        {
+          "info": {
+            "name": "Delete deletes an application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/applications/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cascade",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "propagationPolicy",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete deletes an application"
+        },
+        {
+          "info": {
+            "name": "ListResourceEvents returns a list of event resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/events",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resourceNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceUID",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListResourceEvents returns a list of event resources"
+        },
+        {
+          "info": {
+            "name": "ListLinks returns the list of all application deep links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/links",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListLinks returns the list of all application deep links"
+        },
+        {
+          "info": {
+            "name": "PodLogs returns stream of log entries for the specified pod. Pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/logs",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "podName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sinceSeconds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sinceTime.seconds",
+                "value": "",
+                "type": "query",
+                "description": "Represents seconds of UTC time since Unix epoch\n1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to\n9999-12-31T23:59:59Z inclusive."
+              },
+              {
+                "name": "sinceTime.nanos",
+                "value": "",
+                "type": "query",
+                "description": "Non-negative fractions of a second at nanosecond resolution. Negative\nsecond values with fractions must still have non-negative nanos values\nthat count forward in time. Must be from 0 to 999,999,999\ninclusive. This field may be limited in precision depending on context."
+              },
+              {
+                "name": "tailLines",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "follow",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "untilTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "previous",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "matchCase",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "PodLogs returns stream of log entries for the specified pod. Pod"
+        },
+        {
+          "info": {
+            "name": "GetManifests returns application manifests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/manifests",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourcePositions",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "revisions",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "noCache",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetManifests returns application manifests"
+        },
+        {
+          "info": {
+            "name": "TerminateOperation terminates the currently running operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/applications/:name/operation",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "TerminateOperation terminates the currently running operation"
+        },
+        {
+          "info": {
+            "name": "PodLogs returns stream of log entries for the specified pod. Pod",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/pods/:podName/logs",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "podName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "container",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sinceSeconds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sinceTime.seconds",
+                "value": "",
+                "type": "query",
+                "description": "Represents seconds of UTC time since Unix epoch\n1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to\n9999-12-31T23:59:59Z inclusive."
+              },
+              {
+                "name": "sinceTime.nanos",
+                "value": "",
+                "type": "query",
+                "description": "Non-negative fractions of a second at nanosecond resolution. Negative\nsecond values with fractions must still have non-negative nanos values\nthat count forward in time. Must be from 0 to 999,999,999\ninclusive. This field may be limited in precision depending on context."
+              },
+              {
+                "name": "tailLines",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "follow",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "untilTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "previous",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "matchCase",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "PodLogs returns stream of log entries for the specified pod. Pod"
+        },
+        {
+          "info": {
+            "name": "GetResource returns single application resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "GetResource returns single application resource"
+        },
+        {
+          "info": {
+            "name": "PatchResource patch single application resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "patchType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "PatchResource patch single application resource"
+        },
+        {
+          "info": {
+            "name": "DeleteResource deletes a single application resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "orphan",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "DeleteResource deletes a single application resource"
+        },
+        {
+          "info": {
+            "name": "ListResourceActions returns list of resource actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource/actions",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListResourceActions returns list of resource actions"
+        },
+        {
+          "info": {
+            "name": "RunResourceAction runs a resource action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource/actions",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deprecated: use RunResourceActionV2 instead. This version does not support resource action parameters but is\nmaintained for backward compatibility. It will be removed in a future release."
+        },
+        {
+          "info": {
+            "name": "RunResourceActionV2 runs a resource action with parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource/actions/v2",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "RunResourceActionV2 runs a resource action with parameters"
+        },
+        {
+          "info": {
+            "name": "ListResourceLinks returns the list of all resource deep links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/resource/links",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resourceName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListResourceLinks returns the list of all resource deep links"
+        },
+        {
+          "info": {
+            "name": "Get the chart metadata (description, maintainers, home) for a specific revision of the application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/revisions/:revision/chartdetails",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "the application's name"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "path",
+                "description": "the revision of the app"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceIndex",
+                "value": "",
+                "type": "query",
+                "description": "source index (for multi source apps)."
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "query",
+                "description": "versionId from historical data (for multi source apps)."
+              }
+            ]
+          },
+          "docs": "Get the chart metadata (description, maintainers, home) for a specific revision of the application"
+        },
+        {
+          "info": {
+            "name": "Get the meta-data (author, date, tags, message) for a specific revision of the application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/revisions/:revision/metadata",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "the application's name"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "path",
+                "description": "the revision of the app"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceIndex",
+                "value": "",
+                "type": "query",
+                "description": "source index (for multi source apps)."
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "query",
+                "description": "versionId from historical data (for multi source apps)."
+              }
+            ]
+          },
+          "docs": "Get the meta-data (author, date, tags, message) for a specific revision of the application"
+        },
+        {
+          "info": {
+            "name": "Get the chart metadata (description, maintainers, home) for a specific revision of the application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/revisions/:revision/ocimetadata",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "the application's name"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "path",
+                "description": "the revision of the app"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sourceIndex",
+                "value": "",
+                "type": "query",
+                "description": "source index (for multi source apps)."
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "query",
+                "description": "versionId from historical data (for multi source apps)."
+              }
+            ]
+          },
+          "docs": "Get the chart metadata (description, maintainers, home) for a specific revision of the application"
+        },
+        {
+          "info": {
+            "name": "Rollback syncs an application to its target state",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/:name/rollback",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Rollback syncs an application to its target state"
+        },
+        {
+          "info": {
+            "name": "UpdateSpec updates an application spec",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/applications/:name/spec",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "validate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "UpdateSpec updates an application spec"
+        },
+        {
+          "info": {
+            "name": "Sync syncs an application to its target state",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/applications/:name/sync",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Sync syncs an application to its target state"
+        },
+        {
+          "info": {
+            "name": "Get returns sync windows of the application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/applications/:name/syncwindows",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get returns sync windows of the application"
+        },
+        {
+          "info": {
+            "name": "Watch returns stream of application change events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/stream/applications",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "the application's name."
+              },
+              {
+                "name": "refresh",
+                "value": "",
+                "type": "query",
+                "description": "forces application reconciliation if set to 'hard'."
+              },
+              {
+                "name": "projects",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications."
+              },
+              {
+                "name": "resourceVersion",
+                "value": "",
+                "type": "query",
+                "description": "when specified with a watch call, shows changes that occur after that particular version of a resource."
+              },
+              {
+                "name": "selector",
+                "value": "",
+                "type": "query",
+                "description": "the selector to restrict returned list to applications only with matched labels."
+              },
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "the repoURL to restrict returned list applications."
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query",
+                "description": "the application's namespace."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "the project names to restrict returned list applications (legacy name for backwards-compatibility)."
+              }
+            ]
+          },
+          "docs": "Watch returns stream of application change events"
+        },
+        {
+          "info": {
+            "name": "Watch returns stream of application resource tree",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/stream/applications/:applicationName/resource-tree",
+            "params": [
+              {
+                "name": "applicationName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appNamespace",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Watch returns stream of application resource tree"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,761 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Consolidate Services AccountService RepositoryService API",
+    "version": "version not set"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RepositoryService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListRepositories gets a list of all configured repositories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "Repo URL for query."
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "ListRepositories gets a list of all configured repositories"
+        },
+        {
+          "info": {
+            "name": "CreateRepository creates a new repository configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/repositories",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to create in upsert mode."
+              },
+              {
+                "name": "credsOnly",
+                "value": "",
+                "type": "query",
+                "description": "Whether to operate on credential set instead of repository."
+              }
+            ]
+          },
+          "docs": "CreateRepository creates a new repository configuration"
+        },
+        {
+          "info": {
+            "name": "UpdateRepository updates a repository configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo.repo",
+            "params": [
+              {
+                "name": "repo.repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo contains the URL to the remote repository"
+              }
+            ]
+          },
+          "docs": "UpdateRepository updates a repository configuration"
+        },
+        {
+          "info": {
+            "name": "Get returns a repository or its credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "Get returns a repository or its credentials"
+        },
+        {
+          "info": {
+            "name": "DeleteRepository deletes a repository from the configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "DeleteRepository deletes a repository from the configuration"
+        },
+        {
+          "info": {
+            "name": "ListApps returns list of apps in the repo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo/apps",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "revision",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "ListApps returns list of apps in the repo"
+        },
+        {
+          "info": {
+            "name": "GetHelmCharts returns list of helm charts in the specified repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo/helmcharts",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "GetHelmCharts returns list of helm charts in the specified repository"
+        },
+        {
+          "info": {
+            "name": "RepositoryService_ListOCITags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo/oci-tags",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "RepositoryService_ListRefs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo/refs",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "ValidateAccess validates access to a repository with given parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/repositories/:repo/validate",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The URL to the repo"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "Username for accessing repo."
+              },
+              {
+                "name": "password",
+                "value": "",
+                "type": "query",
+                "description": "Password for accessing repo."
+              },
+              {
+                "name": "sshPrivateKey",
+                "value": "",
+                "type": "query",
+                "description": "Private key data for accessing SSH repository."
+              },
+              {
+                "name": "insecure",
+                "value": "",
+                "type": "query",
+                "description": "Whether to skip certificate or host key validation."
+              },
+              {
+                "name": "tlsClientCertData",
+                "value": "",
+                "type": "query",
+                "description": "TLS client cert data for accessing HTTPS repository."
+              },
+              {
+                "name": "tlsClientCertKey",
+                "value": "",
+                "type": "query",
+                "description": "TLS client cert key for accessing HTTPS repository."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the repo."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the repo."
+              },
+              {
+                "name": "enableOci",
+                "value": "",
+                "type": "query",
+                "description": "Whether helm-oci support should be enabled for this repo."
+              },
+              {
+                "name": "githubAppPrivateKey",
+                "value": "",
+                "type": "query",
+                "description": "Github App Private Key PEM data."
+              },
+              {
+                "name": "githubAppID",
+                "value": "",
+                "type": "query",
+                "description": "Github App ID of the app used to access the repo."
+              },
+              {
+                "name": "githubAppInstallationID",
+                "value": "",
+                "type": "query",
+                "description": "Github App Installation ID of the installed GitHub App."
+              },
+              {
+                "name": "githubAppEnterpriseBaseUrl",
+                "value": "",
+                "type": "query",
+                "description": "Github App Enterprise base url if empty will default to https://api.github.com."
+              },
+              {
+                "name": "proxy",
+                "value": "",
+                "type": "query",
+                "description": "HTTP/HTTPS proxy to access the repository."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Reference between project and repository that allow you automatically to be added as item inside SourceRepos project entity."
+              },
+              {
+                "name": "gcpServiceAccountKey",
+                "value": "",
+                "type": "query",
+                "description": "Google Cloud Platform service account key."
+              },
+              {
+                "name": "forceHttpBasicAuth",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force HTTP basic auth."
+              },
+              {
+                "name": "useAzureWorkloadIdentity",
+                "value": "",
+                "type": "query",
+                "description": "Whether to use azure workload identity for authentication."
+              },
+              {
+                "name": "bearerToken",
+                "value": "",
+                "type": "query",
+                "description": "BearerToken contains the bearer token used for Git auth at the repo server."
+              },
+              {
+                "name": "insecureOciForceHttp",
+                "value": "",
+                "type": "query",
+                "description": "Whether https should be disabled for an OCI repo."
+              },
+              {
+                "name": "azureServicePrincipalClientId",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Client ID."
+              },
+              {
+                "name": "azureServicePrincipalClientSecret",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Client Secret."
+              },
+              {
+                "name": "azureServicePrincipalTenantId",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Tenant ID."
+              },
+              {
+                "name": "azureActiveDirectoryEndpoint",
+                "value": "",
+                "type": "query",
+                "description": "Azure Active Directory Endpoint."
+              }
+            ]
+          },
+          "docs": "ValidateAccess validates access to a repository with given parameters"
+        },
+        {
+          "info": {
+            "name": "GetAppDetails returns application details by given path",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/repositories/:source.repoURL/appdetails",
+            "params": [
+              {
+                "name": "source.repoURL",
+                "value": "",
+                "type": "path",
+                "description": "RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+              }
+            ]
+          },
+          "docs": "GetAppDetails returns application details by given path"
+        },
+        {
+          "info": {
+            "name": "ListWriteRepositories gets a list of all configured write repositories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/write-repositories",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "query",
+                "description": "Repo URL for query."
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "ListWriteRepositories gets a list of all configured write repositories"
+        },
+        {
+          "info": {
+            "name": "CreateWriteRepository creates a new write repository configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/write-repositories",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to create in upsert mode."
+              },
+              {
+                "name": "credsOnly",
+                "value": "",
+                "type": "query",
+                "description": "Whether to operate on credential set instead of repository."
+              }
+            ]
+          },
+          "docs": "CreateWriteRepository creates a new write repository configuration"
+        },
+        {
+          "info": {
+            "name": "UpdateWriteRepository updates a write repository configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/write-repositories/:repo.repo",
+            "params": [
+              {
+                "name": "repo.repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo contains the URL to the remote repository"
+              }
+            ]
+          },
+          "docs": "UpdateWriteRepository updates a write repository configuration"
+        },
+        {
+          "info": {
+            "name": "GetWrite returns a repository or its write credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/write-repositories/:repo",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "GetWrite returns a repository or its write credentials"
+        },
+        {
+          "info": {
+            "name": "DeleteWriteRepository deletes a write repository from the configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/write-repositories/:repo",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "Repo URL for query"
+              },
+              {
+                "name": "forceRefresh",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force a cache refresh on repo's connection state."
+              },
+              {
+                "name": "appProject",
+                "value": "",
+                "type": "query",
+                "description": "App project for query."
+              }
+            ]
+          },
+          "docs": "DeleteWriteRepository deletes a write repository from the configuration"
+        },
+        {
+          "info": {
+            "name": "ValidateWriteAccess validates write access to a repository with given parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/write-repositories/:repo/validate",
+            "params": [
+              {
+                "name": "repo",
+                "value": "",
+                "type": "path",
+                "description": "The URL to the repo"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "Username for accessing repo."
+              },
+              {
+                "name": "password",
+                "value": "",
+                "type": "query",
+                "description": "Password for accessing repo."
+              },
+              {
+                "name": "sshPrivateKey",
+                "value": "",
+                "type": "query",
+                "description": "Private key data for accessing SSH repository."
+              },
+              {
+                "name": "insecure",
+                "value": "",
+                "type": "query",
+                "description": "Whether to skip certificate or host key validation."
+              },
+              {
+                "name": "tlsClientCertData",
+                "value": "",
+                "type": "query",
+                "description": "TLS client cert data for accessing HTTPS repository."
+              },
+              {
+                "name": "tlsClientCertKey",
+                "value": "",
+                "type": "query",
+                "description": "TLS client cert key for accessing HTTPS repository."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the repo."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the repo."
+              },
+              {
+                "name": "enableOci",
+                "value": "",
+                "type": "query",
+                "description": "Whether helm-oci support should be enabled for this repo."
+              },
+              {
+                "name": "githubAppPrivateKey",
+                "value": "",
+                "type": "query",
+                "description": "Github App Private Key PEM data."
+              },
+              {
+                "name": "githubAppID",
+                "value": "",
+                "type": "query",
+                "description": "Github App ID of the app used to access the repo."
+              },
+              {
+                "name": "githubAppInstallationID",
+                "value": "",
+                "type": "query",
+                "description": "Github App Installation ID of the installed GitHub App."
+              },
+              {
+                "name": "githubAppEnterpriseBaseUrl",
+                "value": "",
+                "type": "query",
+                "description": "Github App Enterprise base url if empty will default to https://api.github.com."
+              },
+              {
+                "name": "proxy",
+                "value": "",
+                "type": "query",
+                "description": "HTTP/HTTPS proxy to access the repository."
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "query",
+                "description": "Reference between project and repository that allow you automatically to be added as item inside SourceRepos project entity."
+              },
+              {
+                "name": "gcpServiceAccountKey",
+                "value": "",
+                "type": "query",
+                "description": "Google Cloud Platform service account key."
+              },
+              {
+                "name": "forceHttpBasicAuth",
+                "value": "",
+                "type": "query",
+                "description": "Whether to force HTTP basic auth."
+              },
+              {
+                "name": "useAzureWorkloadIdentity",
+                "value": "",
+                "type": "query",
+                "description": "Whether to use azure workload identity for authentication."
+              },
+              {
+                "name": "bearerToken",
+                "value": "",
+                "type": "query",
+                "description": "BearerToken contains the bearer token used for Git auth at the repo server."
+              },
+              {
+                "name": "insecureOciForceHttp",
+                "value": "",
+                "type": "query",
+                "description": "Whether https should be disabled for an OCI repo."
+              },
+              {
+                "name": "azureServicePrincipalClientId",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Client ID."
+              },
+              {
+                "name": "azureServicePrincipalClientSecret",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Client Secret."
+              },
+              {
+                "name": "azureServicePrincipalTenantId",
+                "value": "",
+                "type": "query",
+                "description": "Azure Service Principal Tenant ID."
+              },
+              {
+                "name": "azureActiveDirectoryEndpoint",
+                "value": "",
+                "type": "query",
+                "description": "Azure Active Directory Endpoint."
+              }
+            ]
+          },
+          "docs": "ValidateWriteAccess validates write access to a repository with given parameters"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

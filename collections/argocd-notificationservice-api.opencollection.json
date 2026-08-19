@@ -1,0 +1,51 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Consolidate Services AccountService NotificationService API",
+    "version": "version not set"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NotificationService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List returns list of services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/notifications/services"
+          },
+          "docs": "List returns list of services"
+        },
+        {
+          "info": {
+            "name": "List returns list of templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/notifications/templates"
+          },
+          "docs": "List returns list of templates"
+        },
+        {
+          "info": {
+            "name": "List returns list of triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/notifications/triggers"
+          },
+          "docs": "List returns list of triggers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

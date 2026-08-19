@@ -1,0 +1,251 @@
+{
+  "item": [
+    {
+      "id": "0dcb6097-444d-4515-9c9a-54f68d9ebb22",
+      "name": "SettingsService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "633cc2ed-fd26-4316-ab13-99d0f588ffb3",
+          "name": "Get returns Argo CD settings",
+          "request": {
+            "name": "Get returns Argo CD settings",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7751e34e-888a-4fe6-8b40-39df01fe7bfe",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"additionalUrls\": [\n    \"string\",\n    \"string\"\n  ],\n  \"appLabelKey\": \"string\",\n  \"appsInAnyNamespaceEnabled\": false,\n  \"configManagementPlugins\": [\n    {\n      \"generate\": {\n        \"args\": [\n          \"string\",\n          \"string\"\n        ],\n        \"command\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"init\": {\n        \"args\": [\n          \"string\",\n          \"string\"\n        ],\n        \"command\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"lockRepo\": false,\n      \"name\": \"string\"\n    },\n    {\n      \"generate\": {\n        \"args\": [\n          \"string\",\n          \"string\"\n        ],\n        \"command\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"init\": {\n        \"args\": [\n          \"string\",\n          \"string\"\n        ],\n        \"command\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"lockRepo\": false,\n      \"name\": \"string\"\n    }\n  ],\n  \"controllerNamespace\": \"string\",\n  \"dexConfig\": {\n    \"connectors\": [\n      {\n        \"name\": \"string\",\n        \"type\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"type\": \"string\"\n      }\n    ]\n  },\n  \"execEnabled\": false,\n  \"googleAnalytics\": {\n    \"anonymizeUsers\": true,\n    \"trackingID\": \"string\"\n  },\n  \"help\": {\n    \"binaryUrls\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"chatText\": \"string\",\n    \"chatUrl\": \"string\"\n  },\n  \"hydratorEnabled\": false,\n  \"impersonationEnabled\": true,\n  \"installationID\": \"string\",\n  \"kustomizeOptions\": {\n    \"binaryPath\": \"string\",\n    \"buildOptions\": \"string\",\n    \"versions\": [\n      {\n        \"buildOptions\": \"string\",\n        \"name\": \"string\",\n        \"path\": \"string\"\n      },\n      {\n        \"buildOptions\": \"string\",\n        \"name\": \"string\",\n        \"path\": \"string\"\n      }\n    ]\n  },\n  \"kustomizeVersions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"oidcConfig\": {\n    \"cliClientID\": \"string\",\n    \"clientID\": \"string\",\n    \"enablePKCEAuthentication\": false,\n    \"idTokenClaims\": {\n      \"key_0\": {\n        \"essential\": false,\n        \"value\": \"string\",\n        \"values\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"issuer\": \"string\",\n    \"name\": \"string\",\n    \"scopes\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"passwordPattern\": \"string\",\n  \"plugins\": [\n    {\n      \"name\": \"string\"\n    },\n    {\n      \"name\": \"string\"\n    }\n  ],\n  \"resourceOverrides\": {\n    \"key_0\": {\n      \"actions\": \"string\",\n      \"healthLua\": \"string\",\n      \"ignoreDifferences\": {\n        \"jSONPointers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"jqPathExpressions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"managedFieldsManagers\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"ignoreResourceUpdates\": {\n        \"jSONPointers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"jqPathExpressions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"managedFieldsManagers\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"knownTypeFields\": [\n        {\n          \"field\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"field\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"useOpenLibs\": false\n    },\n    \"key_1\": {\n      \"actions\": \"string\",\n      \"healthLua\": \"string\",\n      \"ignoreDifferences\": {\n        \"jSONPointers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"jqPathExpressions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"managedFieldsManagers\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"ignoreResourceUpdates\": {\n        \"jSONPointers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"jqPathExpressions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"managedFieldsManagers\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"knownTypeFields\": [\n        {\n          \"field\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"field\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"useOpenLibs\": false\n    }\n  },\n  \"statusBadgeEnabled\": false,\n  \"statusBadgeRootUrl\": \"string\",\n  \"syncWithReplaceAllowed\": false,\n  \"trackingMethod\": \"string\",\n  \"uiBannerContent\": \"string\",\n  \"uiBannerPermanent\": true,\n  \"uiBannerPosition\": \"string\",\n  \"uiBannerURL\": \"string\",\n  \"uiCssURL\": \"string\",\n  \"url\": \"string\",\n  \"userLoginsDisabled\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cd28952-fc1f-4596-916c-3d091b434e5d",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6552,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59a8f2e5-1b13-4e77-b6bb-9e04ffb51281",
+          "name": "Get returns Argo CD plugins",
+          "request": {
+            "name": "Get returns Argo CD plugins",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "settings",
+                "plugins"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a18a3c7-d6a7-45c0-87be-430ecea3a704",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "settings",
+                    "plugins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"plugins\": [\n    {\n      \"name\": \"string\"\n    },\n    {\n      \"name\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fa6150d-8475-40ed-8882-92dae5533652",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "settings",
+                    "plugins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1091,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e280a5f8-b006-4180-a23a-6359a995a915",
+    "name": "Consolidate Services AccountService SettingsService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Description of all APIs",
+      "type": "text/plain"
+    }
+  }
+}

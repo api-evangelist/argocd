@@ -1,0 +1,3436 @@
+{
+  "item": [
+    {
+      "id": "0ea4566e-a9c8-4342-a1ce-bf20d8d5f5b4",
+      "name": "RepositoryService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "541123fe-9e6b-4af4-8563-791fac73fb85",
+          "name": "ListRepositories gets a list of all configured repositories",
+          "request": {
+            "name": "ListRepositories gets a list of all configured repositories",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "repositories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "repo",
+                  "value": "<string>",
+                  "description": "Repo URL for query."
+                },
+                {
+                  "disabled": false,
+                  "key": "forceRefresh",
+                  "value": "<boolean>",
+                  "description": "Whether to force a cache refresh on repo's connection state."
+                },
+                {
+                  "disabled": false,
+                  "key": "appProject",
+                  "value": "<string>",
+                  "description": "App project for query."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eec03e38-fe33-463b-9041-dfc5b1d8b8ae",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "repo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"azureActiveDirectoryEndpoint\": \"string\",\n      \"azureServicePrincipalClientId\": \"string\",\n      \"azureServicePrincipalClientSecret\": \"string\",\n      \"azureServicePrincipalTenantId\": \"string\",\n      \"bearerToken\": \"string\",\n      \"connectionState\": {\n        \"attemptedAt\": \"1969-08-29T17:40:36.994Z\",\n        \"message\": \"string\",\n        \"status\": \"string\"\n      },\n      \"depth\": 4344,\n      \"enableLfs\": true,\n      \"enableOCI\": true,\n      \"forceHttpBasicAuth\": false,\n      \"gcpServiceAccountKey\": \"string\",\n      \"githubAppEnterpriseBaseUrl\": \"string\",\n      \"githubAppID\": 2285,\n      \"githubAppInstallationID\": 2751,\n      \"githubAppPrivateKey\": \"string\",\n      \"inheritedCreds\": true,\n      \"insecure\": false,\n      \"insecureIgnoreHostKey\": false,\n      \"insecureOCIForceHttp\": true,\n      \"name\": \"string\",\n      \"noProxy\": \"string\",\n      \"password\": \"string\",\n      \"project\": \"string\",\n      \"proxy\": \"string\",\n      \"repo\": \"string\",\n      \"sshPrivateKey\": \"string\",\n      \"tlsClientCertData\": \"string\",\n      \"tlsClientCertKey\": \"string\",\n      \"type\": \"string\",\n      \"useAzureWorkloadIdentity\": false,\n      \"username\": \"string\",\n      \"webhookManifestCacheWarmDisabled\": false\n    },\n    {\n      \"azureActiveDirectoryEndpoint\": \"string\",\n      \"azureServicePrincipalClientId\": \"string\",\n      \"azureServicePrincipalClientSecret\": \"string\",\n      \"azureServicePrincipalTenantId\": \"string\",\n      \"bearerToken\": \"string\",\n      \"connectionState\": {\n        \"attemptedAt\": \"1999-08-22T03:32:18.912Z\",\n        \"message\": \"string\",\n        \"status\": \"string\"\n      },\n      \"depth\": 1948,\n      \"enableLfs\": false,\n      \"enableOCI\": true,\n      \"forceHttpBasicAuth\": false,\n      \"gcpServiceAccountKey\": \"string\",\n      \"githubAppEnterpriseBaseUrl\": \"string\",\n      \"githubAppID\": 2852,\n      \"githubAppInstallationID\": 4654,\n      \"githubAppPrivateKey\": \"string\",\n      \"inheritedCreds\": false,\n      \"insecure\": true,\n      \"insecureIgnoreHostKey\": false,\n      \"insecureOCIForceHttp\": true,\n      \"name\": \"string\",\n      \"noProxy\": \"string\",\n      \"password\": \"string\",\n      \"project\": \"string\",\n      \"proxy\": \"string\",\n      \"repo\": \"string\",\n      \"sshPrivateKey\": \"string\",\n      \"tlsClientCertData\": \"string\",\n      \"tlsClientCertKey\": \"string\",\n      \"type\": \"string\",\n      \"useAzureWorkloadIdentity\": false,\n      \"username\": \"string\",\n      \"webhookManifestCacheWarmDisabled\": true\n    }\n  ],\n  \"metadata\": {\n    \"continue\": \"string\",\n    \"remainingItemCount\": 8865,\n    \"resourceVersion\": \"string\",\n    \"selfLink\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f679d02f-8347-4817-8b1f-fbd8fc60fc99",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "repo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6771,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7778d7c4-b5f2-4156-b0a1-d5d62e2b24c5",
+          "name": "CreateRepository creates a new repository configuration",
+          "request": {
+            "name": "CreateRepository creates a new repository configuration",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "repositories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "upsert",
+                  "value": "<boolean>",
+                  "description": "Whether to create in upsert mode."
+                },
+                {
+                  "disabled": false,
+                  "key": "credsOnly",
+                  "value": "<boolean>",
+                  "description": "Whether to operate on credential set instead of repository."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"azureActiveDirectoryEndpoint\": \"<string>\",\n  \"azureServicePrincipalClientId\": \"<string>\",\n  \"azureServicePrincipalClientSecret\": \"<string>\",\n  \"azureServicePrincipalTenantId\": \"<string>\",\n  \"bearerToken\": \"<string>\",\n  \"connectionState\": {\n    \"attemptedAt\": \"<dateTime>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  \"depth\": \"<long>\",\n  \"enableLfs\": \"<boolean>\",\n  \"enableOCI\": \"<boolean>\",\n  \"forceHttpBasicAuth\": \"<boolean>\",\n  \"gcpServiceAccountKey\": \"<string>\",\n  \"githubAppEnterpriseBaseUrl\": \"<string>\",\n  \"githubAppID\": \"<long>\",\n  \"githubAppInstallationID\": \"<long>\",\n  \"githubAppPrivateKey\": \"<string>\",\n  \"inheritedCreds\": \"<boolean>\",\n  \"insecure\": \"<boolean>\",\n  \"insecureIgnoreHostKey\": \"<boolean>\",\n  \"insecureOCIForceHttp\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"noProxy\": \"<string>\",\n  \"password\": \"<string>\",\n  \"project\": \"<string>\",\n  \"proxy\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"sshPrivateKey\": \"<string>\",\n  \"tlsClientCertData\": \"<string>\",\n  \"tlsClientCertKey\": \"<string>\",\n  \"type\": \"<string>\",\n  \"useAzureWorkloadIdentity\": \"<boolean>\",\n  \"username\": \"<string>\",\n  \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1bb64665-6e0f-4c61-b99d-9293a229a30d",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "upsert",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "credsOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"azureActiveDirectoryEndpoint\": \"<string>\",\n  \"azureServicePrincipalClientId\": \"<string>\",\n  \"azureServicePrincipalClientSecret\": \"<string>\",\n  \"azureServicePrincipalTenantId\": \"<string>\",\n  \"bearerToken\": \"<string>\",\n  \"connectionState\": {\n    \"attemptedAt\": \"<dateTime>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  \"depth\": \"<long>\",\n  \"enableLfs\": \"<boolean>\",\n  \"enableOCI\": \"<boolean>\",\n  \"forceHttpBasicAuth\": \"<boolean>\",\n  \"gcpServiceAccountKey\": \"<string>\",\n  \"githubAppEnterpriseBaseUrl\": \"<string>\",\n  \"githubAppID\": \"<long>\",\n  \"githubAppInstallationID\": \"<long>\",\n  \"githubAppPrivateKey\": \"<string>\",\n  \"inheritedCreds\": \"<boolean>\",\n  \"insecure\": \"<boolean>\",\n  \"insecureIgnoreHostKey\": \"<boolean>\",\n  \"insecureOCIForceHttp\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"noProxy\": \"<string>\",\n  \"password\": \"<string>\",\n  \"project\": \"<string>\",\n  \"proxy\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"sshPrivateKey\": \"<string>\",\n  \"tlsClientCertData\": \"<string>\",\n  \"tlsClientCertKey\": \"<string>\",\n  \"type\": \"<string>\",\n  \"useAzureWorkloadIdentity\": \"<boolean>\",\n  \"username\": \"<string>\",\n  \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8454931-3fca-4510-9060-42512648d37f",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "upsert",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "credsOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4928b57f-68ce-4041-adb9-496b16b3e79a",
+          "name": "UpdateRepository updates a repository configuration",
+          "request": {
+            "name": "UpdateRepository updates a repository configuration",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "repositories",
+                ":repo.repo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo.repo",
+                  "description": "(Required) Repo contains the URL to the remote repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"azureActiveDirectoryEndpoint\": \"<string>\",\n  \"azureServicePrincipalClientId\": \"<string>\",\n  \"azureServicePrincipalClientSecret\": \"<string>\",\n  \"azureServicePrincipalTenantId\": \"<string>\",\n  \"bearerToken\": \"<string>\",\n  \"connectionState\": {\n    \"attemptedAt\": \"<dateTime>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  \"depth\": \"<long>\",\n  \"enableLfs\": \"<boolean>\",\n  \"enableOCI\": \"<boolean>\",\n  \"forceHttpBasicAuth\": \"<boolean>\",\n  \"gcpServiceAccountKey\": \"<string>\",\n  \"githubAppEnterpriseBaseUrl\": \"<string>\",\n  \"githubAppID\": \"<long>\",\n  \"githubAppInstallationID\": \"<long>\",\n  \"githubAppPrivateKey\": \"<string>\",\n  \"inheritedCreds\": \"<boolean>\",\n  \"insecure\": \"<boolean>\",\n  \"insecureIgnoreHostKey\": \"<boolean>\",\n  \"insecureOCIForceHttp\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"noProxy\": \"<string>\",\n  \"password\": \"<string>\",\n  \"project\": \"<string>\",\n  \"proxy\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"sshPrivateKey\": \"<string>\",\n  \"tlsClientCertData\": \"<string>\",\n  \"tlsClientCertKey\": \"<string>\",\n  \"type\": \"<string>\",\n  \"useAzureWorkloadIdentity\": \"<boolean>\",\n  \"username\": \"<string>\",\n  \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd04160c-2e69-4037-a949-f6c7082cc5b0",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo.repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo.repo",
+                      "description": "(Required) Repo contains the URL to the remote repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"azureActiveDirectoryEndpoint\": \"<string>\",\n  \"azureServicePrincipalClientId\": \"<string>\",\n  \"azureServicePrincipalClientSecret\": \"<string>\",\n  \"azureServicePrincipalTenantId\": \"<string>\",\n  \"bearerToken\": \"<string>\",\n  \"connectionState\": {\n    \"attemptedAt\": \"<dateTime>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  \"depth\": \"<long>\",\n  \"enableLfs\": \"<boolean>\",\n  \"enableOCI\": \"<boolean>\",\n  \"forceHttpBasicAuth\": \"<boolean>\",\n  \"gcpServiceAccountKey\": \"<string>\",\n  \"githubAppEnterpriseBaseUrl\": \"<string>\",\n  \"githubAppID\": \"<long>\",\n  \"githubAppInstallationID\": \"<long>\",\n  \"githubAppPrivateKey\": \"<string>\",\n  \"inheritedCreds\": \"<boolean>\",\n  \"insecure\": \"<boolean>\",\n  \"insecureIgnoreHostKey\": \"<boolean>\",\n  \"insecureOCIForceHttp\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"noProxy\": \"<string>\",\n  \"password\": \"<string>\",\n  \"project\": \"<string>\",\n  \"proxy\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"sshPrivateKey\": \"<string>\",\n  \"tlsClientCertData\": \"<string>\",\n  \"tlsClientCertKey\": \"<string>\",\n  \"type\": \"<string>\",\n  \"useAzureWorkloadIdentity\": \"<boolean>\",\n  \"username\": \"<string>\",\n  \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10a6d7eb-fd5d-4a16-8606-f48e4f50ebc8",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo.repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo.repo",
+                      "description": "(Required) Repo contains the URL to the remote repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0469a70-5115-43d6-b40a-772f955a2f28",
+          "name": "Get returns a repository or its credentials",
+          "request": {
+            "name": "Get returns a repository or its credentials",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "repositories",
+                ":repo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "forceRefresh",
+                  "value": "<boolean>",
+                  "description": "Whether to force a cache refresh on repo's connection state."
+                },
+                {
+                  "disabled": false,
+                  "key": "appProject",
+                  "value": "<string>",
+                  "description": "App project for query."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo",
+                  "description": "(Required) Repo URL for query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00252d2a-f493-4dd9-a60e-ae03eb72bd19",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"azureActiveDirectoryEndpoint\": \"<string>\",\n  \"azureServicePrincipalClientId\": \"<string>\",\n  \"azureServicePrincipalClientSecret\": \"<string>\",\n  \"azureServicePrincipalTenantId\": \"<string>\",\n  \"bearerToken\": \"<string>\",\n  \"connectionState\": {\n    \"attemptedAt\": \"<dateTime>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  \"depth\": \"<long>\",\n  \"enableLfs\": \"<boolean>\",\n  \"enableOCI\": \"<boolean>\",\n  \"forceHttpBasicAuth\": \"<boolean>\",\n  \"gcpServiceAccountKey\": \"<string>\",\n  \"githubAppEnterpriseBaseUrl\": \"<string>\",\n  \"githubAppID\": \"<long>\",\n  \"githubAppInstallationID\": \"<long>\",\n  \"githubAppPrivateKey\": \"<string>\",\n  \"inheritedCreds\": \"<boolean>\",\n  \"insecure\": \"<boolean>\",\n  \"insecureIgnoreHostKey\": \"<boolean>\",\n  \"insecureOCIForceHttp\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"noProxy\": \"<string>\",\n  \"password\": \"<string>\",\n  \"project\": \"<string>\",\n  \"proxy\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"sshPrivateKey\": \"<string>\",\n  \"tlsClientCertData\": \"<string>\",\n  \"tlsClientCertKey\": \"<string>\",\n  \"type\": \"<string>\",\n  \"useAzureWorkloadIdentity\": \"<boolean>\",\n  \"username\": \"<string>\",\n  \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e46891fa-40ed-42d9-a4d5-087b1423831a",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "603171f9-defe-42fb-a28d-be0671787fd0",
+          "name": "DeleteRepository deletes a repository from the configuration",
+          "request": {
+            "name": "DeleteRepository deletes a repository from the configuration",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "repositories",
+                ":repo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "forceRefresh",
+                  "value": "<boolean>",
+                  "description": "Whether to force a cache refresh on repo's connection state."
+                },
+                {
+                  "disabled": false,
+                  "key": "appProject",
+                  "value": "<string>",
+                  "description": "App project for query."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo",
+                  "description": "(Required) Repo URL for query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26798d37-5aa1-43af-bc89-70de5bbf315b",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87ee2f24-1cb7-48a4-a100-8068ca6507e8",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8302a54-25a3-4096-be60-9b6abbccaa66",
+          "name": "ListApps returns list of apps in the repo",
+          "request": {
+            "name": "ListApps returns list of apps in the repo",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "repositories",
+                ":repo",
+                "apps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "appName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "appProject",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f6d07f1-0d59-45a9-9953-d28529ce6a92",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo",
+                    "apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"path\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7654925-def8-4dba-a644-c9cb2492189b",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo",
+                    "apps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be1af41f-1691-4f1b-b9f9-990ed1ee0ee7",
+          "name": "GetHelmCharts returns list of helm charts in the specified repository",
+          "request": {
+            "name": "GetHelmCharts returns list of helm charts in the specified repository",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "repositories",
+                ":repo",
+                "helmcharts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "forceRefresh",
+                  "value": "<boolean>",
+                  "description": "Whether to force a cache refresh on repo's connection state."
+                },
+                {
+                  "disabled": false,
+                  "key": "appProject",
+                  "value": "<string>",
+                  "description": "App project for query."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo",
+                  "description": "(Required) Repo URL for query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fa7dca1-cac2-4c2e-86b8-05f7e5ba3463",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo",
+                    "helmcharts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"versions\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"name\": \"string\",\n      \"versions\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bff8986-22d9-4571-b8d8-978e2963ac6d",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo",
+                    "helmcharts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3de68dcd-413c-4ce5-88e5-f8a332b5f365",
+          "name": "Repository Service List OCI Tags",
+          "request": {
+            "name": "Repository Service List OCI Tags",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "repositories",
+                ":repo",
+                "oci-tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "forceRefresh",
+                  "value": "<boolean>",
+                  "description": "Whether to force a cache refresh on repo's connection state."
+                },
+                {
+                  "disabled": false,
+                  "key": "appProject",
+                  "value": "<string>",
+                  "description": "App project for query."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo",
+                  "description": "(Required) Repo URL for query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63980e09-9027-4906-97b5-f5c028a0ec70",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo",
+                    "oci-tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"branches\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57020c55-1e4e-4445-a830-17eeeb018598",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo",
+                    "oci-tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "607ab63f-4837-4b60-a8e0-075587d6c43f",
+          "name": "Repository Service List Refs",
+          "request": {
+            "name": "Repository Service List Refs",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "repositories",
+                ":repo",
+                "refs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "forceRefresh",
+                  "value": "<boolean>",
+                  "description": "Whether to force a cache refresh on repo's connection state."
+                },
+                {
+                  "disabled": false,
+                  "key": "appProject",
+                  "value": "<string>",
+                  "description": "App project for query."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo",
+                  "description": "(Required) Repo URL for query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca149c11-e26e-4f8f-bbd4-aff471bd20a3",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo",
+                    "refs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"branches\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87cdaa72-a5a2-4e43-8da3-7fdd6f5acec9",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo",
+                    "refs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6324d3c-4f30-4151-b9c2-60605fc20f17",
+          "name": "ValidateAccess validates access to a repository with given parameters",
+          "request": {
+            "name": "ValidateAccess validates access to a repository with given parameters",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "repositories",
+                ":repo",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "username",
+                  "value": "<string>",
+                  "description": "Username for accessing repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>",
+                  "description": "Password for accessing repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "sshPrivateKey",
+                  "value": "<string>",
+                  "description": "Private key data for accessing SSH repository."
+                },
+                {
+                  "disabled": false,
+                  "key": "insecure",
+                  "value": "<boolean>",
+                  "description": "Whether to skip certificate or host key validation."
+                },
+                {
+                  "disabled": false,
+                  "key": "tlsClientCertData",
+                  "value": "<string>",
+                  "description": "TLS client cert data for accessing HTTPS repository."
+                },
+                {
+                  "disabled": false,
+                  "key": "tlsClientCertKey",
+                  "value": "<string>",
+                  "description": "TLS client cert key for accessing HTTPS repository."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of the repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The name of the repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "enableOci",
+                  "value": "<boolean>",
+                  "description": "Whether helm-oci support should be enabled for this repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "githubAppPrivateKey",
+                  "value": "<string>",
+                  "description": "Github App Private Key PEM data."
+                },
+                {
+                  "disabled": false,
+                  "key": "githubAppID",
+                  "value": "<int64>",
+                  "description": "Github App ID of the app used to access the repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "githubAppInstallationID",
+                  "value": "<int64>",
+                  "description": "Github App Installation ID of the installed GitHub App."
+                },
+                {
+                  "disabled": false,
+                  "key": "githubAppEnterpriseBaseUrl",
+                  "value": "<string>",
+                  "description": "Github App Enterprise base url if empty will default to https://api.github.com."
+                },
+                {
+                  "disabled": false,
+                  "key": "proxy",
+                  "value": "<string>",
+                  "description": "HTTP/HTTPS proxy to access the repository."
+                },
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Reference between project and repository that allow you automatically to be added as item inside SourceRepos project entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "gcpServiceAccountKey",
+                  "value": "<string>",
+                  "description": "Google Cloud Platform service account key."
+                },
+                {
+                  "disabled": false,
+                  "key": "forceHttpBasicAuth",
+                  "value": "<boolean>",
+                  "description": "Whether to force HTTP basic auth."
+                },
+                {
+                  "disabled": false,
+                  "key": "useAzureWorkloadIdentity",
+                  "value": "<boolean>",
+                  "description": "Whether to use azure workload identity for authentication."
+                },
+                {
+                  "disabled": false,
+                  "key": "bearerToken",
+                  "value": "<string>",
+                  "description": "BearerToken contains the bearer token used for Git auth at the repo server."
+                },
+                {
+                  "disabled": false,
+                  "key": "insecureOciForceHttp",
+                  "value": "<boolean>",
+                  "description": "Whether https should be disabled for an OCI repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "azureServicePrincipalClientId",
+                  "value": "<string>",
+                  "description": "Azure Service Principal Client ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "azureServicePrincipalClientSecret",
+                  "value": "<string>",
+                  "description": "Azure Service Principal Client Secret."
+                },
+                {
+                  "disabled": false,
+                  "key": "azureServicePrincipalTenantId",
+                  "value": "<string>",
+                  "description": "Azure Service Principal Tenant ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "azureActiveDirectoryEndpoint",
+                  "value": "<string>",
+                  "description": "Azure Active Directory Endpoint."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo",
+                  "description": "(Required) The URL to the repo"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9c303dfd-67b6-4ca6-97ca-54e6c66181bc",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sshPrivateKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insecure",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "tlsClientCertData",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlsClientCertKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enableOci",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "githubAppPrivateKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "githubAppID",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "githubAppInstallationID",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "githubAppEnterpriseBaseUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "proxy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gcpServiceAccountKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forceHttpBasicAuth",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "useAzureWorkloadIdentity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bearerToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insecureOciForceHttp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "azureServicePrincipalClientId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureServicePrincipalClientSecret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureServicePrincipalTenantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureActiveDirectoryEndpoint",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) The URL to the repo"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e047fd43-a322-404c-a4ca-ab0ec564e7ba",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":repo",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sshPrivateKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insecure",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "tlsClientCertData",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlsClientCertKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enableOci",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "githubAppPrivateKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "githubAppID",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "githubAppInstallationID",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "githubAppEnterpriseBaseUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "proxy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gcpServiceAccountKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forceHttpBasicAuth",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "useAzureWorkloadIdentity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bearerToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insecureOciForceHttp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "azureServicePrincipalClientId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureServicePrincipalClientSecret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureServicePrincipalTenantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureActiveDirectoryEndpoint",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) The URL to the repo"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6765b02-7960-4593-9271-a49d686b52d9",
+          "name": "GetAppDetails returns application details by given path",
+          "request": {
+            "name": "GetAppDetails returns application details by given path",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "repositories",
+                ":source.repoURL",
+                "appdetails"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source.repoURL",
+                  "description": "(Required) RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appName\": \"<string>\",\n  \"appProject\": \"<string>\",\n  \"source\": {\n    \"chart\": \"<string>\",\n    \"directory\": {\n      \"exclude\": \"<string>\",\n      \"include\": \"<string>\",\n      \"jsonnet\": {\n        \"extVars\": [\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"libs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tlas\": [\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"recurse\": \"<boolean>\"\n    },\n    \"helm\": {\n      \"apiVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"fileParameters\": [\n        {\n          \"name\": \"<string>\",\n          \"path\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"path\": \"<string>\"\n        }\n      ],\n      \"ignoreMissingValueFiles\": \"<boolean>\",\n      \"kubeVersion\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"parameters\": [\n        {\n          \"forceString\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"forceString\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"passCredentials\": \"<boolean>\",\n      \"releaseName\": \"<string>\",\n      \"skipCrds\": \"<boolean>\",\n      \"skipSchemaValidation\": \"<boolean>\",\n      \"skipTests\": \"<boolean>\",\n      \"valueFiles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"values\": \"<string>\",\n      \"valuesObject\": {\n        \"raw\": \"<byte>\"\n      },\n      \"version\": \"<string>\"\n    },\n    \"kustomize\": {\n      \"apiVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"commonAnnotations\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\"\n      },\n      \"commonAnnotationsEnvsubst\": \"<boolean>\",\n      \"commonLabels\": {\n        \"key_0\": \"<string>\"\n      },\n      \"components\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forceCommonAnnotations\": \"<boolean>\",\n      \"forceCommonLabels\": \"<boolean>\",\n      \"ignoreMissingComponents\": \"<boolean>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"kubeVersion\": \"<string>\",\n      \"labelIncludeTemplates\": \"<boolean>\",\n      \"labelWithoutSelector\": \"<boolean>\",\n      \"namePrefix\": \"<string>\",\n      \"nameSuffix\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"patches\": [\n        {\n          \"options\": {\n            \"key_0\": \"<boolean>\",\n            \"key_1\": \"<boolean>\"\n          },\n          \"patch\": \"<string>\",\n          \"path\": \"<string>\",\n          \"target\": {\n            \"annotationSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"labelSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"options\": {\n            \"key_0\": \"<boolean>\",\n            \"key_1\": \"<boolean>\"\n          },\n          \"patch\": \"<string>\",\n          \"path\": \"<string>\",\n          \"target\": {\n            \"annotationSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"labelSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"replicas\": [\n        {\n          \"count\": {\n            \"intVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"strVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"count\": {\n            \"intVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"strVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ],\n      \"version\": \"<string>\"\n    },\n    \"name\": \"<string>\",\n    \"path\": \"<string>\",\n    \"plugin\": {\n      \"env\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"parameters\": [\n        {\n          \"array\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"map\": {\n            \"key_0\": \"<string>\"\n          },\n          \"name\": \"<string>\",\n          \"string\": \"<string>\"\n        },\n        {\n          \"array\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"map\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          },\n          \"name\": \"<string>\",\n          \"string\": \"<string>\"\n        }\n      ]\n    },\n    \"ref\": \"<string>\",\n    \"repoURL\": \"<string>\",\n    \"targetRevision\": \"<string>\"\n  },\n  \"sourceIndex\": \"<integer>\",\n  \"versionId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a4feb31e-4d5e-4bcf-a2cc-c28ed3eb89cc",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":source.repoURL",
+                    "appdetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source.repoURL",
+                      "description": "(Required) RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appName\": \"<string>\",\n  \"appProject\": \"<string>\",\n  \"source\": {\n    \"chart\": \"<string>\",\n    \"directory\": {\n      \"exclude\": \"<string>\",\n      \"include\": \"<string>\",\n      \"jsonnet\": {\n        \"extVars\": [\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"libs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tlas\": [\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"recurse\": \"<boolean>\"\n    },\n    \"helm\": {\n      \"apiVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"fileParameters\": [\n        {\n          \"name\": \"<string>\",\n          \"path\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"path\": \"<string>\"\n        }\n      ],\n      \"ignoreMissingValueFiles\": \"<boolean>\",\n      \"kubeVersion\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"parameters\": [\n        {\n          \"forceString\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"forceString\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"passCredentials\": \"<boolean>\",\n      \"releaseName\": \"<string>\",\n      \"skipCrds\": \"<boolean>\",\n      \"skipSchemaValidation\": \"<boolean>\",\n      \"skipTests\": \"<boolean>\",\n      \"valueFiles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"values\": \"<string>\",\n      \"valuesObject\": {\n        \"raw\": \"<byte>\"\n      },\n      \"version\": \"<string>\"\n    },\n    \"kustomize\": {\n      \"apiVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"commonAnnotations\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"commonAnnotationsEnvsubst\": \"<boolean>\",\n      \"commonLabels\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"components\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forceCommonAnnotations\": \"<boolean>\",\n      \"forceCommonLabels\": \"<boolean>\",\n      \"ignoreMissingComponents\": \"<boolean>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"kubeVersion\": \"<string>\",\n      \"labelIncludeTemplates\": \"<boolean>\",\n      \"labelWithoutSelector\": \"<boolean>\",\n      \"namePrefix\": \"<string>\",\n      \"nameSuffix\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"patches\": [\n        {\n          \"options\": {\n            \"key_0\": \"<boolean>\"\n          },\n          \"patch\": \"<string>\",\n          \"path\": \"<string>\",\n          \"target\": {\n            \"annotationSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"labelSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"options\": {\n            \"key_0\": \"<boolean>\"\n          },\n          \"patch\": \"<string>\",\n          \"path\": \"<string>\",\n          \"target\": {\n            \"annotationSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"labelSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"replicas\": [\n        {\n          \"count\": {\n            \"intVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"strVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"count\": {\n            \"intVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"strVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ],\n      \"version\": \"<string>\"\n    },\n    \"name\": \"<string>\",\n    \"path\": \"<string>\",\n    \"plugin\": {\n      \"env\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"parameters\": [\n        {\n          \"array\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"map\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\",\n            \"key_2\": \"<string>\"\n          },\n          \"name\": \"<string>\",\n          \"string\": \"<string>\"\n        },\n        {\n          \"array\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"map\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          },\n          \"name\": \"<string>\",\n          \"string\": \"<string>\"\n        }\n      ]\n    },\n    \"ref\": \"<string>\",\n    \"repoURL\": \"<string>\",\n    \"targetRevision\": \"<string>\"\n  },\n  \"sourceIndex\": \"<integer>\",\n  \"versionId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"directory\": {},\n  \"helm\": {\n    \"fileParameters\": [\n      {\n        \"name\": \"<string>\",\n        \"path\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"path\": \"<string>\"\n      }\n    ],\n    \"name\": \"string\",\n    \"parameters\": [\n      {\n        \"forceString\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"forceString\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"valueFiles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"values\": \"string\"\n  },\n  \"kustomize\": {\n    \"images\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"plugin\": {\n    \"parametersAnnouncement\": [\n      {\n        \"array\": [\n          \"string\",\n          \"string\"\n        ],\n        \"collectionType\": \"string\",\n        \"itemType\": \"string\",\n        \"map\": {\n          \"key_0\": \"string\"\n        },\n        \"name\": \"string\",\n        \"required\": true,\n        \"string\": \"string\",\n        \"title\": \"string\",\n        \"tooltip\": \"string\"\n      },\n      {\n        \"array\": [\n          \"string\",\n          \"string\"\n        ],\n        \"collectionType\": \"string\",\n        \"itemType\": \"string\",\n        \"map\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"name\": \"string\",\n        \"required\": false,\n        \"string\": \"string\",\n        \"title\": \"string\",\n        \"tooltip\": \"string\"\n      }\n    ]\n  },\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6889372c-c44a-4107-b90b-f39c33aea9e2",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "repositories",
+                    ":source.repoURL",
+                    "appdetails"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source.repoURL",
+                      "description": "(Required) RepoURL is the URL to the repository (Git or Helm) that contains the application manifests"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appName\": \"<string>\",\n  \"appProject\": \"<string>\",\n  \"source\": {\n    \"chart\": \"<string>\",\n    \"directory\": {\n      \"exclude\": \"<string>\",\n      \"include\": \"<string>\",\n      \"jsonnet\": {\n        \"extVars\": [\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"libs\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"tlas\": [\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"recurse\": \"<boolean>\"\n    },\n    \"helm\": {\n      \"apiVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"fileParameters\": [\n        {\n          \"name\": \"<string>\",\n          \"path\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"path\": \"<string>\"\n        }\n      ],\n      \"ignoreMissingValueFiles\": \"<boolean>\",\n      \"kubeVersion\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"parameters\": [\n        {\n          \"forceString\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"forceString\": \"<boolean>\",\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"passCredentials\": \"<boolean>\",\n      \"releaseName\": \"<string>\",\n      \"skipCrds\": \"<boolean>\",\n      \"skipSchemaValidation\": \"<boolean>\",\n      \"skipTests\": \"<boolean>\",\n      \"valueFiles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"values\": \"<string>\",\n      \"valuesObject\": {\n        \"raw\": \"<byte>\"\n      },\n      \"version\": \"<string>\"\n    },\n    \"kustomize\": {\n      \"apiVersions\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"commonAnnotations\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"commonAnnotationsEnvsubst\": \"<boolean>\",\n      \"commonLabels\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      },\n      \"components\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"forceCommonAnnotations\": \"<boolean>\",\n      \"forceCommonLabels\": \"<boolean>\",\n      \"ignoreMissingComponents\": \"<boolean>\",\n      \"images\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"kubeVersion\": \"<string>\",\n      \"labelIncludeTemplates\": \"<boolean>\",\n      \"labelWithoutSelector\": \"<boolean>\",\n      \"namePrefix\": \"<string>\",\n      \"nameSuffix\": \"<string>\",\n      \"namespace\": \"<string>\",\n      \"patches\": [\n        {\n          \"options\": {\n            \"key_0\": \"<boolean>\"\n          },\n          \"patch\": \"<string>\",\n          \"path\": \"<string>\",\n          \"target\": {\n            \"annotationSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"labelSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"options\": {\n            \"key_0\": \"<boolean>\"\n          },\n          \"patch\": \"<string>\",\n          \"path\": \"<string>\",\n          \"target\": {\n            \"annotationSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"labelSelector\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"resId\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"replicas\": [\n        {\n          \"count\": {\n            \"intVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"strVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        },\n        {\n          \"count\": {\n            \"intVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"strVal\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"name\": \"<string>\"\n        }\n      ],\n      \"version\": \"<string>\"\n    },\n    \"name\": \"<string>\",\n    \"path\": \"<string>\",\n    \"plugin\": {\n      \"env\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"name\": \"<string>\",\n      \"parameters\": [\n        {\n          \"array\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"map\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\",\n            \"key_2\": \"<string>\"\n          },\n          \"name\": \"<string>\",\n          \"string\": \"<string>\"\n        },\n        {\n          \"array\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"map\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          },\n          \"name\": \"<string>\",\n          \"string\": \"<string>\"\n        }\n      ]\n    },\n    \"ref\": \"<string>\",\n    \"repoURL\": \"<string>\",\n    \"targetRevision\": \"<string>\"\n  },\n  \"sourceIndex\": \"<integer>\",\n  \"versionId\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f24176ee-62ac-4542-a0c7-a71691047e2d",
+          "name": "ListWriteRepositories gets a list of all configured write repositories",
+          "request": {
+            "name": "ListWriteRepositories gets a list of all configured write repositories",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "write-repositories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "repo",
+                  "value": "<string>",
+                  "description": "Repo URL for query."
+                },
+                {
+                  "disabled": false,
+                  "key": "forceRefresh",
+                  "value": "<boolean>",
+                  "description": "Whether to force a cache refresh on repo's connection state."
+                },
+                {
+                  "disabled": false,
+                  "key": "appProject",
+                  "value": "<string>",
+                  "description": "App project for query."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e75d99e-52a5-4eba-9a05-a89c2ad73a98",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "repo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"azureActiveDirectoryEndpoint\": \"<string>\",\n      \"azureServicePrincipalClientId\": \"<string>\",\n      \"azureServicePrincipalClientSecret\": \"<string>\",\n      \"azureServicePrincipalTenantId\": \"<string>\",\n      \"bearerToken\": \"<string>\",\n      \"connectionState\": {\n        \"attemptedAt\": \"<dateTime>\",\n        \"message\": \"<string>\",\n        \"status\": \"<string>\"\n      },\n      \"depth\": \"<long>\",\n      \"enableLfs\": \"<boolean>\",\n      \"enableOCI\": \"<boolean>\",\n      \"forceHttpBasicAuth\": \"<boolean>\",\n      \"gcpServiceAccountKey\": \"<string>\",\n      \"githubAppEnterpriseBaseUrl\": \"<string>\",\n      \"githubAppID\": \"<long>\",\n      \"githubAppInstallationID\": \"<long>\",\n      \"githubAppPrivateKey\": \"<string>\",\n      \"inheritedCreds\": \"<boolean>\",\n      \"insecure\": \"<boolean>\",\n      \"insecureIgnoreHostKey\": \"<boolean>\",\n      \"insecureOCIForceHttp\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"noProxy\": \"<string>\",\n      \"password\": \"<string>\",\n      \"project\": \"<string>\",\n      \"proxy\": \"<string>\",\n      \"repo\": \"<string>\",\n      \"sshPrivateKey\": \"<string>\",\n      \"tlsClientCertData\": \"<string>\",\n      \"tlsClientCertKey\": \"<string>\",\n      \"type\": \"<string>\",\n      \"useAzureWorkloadIdentity\": \"<boolean>\",\n      \"username\": \"<string>\",\n      \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n    },\n    {\n      \"azureActiveDirectoryEndpoint\": \"<string>\",\n      \"azureServicePrincipalClientId\": \"<string>\",\n      \"azureServicePrincipalClientSecret\": \"<string>\",\n      \"azureServicePrincipalTenantId\": \"<string>\",\n      \"bearerToken\": \"<string>\",\n      \"connectionState\": {\n        \"attemptedAt\": \"<dateTime>\",\n        \"message\": \"<string>\",\n        \"status\": \"<string>\"\n      },\n      \"depth\": \"<long>\",\n      \"enableLfs\": \"<boolean>\",\n      \"enableOCI\": \"<boolean>\",\n      \"forceHttpBasicAuth\": \"<boolean>\",\n      \"gcpServiceAccountKey\": \"<string>\",\n      \"githubAppEnterpriseBaseUrl\": \"<string>\",\n      \"githubAppID\": \"<long>\",\n      \"githubAppInstallationID\": \"<long>\",\n      \"githubAppPrivateKey\": \"<string>\",\n      \"inheritedCreds\": \"<boolean>\",\n      \"insecure\": \"<boolean>\",\n      \"insecureIgnoreHostKey\": \"<boolean>\",\n      \"insecureOCIForceHttp\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"noProxy\": \"<string>\",\n      \"password\": \"<string>\",\n      \"project\": \"<string>\",\n      \"proxy\": \"<string>\",\n      \"repo\": \"<string>\",\n      \"sshPrivateKey\": \"<string>\",\n      \"tlsClientCertData\": \"<string>\",\n      \"tlsClientCertKey\": \"<string>\",\n      \"type\": \"<string>\",\n      \"useAzureWorkloadIdentity\": \"<boolean>\",\n      \"username\": \"<string>\",\n      \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n    }\n  ],\n  \"metadata\": {\n    \"continue\": \"string\",\n    \"remainingItemCount\": 9213,\n    \"resourceVersion\": \"string\",\n    \"selfLink\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fae61f00-c33e-4287-8020-61212e7131ae",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "repo",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "defe417b-b14f-43bf-bf02-21efcfd12964",
+          "name": "CreateWriteRepository creates a new write repository configuration",
+          "request": {
+            "name": "CreateWriteRepository creates a new write repository configuration",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "write-repositories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "upsert",
+                  "value": "<boolean>",
+                  "description": "Whether to create in upsert mode."
+                },
+                {
+                  "disabled": false,
+                  "key": "credsOnly",
+                  "value": "<boolean>",
+                  "description": "Whether to operate on credential set instead of repository."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"azureActiveDirectoryEndpoint\": \"<string>\",\n  \"azureServicePrincipalClientId\": \"<string>\",\n  \"azureServicePrincipalClientSecret\": \"<string>\",\n  \"azureServicePrincipalTenantId\": \"<string>\",\n  \"bearerToken\": \"<string>\",\n  \"connectionState\": {\n    \"attemptedAt\": \"<dateTime>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  \"depth\": \"<long>\",\n  \"enableLfs\": \"<boolean>\",\n  \"enableOCI\": \"<boolean>\",\n  \"forceHttpBasicAuth\": \"<boolean>\",\n  \"gcpServiceAccountKey\": \"<string>\",\n  \"githubAppEnterpriseBaseUrl\": \"<string>\",\n  \"githubAppID\": \"<long>\",\n  \"githubAppInstallationID\": \"<long>\",\n  \"githubAppPrivateKey\": \"<string>\",\n  \"inheritedCreds\": \"<boolean>\",\n  \"insecure\": \"<boolean>\",\n  \"insecureIgnoreHostKey\": \"<boolean>\",\n  \"insecureOCIForceHttp\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"noProxy\": \"<string>\",\n  \"password\": \"<string>\",\n  \"project\": \"<string>\",\n  \"proxy\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"sshPrivateKey\": \"<string>\",\n  \"tlsClientCertData\": \"<string>\",\n  \"tlsClientCertKey\": \"<string>\",\n  \"type\": \"<string>\",\n  \"useAzureWorkloadIdentity\": \"<boolean>\",\n  \"username\": \"<string>\",\n  \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "afbb943f-d813-4298-906d-26bd7600fcc1",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "upsert",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "credsOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"azureActiveDirectoryEndpoint\": \"<string>\",\n  \"azureServicePrincipalClientId\": \"<string>\",\n  \"azureServicePrincipalClientSecret\": \"<string>\",\n  \"azureServicePrincipalTenantId\": \"<string>\",\n  \"bearerToken\": \"<string>\",\n  \"connectionState\": {\n    \"attemptedAt\": \"<dateTime>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  \"depth\": \"<long>\",\n  \"enableLfs\": \"<boolean>\",\n  \"enableOCI\": \"<boolean>\",\n  \"forceHttpBasicAuth\": \"<boolean>\",\n  \"gcpServiceAccountKey\": \"<string>\",\n  \"githubAppEnterpriseBaseUrl\": \"<string>\",\n  \"githubAppID\": \"<long>\",\n  \"githubAppInstallationID\": \"<long>\",\n  \"githubAppPrivateKey\": \"<string>\",\n  \"inheritedCreds\": \"<boolean>\",\n  \"insecure\": \"<boolean>\",\n  \"insecureIgnoreHostKey\": \"<boolean>\",\n  \"insecureOCIForceHttp\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"noProxy\": \"<string>\",\n  \"password\": \"<string>\",\n  \"project\": \"<string>\",\n  \"proxy\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"sshPrivateKey\": \"<string>\",\n  \"tlsClientCertData\": \"<string>\",\n  \"tlsClientCertKey\": \"<string>\",\n  \"type\": \"<string>\",\n  \"useAzureWorkloadIdentity\": \"<boolean>\",\n  \"username\": \"<string>\",\n  \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "047c6178-3636-4b9b-8967-36d1ae6b2928",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "upsert",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "credsOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a410d30f-ce51-46db-8682-b1a5b83a5588",
+          "name": "UpdateWriteRepository updates a write repository configuration",
+          "request": {
+            "name": "UpdateWriteRepository updates a write repository configuration",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "write-repositories",
+                ":repo.repo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo.repo",
+                  "description": "(Required) Repo contains the URL to the remote repository"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"azureActiveDirectoryEndpoint\": \"<string>\",\n  \"azureServicePrincipalClientId\": \"<string>\",\n  \"azureServicePrincipalClientSecret\": \"<string>\",\n  \"azureServicePrincipalTenantId\": \"<string>\",\n  \"bearerToken\": \"<string>\",\n  \"connectionState\": {\n    \"attemptedAt\": \"<dateTime>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  \"depth\": \"<long>\",\n  \"enableLfs\": \"<boolean>\",\n  \"enableOCI\": \"<boolean>\",\n  \"forceHttpBasicAuth\": \"<boolean>\",\n  \"gcpServiceAccountKey\": \"<string>\",\n  \"githubAppEnterpriseBaseUrl\": \"<string>\",\n  \"githubAppID\": \"<long>\",\n  \"githubAppInstallationID\": \"<long>\",\n  \"githubAppPrivateKey\": \"<string>\",\n  \"inheritedCreds\": \"<boolean>\",\n  \"insecure\": \"<boolean>\",\n  \"insecureIgnoreHostKey\": \"<boolean>\",\n  \"insecureOCIForceHttp\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"noProxy\": \"<string>\",\n  \"password\": \"<string>\",\n  \"project\": \"<string>\",\n  \"proxy\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"sshPrivateKey\": \"<string>\",\n  \"tlsClientCertData\": \"<string>\",\n  \"tlsClientCertKey\": \"<string>\",\n  \"type\": \"<string>\",\n  \"useAzureWorkloadIdentity\": \"<boolean>\",\n  \"username\": \"<string>\",\n  \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "161bc5bd-84e7-4303-8f6d-e74a92f2e552",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories",
+                    ":repo.repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo.repo",
+                      "description": "(Required) Repo contains the URL to the remote repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"azureActiveDirectoryEndpoint\": \"<string>\",\n  \"azureServicePrincipalClientId\": \"<string>\",\n  \"azureServicePrincipalClientSecret\": \"<string>\",\n  \"azureServicePrincipalTenantId\": \"<string>\",\n  \"bearerToken\": \"<string>\",\n  \"connectionState\": {\n    \"attemptedAt\": \"<dateTime>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  \"depth\": \"<long>\",\n  \"enableLfs\": \"<boolean>\",\n  \"enableOCI\": \"<boolean>\",\n  \"forceHttpBasicAuth\": \"<boolean>\",\n  \"gcpServiceAccountKey\": \"<string>\",\n  \"githubAppEnterpriseBaseUrl\": \"<string>\",\n  \"githubAppID\": \"<long>\",\n  \"githubAppInstallationID\": \"<long>\",\n  \"githubAppPrivateKey\": \"<string>\",\n  \"inheritedCreds\": \"<boolean>\",\n  \"insecure\": \"<boolean>\",\n  \"insecureIgnoreHostKey\": \"<boolean>\",\n  \"insecureOCIForceHttp\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"noProxy\": \"<string>\",\n  \"password\": \"<string>\",\n  \"project\": \"<string>\",\n  \"proxy\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"sshPrivateKey\": \"<string>\",\n  \"tlsClientCertData\": \"<string>\",\n  \"tlsClientCertKey\": \"<string>\",\n  \"type\": \"<string>\",\n  \"useAzureWorkloadIdentity\": \"<boolean>\",\n  \"username\": \"<string>\",\n  \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c7c6013-55fb-42e9-b050-8bd33a3ff3d2",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories",
+                    ":repo.repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo.repo",
+                      "description": "(Required) Repo contains the URL to the remote repository"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08640f6d-ae6d-4368-8416-8dfa5fcaccb5",
+          "name": "GetWrite returns a repository or its write credentials",
+          "request": {
+            "name": "GetWrite returns a repository or its write credentials",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "write-repositories",
+                ":repo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "forceRefresh",
+                  "value": "<boolean>",
+                  "description": "Whether to force a cache refresh on repo's connection state."
+                },
+                {
+                  "disabled": false,
+                  "key": "appProject",
+                  "value": "<string>",
+                  "description": "App project for query."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo",
+                  "description": "(Required) Repo URL for query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c068b31-bc5d-45aa-94c3-6c0c0b5a0539",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories",
+                    ":repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"azureActiveDirectoryEndpoint\": \"<string>\",\n  \"azureServicePrincipalClientId\": \"<string>\",\n  \"azureServicePrincipalClientSecret\": \"<string>\",\n  \"azureServicePrincipalTenantId\": \"<string>\",\n  \"bearerToken\": \"<string>\",\n  \"connectionState\": {\n    \"attemptedAt\": \"<dateTime>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\"\n  },\n  \"depth\": \"<long>\",\n  \"enableLfs\": \"<boolean>\",\n  \"enableOCI\": \"<boolean>\",\n  \"forceHttpBasicAuth\": \"<boolean>\",\n  \"gcpServiceAccountKey\": \"<string>\",\n  \"githubAppEnterpriseBaseUrl\": \"<string>\",\n  \"githubAppID\": \"<long>\",\n  \"githubAppInstallationID\": \"<long>\",\n  \"githubAppPrivateKey\": \"<string>\",\n  \"inheritedCreds\": \"<boolean>\",\n  \"insecure\": \"<boolean>\",\n  \"insecureIgnoreHostKey\": \"<boolean>\",\n  \"insecureOCIForceHttp\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"noProxy\": \"<string>\",\n  \"password\": \"<string>\",\n  \"project\": \"<string>\",\n  \"proxy\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"sshPrivateKey\": \"<string>\",\n  \"tlsClientCertData\": \"<string>\",\n  \"tlsClientCertKey\": \"<string>\",\n  \"type\": \"<string>\",\n  \"useAzureWorkloadIdentity\": \"<boolean>\",\n  \"username\": \"<string>\",\n  \"webhookManifestCacheWarmDisabled\": \"<boolean>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc7154fa-0299-4d9e-a6a0-b61b714cbd49",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories",
+                    ":repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92919241-320d-4c14-8354-97155d50e6b6",
+          "name": "DeleteWriteRepository deletes a write repository from the configuration",
+          "request": {
+            "name": "DeleteWriteRepository deletes a write repository from the configuration",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "write-repositories",
+                ":repo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "forceRefresh",
+                  "value": "<boolean>",
+                  "description": "Whether to force a cache refresh on repo's connection state."
+                },
+                {
+                  "disabled": false,
+                  "key": "appProject",
+                  "value": "<string>",
+                  "description": "App project for query."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo",
+                  "description": "(Required) Repo URL for query"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "20cab5e4-c3ff-43c3-a0b7-46745e7159b1",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories",
+                    ":repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d9228a3-a348-44bb-ba52-515bbf9ae70b",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories",
+                    ":repo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "forceRefresh",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "appProject",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) Repo URL for query"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c2d3c12-cc73-465c-9df4-bbdac8d152f2",
+          "name": "ValidateWriteAccess validates write access to a repository with given parameters",
+          "request": {
+            "name": "ValidateWriteAccess validates write access to a repository with given parameters",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "write-repositories",
+                ":repo",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "username",
+                  "value": "<string>",
+                  "description": "Username for accessing repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "password",
+                  "value": "<string>",
+                  "description": "Password for accessing repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "sshPrivateKey",
+                  "value": "<string>",
+                  "description": "Private key data for accessing SSH repository."
+                },
+                {
+                  "disabled": false,
+                  "key": "insecure",
+                  "value": "<boolean>",
+                  "description": "Whether to skip certificate or host key validation."
+                },
+                {
+                  "disabled": false,
+                  "key": "tlsClientCertData",
+                  "value": "<string>",
+                  "description": "TLS client cert data for accessing HTTPS repository."
+                },
+                {
+                  "disabled": false,
+                  "key": "tlsClientCertKey",
+                  "value": "<string>",
+                  "description": "TLS client cert key for accessing HTTPS repository."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of the repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The name of the repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "enableOci",
+                  "value": "<boolean>",
+                  "description": "Whether helm-oci support should be enabled for this repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "githubAppPrivateKey",
+                  "value": "<string>",
+                  "description": "Github App Private Key PEM data."
+                },
+                {
+                  "disabled": false,
+                  "key": "githubAppID",
+                  "value": "<int64>",
+                  "description": "Github App ID of the app used to access the repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "githubAppInstallationID",
+                  "value": "<int64>",
+                  "description": "Github App Installation ID of the installed GitHub App."
+                },
+                {
+                  "disabled": false,
+                  "key": "githubAppEnterpriseBaseUrl",
+                  "value": "<string>",
+                  "description": "Github App Enterprise base url if empty will default to https://api.github.com."
+                },
+                {
+                  "disabled": false,
+                  "key": "proxy",
+                  "value": "<string>",
+                  "description": "HTTP/HTTPS proxy to access the repository."
+                },
+                {
+                  "disabled": false,
+                  "key": "project",
+                  "value": "<string>",
+                  "description": "Reference between project and repository that allow you automatically to be added as item inside SourceRepos project entity."
+                },
+                {
+                  "disabled": false,
+                  "key": "gcpServiceAccountKey",
+                  "value": "<string>",
+                  "description": "Google Cloud Platform service account key."
+                },
+                {
+                  "disabled": false,
+                  "key": "forceHttpBasicAuth",
+                  "value": "<boolean>",
+                  "description": "Whether to force HTTP basic auth."
+                },
+                {
+                  "disabled": false,
+                  "key": "useAzureWorkloadIdentity",
+                  "value": "<boolean>",
+                  "description": "Whether to use azure workload identity for authentication."
+                },
+                {
+                  "disabled": false,
+                  "key": "bearerToken",
+                  "value": "<string>",
+                  "description": "BearerToken contains the bearer token used for Git auth at the repo server."
+                },
+                {
+                  "disabled": false,
+                  "key": "insecureOciForceHttp",
+                  "value": "<boolean>",
+                  "description": "Whether https should be disabled for an OCI repo."
+                },
+                {
+                  "disabled": false,
+                  "key": "azureServicePrincipalClientId",
+                  "value": "<string>",
+                  "description": "Azure Service Principal Client ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "azureServicePrincipalClientSecret",
+                  "value": "<string>",
+                  "description": "Azure Service Principal Client Secret."
+                },
+                {
+                  "disabled": false,
+                  "key": "azureServicePrincipalTenantId",
+                  "value": "<string>",
+                  "description": "Azure Service Principal Tenant ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "azureActiveDirectoryEndpoint",
+                  "value": "<string>",
+                  "description": "Azure Active Directory Endpoint."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repo",
+                  "description": "(Required) The URL to the repo"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<string>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1163b8cb-cd90-4d6d-b7eb-0fff4f8f4248",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories",
+                    ":repo",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sshPrivateKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insecure",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "tlsClientCertData",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlsClientCertKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enableOci",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "githubAppPrivateKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "githubAppID",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "githubAppInstallationID",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "githubAppEnterpriseBaseUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "proxy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gcpServiceAccountKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forceHttpBasicAuth",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "useAzureWorkloadIdentity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bearerToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insecureOciForceHttp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "azureServicePrincipalClientId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureServicePrincipalClientSecret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureServicePrincipalTenantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureActiveDirectoryEndpoint",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) The URL to the repo"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f27d6178-fcba-4f73-80d5-87a88718d9e6",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "write-repositories",
+                    ":repo",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "password",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sshPrivateKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insecure",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "tlsClientCertData",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tlsClientCertKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "enableOci",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "githubAppPrivateKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "githubAppID",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "githubAppInstallationID",
+                      "value": "<int64>"
+                    },
+                    {
+                      "key": "githubAppEnterpriseBaseUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "proxy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "project",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "gcpServiceAccountKey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "forceHttpBasicAuth",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "useAzureWorkloadIdentity",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "bearerToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "insecureOciForceHttp",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "azureServicePrincipalClientId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureServicePrincipalClientSecret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureServicePrincipalTenantId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "azureActiveDirectoryEndpoint",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repo",
+                      "description": "(Required) The URL to the repo"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5459,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c82a7501-62e0-443d-a1e2-cd0f84b9b8a0",
+    "name": "Consolidate Services AccountService RepositoryService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Description of all APIs",
+      "type": "text/plain"
+    }
+  }
+}

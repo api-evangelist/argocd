@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Consolidate Services AccountService API",
+    "version": "version not set"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AccountService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListAccounts returns the list of accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/account"
+          },
+          "docs": "ListAccounts returns the list of accounts"
+        },
+        {
+          "info": {
+            "name": "CanI checks if the current account has permission to perform an action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/account/can-i/:resource/:action/:subresource",
+            "params": [
+              {
+                "name": "resource",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "subresource",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "CanI checks if the current account has permission to perform an action"
+        },
+        {
+          "info": {
+            "name": "UpdatePassword updates an account's password to a new value",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/account/password"
+          },
+          "docs": "UpdatePassword updates an account's password to a new value"
+        },
+        {
+          "info": {
+            "name": "GetAccount returns an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/account/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "GetAccount returns an account"
+        },
+        {
+          "info": {
+            "name": "CreateToken creates a token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/account/:name/token",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "CreateToken creates a token"
+        },
+        {
+          "info": {
+            "name": "DeleteToken deletes a token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/account/:name/token/:id",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeleteToken deletes a token"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

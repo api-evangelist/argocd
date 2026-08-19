@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Consolidate Services AccountService SettingsService API",
+    "version": "version not set"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SettingsService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get returns Argo CD settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/settings"
+          },
+          "docs": "Get returns Argo CD settings"
+        },
+        {
+          "info": {
+            "name": "Get returns Argo CD plugins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/settings/plugins"
+          },
+          "docs": "Get returns Argo CD plugins"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

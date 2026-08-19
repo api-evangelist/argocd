@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Consolidate Services AccountService CertificateService API",
+    "version": "version not set"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CertificateService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all available repository certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/certificates",
+            "params": [
+              {
+                "name": "hostNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "A file-glob pattern (not regular expression) the host name has to match."
+              },
+              {
+                "name": "certType",
+                "value": "",
+                "type": "query",
+                "description": "The type of the certificate to match (ssh or https)."
+              },
+              {
+                "name": "certSubType",
+                "value": "",
+                "type": "query",
+                "description": "The sub type of the certificate to match (protocol dependent, usually only used for ssh certs)."
+              }
+            ]
+          },
+          "docs": "List all available repository certificates"
+        },
+        {
+          "info": {
+            "name": "Creates repository certificates on the server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/certificates",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to upsert already existing certificates."
+              }
+            ]
+          },
+          "docs": "Creates repository certificates on the server"
+        },
+        {
+          "info": {
+            "name": "Delete the certificates that match the RepositoryCertificateQuery",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/certificates",
+            "params": [
+              {
+                "name": "hostNamePattern",
+                "value": "",
+                "type": "query",
+                "description": "A file-glob pattern (not regular expression) the host name has to match."
+              },
+              {
+                "name": "certType",
+                "value": "",
+                "type": "query",
+                "description": "The type of the certificate to match (ssh or https)."
+              },
+              {
+                "name": "certSubType",
+                "value": "",
+                "type": "query",
+                "description": "The sub type of the certificate to match (protocol dependent, usually only used for ssh certs)."
+              }
+            ]
+          },
+          "docs": "Delete the certificates that match the RepositoryCertificateQuery"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

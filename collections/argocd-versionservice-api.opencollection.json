@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Consolidate Services AccountService VersionService API",
+    "version": "version not set"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "VersionService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Version returns version information of the API server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/version"
+          },
+          "docs": "Version returns version information of the API server"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

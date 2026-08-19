@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Consolidate Services AccountService RepoCredsService API",
+    "version": "version not set"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RepoCredsService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ListRepositoryCredentials gets a list of all configured repository credential sets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/repocreds",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "Repo URL for query."
+              }
+            ]
+          },
+          "docs": "ListRepositoryCredentials gets a list of all configured repository credential sets"
+        },
+        {
+          "info": {
+            "name": "CreateRepositoryCredentials creates a new repository credential set",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/repocreds",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to create in upsert mode."
+              }
+            ]
+          },
+          "docs": "CreateRepositoryCredentials creates a new repository credential set"
+        },
+        {
+          "info": {
+            "name": "UpdateRepositoryCredentials updates a repository credential set",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/repocreds/:creds.url",
+            "params": [
+              {
+                "name": "creds.url",
+                "value": "",
+                "type": "path",
+                "description": "URL is the URL to which these credentials match"
+              }
+            ]
+          },
+          "docs": "UpdateRepositoryCredentials updates a repository credential set"
+        },
+        {
+          "info": {
+            "name": "DeleteRepositoryCredentials deletes a repository credential set from the configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/repocreds/:url",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeleteRepositoryCredentials deletes a repository credential set from the configuration"
+        },
+        {
+          "info": {
+            "name": "ListWriteRepositoryCredentials gets a list of all configured repository credential sets that have write access",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/write-repocreds",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "Repo URL for query."
+              }
+            ]
+          },
+          "docs": "ListWriteRepositoryCredentials gets a list of all configured repository credential sets that have write access"
+        },
+        {
+          "info": {
+            "name": "CreateWriteRepositoryCredentials creates a new repository credential set with write access",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/write-repocreds",
+            "params": [
+              {
+                "name": "upsert",
+                "value": "",
+                "type": "query",
+                "description": "Whether to create in upsert mode."
+              }
+            ]
+          },
+          "docs": "CreateWriteRepositoryCredentials creates a new repository credential set with write access"
+        },
+        {
+          "info": {
+            "name": "UpdateWriteRepositoryCredentials updates a repository credential set with write access",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/v1/write-repocreds/:creds.url",
+            "params": [
+              {
+                "name": "creds.url",
+                "value": "",
+                "type": "path",
+                "description": "URL is the URL to which these credentials match"
+              }
+            ]
+          },
+          "docs": "UpdateWriteRepositoryCredentials updates a repository credential set with write access"
+        },
+        {
+          "info": {
+            "name": "DeleteWriteRepositoryCredentials deletes a repository credential set with write access from the configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/v1/write-repocreds/:url",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "DeleteWriteRepositoryCredentials deletes a repository credential set with write access from the configuration"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

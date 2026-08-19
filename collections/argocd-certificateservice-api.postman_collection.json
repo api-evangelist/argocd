@@ -1,0 +1,492 @@
+{
+  "item": [
+    {
+      "id": "b6a969f5-422b-4d27-89b8-307b178a2864",
+      "name": "CertificateService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b8e74ffb-757b-491d-8c88-bb6f0ade0c2a",
+          "name": "List all available repository certificates",
+          "request": {
+            "name": "List all available repository certificates",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "certificates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hostNamePattern",
+                  "value": "<string>",
+                  "description": "A file-glob pattern (not regular expression) the host name has to match."
+                },
+                {
+                  "disabled": false,
+                  "key": "certType",
+                  "value": "<string>",
+                  "description": "The type of the certificate to match (ssh or https)."
+                },
+                {
+                  "disabled": false,
+                  "key": "certSubType",
+                  "value": "<string>",
+                  "description": "The sub type of the certificate to match (protocol dependent, usually only used for ssh certs)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "66bf1f96-65a0-433c-809e-f06d25559f52",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hostNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certSubType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"certData\": \"string\",\n      \"certInfo\": \"string\",\n      \"certSubType\": \"string\",\n      \"certType\": \"string\",\n      \"serverName\": \"string\"\n    },\n    {\n      \"certData\": \"string\",\n      \"certInfo\": \"string\",\n      \"certSubType\": \"string\",\n      \"certType\": \"string\",\n      \"serverName\": \"string\"\n    }\n  ],\n  \"metadata\": {\n    \"continue\": \"string\",\n    \"remainingItemCount\": 3879,\n    \"resourceVersion\": \"string\",\n    \"selfLink\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8002f15c-21c8-4388-9362-4e49b18374e8",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hostNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certSubType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7250,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba46481d-9695-4ede-b0d3-2de632fd67fb",
+          "name": "Creates repository certificates on the server",
+          "request": {
+            "name": "Creates repository certificates on the server",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "certificates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "upsert",
+                  "value": "<boolean>",
+                  "description": "Whether to upsert already existing certificates."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"certData\": \"<byte>\",\n      \"certInfo\": \"<string>\",\n      \"certSubType\": \"<string>\",\n      \"certType\": \"<string>\",\n      \"serverName\": \"<string>\"\n    },\n    {\n      \"certData\": \"<byte>\",\n      \"certInfo\": \"<string>\",\n      \"certSubType\": \"<string>\",\n      \"certType\": \"<string>\",\n      \"serverName\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"continue\": \"<string>\",\n    \"remainingItemCount\": \"<long>\",\n    \"resourceVersion\": \"<string>\",\n    \"selfLink\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5540aa3e-9ba1-482e-91c1-68a3e6ee243f",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "upsert",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"certData\": \"<byte>\",\n      \"certInfo\": \"<string>\",\n      \"certSubType\": \"<string>\",\n      \"certType\": \"<string>\",\n      \"serverName\": \"<string>\"\n    },\n    {\n      \"certData\": \"<byte>\",\n      \"certInfo\": \"<string>\",\n      \"certSubType\": \"<string>\",\n      \"certType\": \"<string>\",\n      \"serverName\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"continue\": \"<string>\",\n    \"remainingItemCount\": \"<long>\",\n    \"resourceVersion\": \"<string>\",\n    \"selfLink\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"certData\": \"<byte>\",\n      \"certInfo\": \"<string>\",\n      \"certSubType\": \"<string>\",\n      \"certType\": \"<string>\",\n      \"serverName\": \"<string>\"\n    },\n    {\n      \"certData\": \"<byte>\",\n      \"certInfo\": \"<string>\",\n      \"certSubType\": \"<string>\",\n      \"certType\": \"<string>\",\n      \"serverName\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"continue\": \"<string>\",\n    \"remainingItemCount\": \"<long>\",\n    \"resourceVersion\": \"<string>\",\n    \"selfLink\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5d428c3-995f-4e5b-8430-008ea90bdf34",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "upsert",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"certData\": \"<byte>\",\n      \"certInfo\": \"<string>\",\n      \"certSubType\": \"<string>\",\n      \"certType\": \"<string>\",\n      \"serverName\": \"<string>\"\n    },\n    {\n      \"certData\": \"<byte>\",\n      \"certInfo\": \"<string>\",\n      \"certSubType\": \"<string>\",\n      \"certType\": \"<string>\",\n      \"serverName\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"continue\": \"<string>\",\n    \"remainingItemCount\": \"<long>\",\n    \"resourceVersion\": \"<string>\",\n    \"selfLink\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5001,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c4ea898-15af-4d8f-a84f-5e3de000dff2",
+          "name": "Delete the certificates that match the RepositoryCertificateQuery",
+          "request": {
+            "name": "Delete the certificates that match the RepositoryCertificateQuery",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "certificates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "hostNamePattern",
+                  "value": "<string>",
+                  "description": "A file-glob pattern (not regular expression) the host name has to match."
+                },
+                {
+                  "disabled": false,
+                  "key": "certType",
+                  "value": "<string>",
+                  "description": "The type of the certificate to match (ssh or https)."
+                },
+                {
+                  "disabled": false,
+                  "key": "certSubType",
+                  "value": "<string>",
+                  "description": "The sub type of the certificate to match (protocol dependent, usually only used for ssh certs)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f4a0df2-6acb-4d9a-b5f4-c915e04d0b30",
+              "name": "A successful response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hostNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certSubType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"certData\": \"<byte>\",\n      \"certInfo\": \"<string>\",\n      \"certSubType\": \"<string>\",\n      \"certType\": \"<string>\",\n      \"serverName\": \"<string>\"\n    },\n    {\n      \"certData\": \"<byte>\",\n      \"certInfo\": \"<string>\",\n      \"certSubType\": \"<string>\",\n      \"certType\": \"<string>\",\n      \"serverName\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"continue\": \"<string>\",\n    \"remainingItemCount\": \"<long>\",\n    \"resourceVersion\": \"<string>\",\n    \"selfLink\": \"<string>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d3a980c-0e87-4500-bb99-afcb3eea9742",
+              "name": "An unexpected error response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "certificates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "hostNamePattern",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "certSubType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 5001,\n  \"details\": [\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"type_url\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"error\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "010451d2-b14e-4de7-b46b-dbaaff9316dc",
+    "name": "Consolidate Services AccountService CertificateService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Description of all APIs",
+      "type": "text/plain"
+    }
+  }
+}
