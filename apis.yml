@@ -29,6 +29,14 @@ tags:
   - Kubernetes
   - Continuous Delivery
   - CNCF
+  - Open-Source
+  - Operator
+tags_raw:
+  - DevOps
+  - GitOps
+  - Kubernetes
+  - Continuous Delivery
+  - CNCF
   - Open Source
   - Operator
 created: '2026-05-08'
@@ -51,6 +59,10 @@ apis:
 - aid: argocd:argocd-projects-api
   name: Argo CD Projects API
   tags:
+  - Project
+  - AppProjects
+  - RBAC
+  tags_raw:
   - Projects
   - AppProjects
   - RBAC
@@ -64,6 +76,10 @@ apis:
 - aid: argocd:argocd-clusters-api
   name: Argo CD Clusters API
   tags:
+  - Cluster
+  - Targets
+  - Kubernetes
+  tags_raw:
   - Clusters
   - Targets
   - Kubernetes
@@ -90,6 +106,10 @@ apis:
 - aid: argocd:argocd-accounts-api
   name: Argo CD Accounts API
   tags:
+  - Account
+  - Authentication
+  - Tokens
+  tags_raw:
   - Accounts
   - Authentication
   - Tokens
@@ -151,6 +171,11 @@ apis:
 - aid: argocd:argocd-notifications-api
   name: Argo CD Notifications API
   tags:
+  - Notification
+  - Webhook
+  - Slack
+  - Email
+  tags_raw:
   - Notifications
   - Webhooks
   - Slack
@@ -295,6 +320,8 @@ apis:
   name: Argo CD NotificationService API
   description: The NotificationService API from Argo CD — 3 operation(s) for notificationservice.
   tags:
+  - Notification Service
+  tags_raw:
   - NotificationService
   properties:
   - type: OpenAPI
