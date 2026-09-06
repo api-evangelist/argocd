@@ -415,6 +415,26 @@ apis:
   - type: APIReference
     url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
 common:
+  - type: SecurityPolicy
+    url: https://github.com/argoproj/argo-cd/blob/master/SECURITY.md
+  - type: ContributionGuide
+    url: https://github.com/argoproj/argo-cd/blob/master/CONTRIBUTING.md
+  - type: Authentication
+    url: authentication/argocd-authentication.yml
+  - type: GitHubRepository
+    url: https://github.com/argoproj/argo-cd
+  - type: ChangeLog
+    url: https://github.com/argoproj/argo-cd/blob/master/CHANGELOG.md
+  - type: CLI
+    url: https://argo-cd.readthedocs.io/en/stable/user-guide/commands/argocd/
+  - type: SDKs
+    url: https://github.com/argoproj/argo-cd/tree/master/pkg/apiclient
+  - type: Support
+    url: https://github.com/argoproj/argo-cd/issues
+  - type: SpectralRules
+    url: rules/argocd-spectral-rules.yml
+  - type: Vocabulary
+    url: vocabulary/argocd-vocabulary.yaml
   - type: AgenticAccess
     url: agentic-access/argocd-agentic-access.yml
   - type: DomainSecurity

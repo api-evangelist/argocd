@@ -1,12 +1,8 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
   description: Description of all APIs
-  title: Consolidate Services AccountService API
+  title: Consolidate Services Account Service API
   version: version not set
-consumes:
-- application/json
-produces:
-- application/json
 tags:
 - name: AccountService
 paths:
@@ -19,12 +15,16 @@ paths:
       responses:
         '200':
           description: A successful response.
-          schema:
-            $ref: '#/definitions/accountAccountsList'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accountAccountsList'
         default:
           description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/runtimeError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
   /api/v1/account/can-i/{resource}/{action}/{subresource}:
     get:
       tags:
@@ -32,48 +32,59 @@ paths:
       summary: CanI checks if the current account has permission to perform an action
       operationId: AccountService_CanI
       parameters:
-      - type: string
-        name: resource
+      - name: resource
         in: path
         required: true
-      - type: string
-        name: action
+        schema:
+          type: string
+      - name: action
         in: path
         required: true
-      - type: string
-        name: subresource
+        schema:
+          type: string
+      - name: subresource
         in: path
         required: true
+        schema:
+          type: string
       responses:
         '200':
           description: A successful response.
-          schema:
-            $ref: '#/definitions/accountCanIResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accountCanIResponse'
         default:
           description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/runtimeError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
   /api/v1/account/password:
     put:
       tags:
       - AccountService
       summary: UpdatePassword updates an account's password to a new value
       operationId: AccountService_UpdatePassword
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          $ref: '#/definitions/accountUpdatePasswordRequest'
       responses:
         '200':
           description: A successful response.
-          schema:
-            $ref: '#/definitions/accountUpdatePasswordResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accountUpdatePasswordResponse'
         default:
           description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/runtimeError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/accountUpdatePasswordRequest'
+        required: true
   /api/v1/account/{name}:
     get:
       tags:
@@ -81,19 +92,24 @@ paths:
       summary: GetAccount returns an account
       operationId: AccountService_GetAccount
       parameters:
-      - type: string
-        name: name
+      - name: name
         in: path
         required: true
+        schema:
+          type: string
       responses:
         '200':
           description: A successful response.
-          schema:
-            $ref: '#/definitions/accountAccount'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accountAccount'
         default:
           description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/runtimeError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
   /api/v1/account/{name}/token:
     post:
       tags:
@@ -101,24 +117,30 @@ paths:
       summary: CreateToken creates a token
       operationId: AccountService_CreateToken
       parameters:
-      - type: string
-        name: name
+      - name: name
         in: path
         required: true
-      - name: body
-        in: body
-        required: true
         schema:
-          $ref: '#/definitions/accountCreateTokenRequest'
+          type: string
       responses:
         '200':
           description: A successful response.
-          schema:
-            $ref: '#/definitions/accountCreateTokenResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accountCreateTokenResponse'
         default:
           description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/runtimeError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/accountCreateTokenRequest'
+        required: true
   /api/v1/account/{name}/token/{id}:
     delete:
       tags:
@@ -126,110 +148,117 @@ paths:
       summary: DeleteToken deletes a token
       operationId: AccountService_DeleteToken
       parameters:
-      - type: string
-        name: name
+      - name: name
         in: path
         required: true
-      - type: string
-        name: id
+        schema:
+          type: string
+      - name: id
         in: path
         required: true
+        schema:
+          type: string
       responses:
         '200':
           description: A successful response.
-          schema:
-            $ref: '#/definitions/accountEmptyResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/accountEmptyResponse'
         default:
           description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/runtimeError'
-definitions:
-  accountUpdatePasswordResponse:
-    type: object
-  accountAccount:
-    type: object
-    properties:
-      capabilities:
-        type: array
-        items:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+components:
+  schemas:
+    accountCanIResponse:
+      type: object
+      properties:
+        value:
           type: string
-      enabled:
-        type: boolean
-      name:
-        type: string
-      tokens:
-        type: array
+    accountToken:
+      type: object
+      properties:
+        expiresAt:
+          type: integer
+          format: int64
+        id:
+          type: string
+        issuedAt:
+          type: integer
+          format: int64
+    accountCreateTokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    accountEmptyResponse:
+      type: object
+    runtimeError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+        error:
+          type: string
+        message:
+          type: string
+    accountCreateTokenRequest:
+      type: object
+      properties:
+        expiresIn:
+          type: integer
+          format: int64
+          title: expiresIn represents a duration in seconds
+        id:
+          type: string
+        name:
+          type: string
+    accountUpdatePasswordResponse:
+      type: object
+    accountUpdatePasswordRequest:
+      type: object
+      properties:
+        currentPassword:
+          type: string
+        name:
+          type: string
+        newPassword:
+          type: string
+    accountAccountsList:
+      type: object
+      properties:
         items:
-          $ref: '#/definitions/accountToken'
-  accountAccountsList:
-    type: object
-    properties:
-      items:
-        type: array
-        items:
-          $ref: '#/definitions/accountAccount'
-  protobufAny:
-    type: object
-    properties:
-      type_url:
-        type: string
-      value:
-        type: string
-        format: byte
-  runtimeError:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-      details:
-        type: array
-        items:
-          $ref: '#/definitions/protobufAny'
-      error:
-        type: string
-      message:
-        type: string
-  accountToken:
-    type: object
-    properties:
-      expiresAt:
-        type: integer
-        format: int64
-      id:
-        type: string
-      issuedAt:
-        type: integer
-        format: int64
-  accountUpdatePasswordRequest:
-    type: object
-    properties:
-      currentPassword:
-        type: string
-      name:
-        type: string
-      newPassword:
-        type: string
-  accountCreateTokenResponse:
-    type: object
-    properties:
-      token:
-        type: string
-  accountCanIResponse:
-    type: object
-    properties:
-      value:
-        type: string
-  accountEmptyResponse:
-    type: object
-  accountCreateTokenRequest:
-    type: object
-    properties:
-      expiresIn:
-        type: integer
-        format: int64
-        title: expiresIn represents a duration in seconds
-      id:
-        type: string
-      name:
-        type: string
+          type: array
+          items:
+            $ref: '#/components/schemas/accountAccount'
+    accountAccount:
+      type: object
+      properties:
+        capabilities:
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/accountToken'
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte

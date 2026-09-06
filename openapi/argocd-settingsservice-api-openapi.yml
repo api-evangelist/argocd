@@ -1,12 +1,8 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
   description: Description of all APIs
-  title: Consolidate Services AccountService SettingsService API
+  title: Consolidate Services AccountService Settings Service API
   version: version not set
-consumes:
-- application/json
-produces:
-- application/json
 tags:
 - name: SettingsService
 paths:
@@ -19,12 +15,16 @@ paths:
       responses:
         '200':
           description: A successful response.
-          schema:
-            $ref: '#/definitions/clusterSettings'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clusterSettings'
         default:
           description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/runtimeError'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
   /api/v1/settings/plugins:
     get:
       tags:
@@ -34,306 +34,311 @@ paths:
       responses:
         '200':
           description: A successful response.
-          schema:
-            $ref: '#/definitions/clusterSettingsPluginsResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clusterSettingsPluginsResponse'
         default:
           description: An unexpected error response.
-          schema:
-            $ref: '#/definitions/runtimeError'
-definitions:
-  v1alpha1KnownTypeField:
-    description: 'KnownTypeField contains a mapping between a Custom Resource Definition (CRD) field
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+components:
+  schemas:
+    clusterSettingsPluginsResponse:
+      type: object
+      properties:
+        plugins:
+          type: array
+          items:
+            $ref: '#/components/schemas/clusterPlugin'
+    clusterGoogleAnalyticsConfig:
+      type: object
+      properties:
+        anonymizeUsers:
+          type: boolean
+        trackingID:
+          type: string
+    clusterSettings:
+      type: object
+      properties:
+        additionalUrls:
+          type: array
+          items:
+            type: string
+        appLabelKey:
+          type: string
+        appsInAnyNamespaceEnabled:
+          type: boolean
+        configManagementPlugins:
+          description: 'Deprecated: use sidecar plugins instead.'
+          type: array
+          items:
+            $ref: '#/components/schemas/v1alpha1ConfigManagementPlugin'
+        controllerNamespace:
+          type: string
+        dexConfig:
+          $ref: '#/components/schemas/clusterDexConfig'
+        execEnabled:
+          type: boolean
+        googleAnalytics:
+          $ref: '#/components/schemas/clusterGoogleAnalyticsConfig'
+        help:
+          $ref: '#/components/schemas/clusterHelp'
+        hydratorEnabled:
+          type: boolean
+        impersonationEnabled:
+          type: boolean
+        installationID:
+          type: string
+        kustomizeOptions:
+          $ref: '#/components/schemas/v1alpha1KustomizeOptions'
+        kustomizeVersions:
+          type: array
+          items:
+            type: string
+        oidcConfig:
+          $ref: '#/components/schemas/clusterOIDCConfig'
+        passwordPattern:
+          type: string
+        plugins:
+          type: array
+          items:
+            $ref: '#/components/schemas/clusterPlugin'
+        resourceOverrides:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v1alpha1ResourceOverride'
+        statusBadgeEnabled:
+          type: boolean
+        statusBadgeRootUrl:
+          type: string
+        syncWithReplaceAllowed:
+          type: boolean
+        trackingMethod:
+          type: string
+        uiBannerContent:
+          type: string
+        uiBannerPermanent:
+          type: boolean
+        uiBannerPosition:
+          type: string
+        uiBannerURL:
+          type: string
+        uiCssURL:
+          type: string
+        url:
+          type: string
+        userLoginsDisabled:
+          type: boolean
+    v1alpha1OverrideIgnoreDiff:
+      type: object
+      title: 'OverrideIgnoreDiff contains configurations about how fields should be ignored during diffs between
 
-      and a well-known Kubernetes type. This mapping is primarily used for unit conversions
+        the desired state and live state'
+      properties:
+        jSONPointers:
+          type: array
+          title: JSONPointers is a JSON path list following the format defined in RFC4627 (https://datatracker.ietf.org/doc/html/rfc6902#section-3)
+          items:
+            type: string
+        jqPathExpressions:
+          type: array
+          title: JQPathExpressions is a JQ path list that will be evaludated during the diff process
+          items:
+            type: string
+        managedFieldsManagers:
+          type: array
+          title: 'ManagedFieldsManagers is a list of trusted managers. Fields mutated by those managers will take precedence over the
 
-      in resources where the type is not explicitly defined (e.g., converting "0.1" to "100m" for CPU requests).'
-    type: object
-    properties:
-      field:
-        type: string
-        title: 'Field represents the JSON path to the specific field in the CRD that requires type conversion.
+            desired state defined in the SCM and won''t be displayed in diffs'
+          items:
+            type: string
+    clusterDexConfig:
+      type: object
+      properties:
+        connectors:
+          type: array
+          items:
+            $ref: '#/components/schemas/clusterConnector'
+    clusterHelp:
+      type: object
+      title: Help settings
+      properties:
+        binaryUrls:
+          type: object
+          title: the URLs for downloading argocd binaries
+          additionalProperties:
+            type: string
+        chatText:
+          type: string
+          title: the text for getting chat help, defaults to "Chat now!"
+        chatUrl:
+          type: string
+          title: the URL for getting chat help, this will typically be your Slack channel for support
+    v1alpha1KustomizeVersion:
+      type: object
+      title: KustomizeVersion holds information about additional Kustomize versions
+      properties:
+        buildOptions:
+          type: string
+          title: BuildOptions that are specific to a Kustomize version
+        name:
+          type: string
+          title: Name holds Kustomize version name
+        path:
+          type: string
+          title: Path holds the corresponding binary path
+    clusterConnector:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+    v1alpha1ResourceOverride:
+      type: object
+      title: ResourceOverride holds configuration to customize resource diffing and health assessment
+      properties:
+        actions:
+          description: Actions defines the set of actions that can be performed on the resource, as a Lua script.
+          type: string
+        healthLua:
+          description: HealthLua contains a Lua script that defines custom health checks for the resource.
+          type: string
+        ignoreDifferences:
+          $ref: '#/components/schemas/v1alpha1OverrideIgnoreDiff'
+        ignoreResourceUpdates:
+          $ref: '#/components/schemas/v1alpha1OverrideIgnoreDiff'
+        knownTypeFields:
+          description: KnownTypeFields lists fields for which unit conversions should be applied.
+          type: array
+          items:
+            $ref: '#/components/schemas/v1alpha1KnownTypeField'
+        useOpenLibs:
+          description: UseOpenLibs indicates whether to use open-source libraries for the resource.
+          type: boolean
+    runtimeError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+        error:
+          type: string
+        message:
+          type: string
+    clusterOIDCConfig:
+      type: object
+      properties:
+        cliClientID:
+          type: string
+        clientID:
+          type: string
+        enablePKCEAuthentication:
+          type: boolean
+        idTokenClaims:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/oidcClaim'
+        issuer:
+          type: string
+        name:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+    clusterPlugin:
+      type: object
+      title: Plugin settings
+      properties:
+        name:
+          type: string
+          title: the name of the plugin, e.g. "kasane"
+    oidcClaim:
+      type: object
+      properties:
+        essential:
+          type: boolean
+        value:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    v1alpha1KustomizeOptions:
+      type: object
+      title: KustomizeOptions are options for kustomize to use when building manifests
+      properties:
+        binaryPath:
+          description: 'Deprecated: Use settings.Settings instead. See: settings.Settings.KustomizeVersions.
 
-          Example: "spec.resources.requests.cpu"'
-      type:
-        description: 'Type specifies the expected Kubernetes type for the field, such as "cpu" or "memory".
+            If this field is set, it will be used as the Kustomize binary path.
 
-          This helps in converting values between different formats (e.g., "0.1" to "100m" for CPU).'
-        type: string
-  clusterConnector:
-    type: object
-    properties:
-      name:
-        type: string
-      type:
-        type: string
-  clusterSettings:
-    type: object
-    properties:
-      additionalUrls:
-        type: array
-        items:
+            Otherwise, Versions is used.'
           type: string
-      appLabelKey:
-        type: string
-      appsInAnyNamespaceEnabled:
-        type: boolean
-      configManagementPlugins:
-        description: 'Deprecated: use sidecar plugins instead.'
-        type: array
-        items:
-          $ref: '#/definitions/v1alpha1ConfigManagementPlugin'
-      controllerNamespace:
-        type: string
-      dexConfig:
-        $ref: '#/definitions/clusterDexConfig'
-      execEnabled:
-        type: boolean
-      googleAnalytics:
-        $ref: '#/definitions/clusterGoogleAnalyticsConfig'
-      help:
-        $ref: '#/definitions/clusterHelp'
-      hydratorEnabled:
-        type: boolean
-      impersonationEnabled:
-        type: boolean
-      installationID:
-        type: string
-      kustomizeOptions:
-        $ref: '#/definitions/v1alpha1KustomizeOptions'
-      kustomizeVersions:
-        type: array
-        items:
+          title: BinaryPath holds optional path to kustomize binary
+        buildOptions:
           type: string
-      oidcConfig:
-        $ref: '#/definitions/clusterOIDCConfig'
-      passwordPattern:
-        type: string
-      plugins:
-        type: array
-        items:
-          $ref: '#/definitions/clusterPlugin'
-      resourceOverrides:
-        type: object
-        additionalProperties:
-          $ref: '#/definitions/v1alpha1ResourceOverride'
-      statusBadgeEnabled:
-        type: boolean
-      statusBadgeRootUrl:
-        type: string
-      syncWithReplaceAllowed:
-        type: boolean
-      trackingMethod:
-        type: string
-      uiBannerContent:
-        type: string
-      uiBannerPermanent:
-        type: boolean
-      uiBannerPosition:
-        type: string
-      uiBannerURL:
-        type: string
-      uiCssURL:
-        type: string
-      url:
-        type: string
-      userLoginsDisabled:
-        type: boolean
-  v1alpha1OverrideIgnoreDiff:
-    type: object
-    title: 'OverrideIgnoreDiff contains configurations about how fields should be ignored during diffs between
+          title: BuildOptions is a string of build parameters to use when calling `kustomize build`
+        versions:
+          description: Versions is a list of Kustomize versions and their corresponding binary paths and build options.
+          type: array
+          items:
+            $ref: '#/components/schemas/v1alpha1KustomizeVersion'
+    v1alpha1Command:
+      type: object
+      title: Command holds binary path and arguments list
+      properties:
+        args:
+          type: array
+          items:
+            type: string
+        command:
+          type: array
+          items:
+            type: string
+    v1alpha1ConfigManagementPlugin:
+      type: object
+      title: ConfigManagementPlugin contains config management plugin configuration
+      properties:
+        generate:
+          $ref: '#/components/schemas/v1alpha1Command'
+        init:
+          $ref: '#/components/schemas/v1alpha1Command'
+        lockRepo:
+          type: boolean
+        name:
+          type: string
+    v1alpha1KnownTypeField:
+      description: 'KnownTypeField contains a mapping between a Custom Resource Definition (CRD) field
 
-      the desired state and live state'
-    properties:
-      jSONPointers:
-        type: array
-        title: JSONPointers is a JSON path list following the format defined in RFC4627 (https://datatracker.ietf.org/doc/html/rfc6902#section-3)
-        items:
-          type: string
-      jqPathExpressions:
-        type: array
-        title: JQPathExpressions is a JQ path list that will be evaludated during the diff process
-        items:
-          type: string
-      managedFieldsManagers:
-        type: array
-        title: 'ManagedFieldsManagers is a list of trusted managers. Fields mutated by those managers will take precedence over the
+        and a well-known Kubernetes type. This mapping is primarily used for unit conversions
 
-          desired state defined in the SCM and won''t be displayed in diffs'
-        items:
+        in resources where the type is not explicitly defined (e.g., converting "0.1" to "100m" for CPU requests).'
+      type: object
+      properties:
+        field:
           type: string
-  v1alpha1KustomizeOptions:
-    type: object
-    title: KustomizeOptions are options for kustomize to use when building manifests
-    properties:
-      binaryPath:
-        description: 'Deprecated: Use settings.Settings instead. See: settings.Settings.KustomizeVersions.
+          title: 'Field represents the JSON path to the specific field in the CRD that requires type conversion.
 
-          If this field is set, it will be used as the Kustomize binary path.
+            Example: "spec.resources.requests.cpu"'
+        type:
+          description: 'Type specifies the expected Kubernetes type for the field, such as "cpu" or "memory".
 
-          Otherwise, Versions is used.'
-        type: string
-        title: BinaryPath holds optional path to kustomize binary
-      buildOptions:
-        type: string
-        title: BuildOptions is a string of build parameters to use when calling `kustomize build`
-      versions:
-        description: Versions is a list of Kustomize versions and their corresponding binary paths and build options.
-        type: array
-        items:
-          $ref: '#/definitions/v1alpha1KustomizeVersion'
-  clusterSettingsPluginsResponse:
-    type: object
-    properties:
-      plugins:
-        type: array
-        items:
-          $ref: '#/definitions/clusterPlugin'
-  protobufAny:
-    type: object
-    properties:
-      type_url:
-        type: string
-      value:
-        type: string
-        format: byte
-  runtimeError:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-      details:
-        type: array
-        items:
-          $ref: '#/definitions/protobufAny'
-      error:
-        type: string
-      message:
-        type: string
-  v1alpha1ResourceOverride:
-    type: object
-    title: ResourceOverride holds configuration to customize resource diffing and health assessment
-    properties:
-      actions:
-        description: Actions defines the set of actions that can be performed on the resource, as a Lua script.
-        type: string
-      healthLua:
-        description: HealthLua contains a Lua script that defines custom health checks for the resource.
-        type: string
-      ignoreDifferences:
-        $ref: '#/definitions/v1alpha1OverrideIgnoreDiff'
-      ignoreResourceUpdates:
-        $ref: '#/definitions/v1alpha1OverrideIgnoreDiff'
-      knownTypeFields:
-        description: KnownTypeFields lists fields for which unit conversions should be applied.
-        type: array
-        items:
-          $ref: '#/definitions/v1alpha1KnownTypeField'
-      useOpenLibs:
-        description: UseOpenLibs indicates whether to use open-source libraries for the resource.
-        type: boolean
-  v1alpha1ConfigManagementPlugin:
-    type: object
-    title: ConfigManagementPlugin contains config management plugin configuration
-    properties:
-      generate:
-        $ref: '#/definitions/v1alpha1Command'
-      init:
-        $ref: '#/definitions/v1alpha1Command'
-      lockRepo:
-        type: boolean
-      name:
-        type: string
-  clusterHelp:
-    type: object
-    title: Help settings
-    properties:
-      binaryUrls:
-        type: object
-        title: the URLs for downloading argocd binaries
-        additionalProperties:
+            This helps in converting values between different formats (e.g., "0.1" to "100m" for CPU).'
           type: string
-      chatText:
-        type: string
-        title: the text for getting chat help, defaults to "Chat now!"
-      chatUrl:
-        type: string
-        title: the URL for getting chat help, this will typically be your Slack channel for support
-  oidcClaim:
-    type: object
-    properties:
-      essential:
-        type: boolean
-      value:
-        type: string
-      values:
-        type: array
-        items:
+    protobufAny:
+      type: object
+      properties:
+        type_url:
           type: string
-  clusterDexConfig:
-    type: object
-    properties:
-      connectors:
-        type: array
-        items:
-          $ref: '#/definitions/clusterConnector'
-  clusterPlugin:
-    type: object
-    title: Plugin settings
-    properties:
-      name:
-        type: string
-        title: the name of the plugin, e.g. "kasane"
-  clusterGoogleAnalyticsConfig:
-    type: object
-    properties:
-      anonymizeUsers:
-        type: boolean
-      trackingID:
-        type: string
-  v1alpha1Command:
-    type: object
-    title: Command holds binary path and arguments list
-    properties:
-      args:
-        type: array
-        items:
+        value:
           type: string
-      command:
-        type: array
-        items:
-          type: string
-  v1alpha1KustomizeVersion:
-    type: object
-    title: KustomizeVersion holds information about additional Kustomize versions
-    properties:
-      buildOptions:
-        type: string
-        title: BuildOptions that are specific to a Kustomize version
-      name:
-        type: string
-        title: Name holds Kustomize version name
-      path:
-        type: string
-        title: Path holds the corresponding binary path
-  clusterOIDCConfig:
-    type: object
-    properties:
-      cliClientID:
-        type: string
-      clientID:
-        type: string
-      enablePKCEAuthentication:
-        type: boolean
-      idTokenClaims:
-        type: object
-        additionalProperties:
-          $ref: '#/definitions/oidcClaim'
-      issuer:
-        type: string
-      name:
-        type: string
-      scopes:
-        type: array
-        items:
-          type: string
+          format: byte

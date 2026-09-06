@@ -1,0 +1,179 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Argo CD"
+  description: "Unified vocabulary for the Argo CD GitOps continuous delivery platform, covering operational API dimensions and capability workflow dimensions."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: argocd
+      version: "2.14.0"
+      baseUrl: "/api/v1"
+      status: active
+      description: "Argo CD REST API"
+
+  resources:
+    - name: applications
+      api: argocd
+      actions: [list, get, create, update, delete, sync, rollback, watch]
+      description: "Kubernetes application definitions managed via GitOps"
+    - name: application-sets
+      api: argocd
+      actions: [list, get, create, update, delete]
+      description: "Template-based multi-application generators"
+    - name: clusters
+      api: argocd
+      actions: [list, get, create, update, delete, rotate-auth]
+      description: "Registered Kubernetes clusters"
+    - name: repositories
+      api: argocd
+      actions: [list, get, create, update, delete, validate]
+      description: "Git and Helm chart repositories"
+    - name: projects
+      api: argocd
+      actions: [list, get, create, update, delete]
+      description: "Argo CD projects for multi-tenancy and RBAC"
+    - name: accounts
+      api: argocd
+      actions: [list, get, update, create-token, delete-token]
+      description: "User accounts and API tokens"
+    - name: certificates
+      api: argocd
+      actions: [list, create, delete]
+      description: "Repository TLS certificates and SSH known hosts"
+    - name: gpg-keys
+      api: argocd
+      actions: [list, get, create, delete]
+      description: "GPG keys for commit signature verification"
+    - name: notifications
+      api: argocd
+      actions: [list-services, list-templates, list-triggers]
+      description: "Notification services, templates, and triggers"
+    - name: settings
+      api: argocd
+      actions: [get]
+      description: "Argo CD server settings and configuration"
+
+  actions:
+    - name: list
+      httpMethod: GET
+      pattern: read
+    - name: get
+      httpMethod: GET
+      pattern: read
+    - name: create
+      httpMethod: POST
+      pattern: write
+    - name: update
+      httpMethod: PUT
+      pattern: write
+    - name: delete
+      httpMethod: DELETE
+      pattern: destructive
+    - name: sync
+      httpMethod: POST
+      pattern: write
+    - name: rollback
+      httpMethod: POST
+      pattern: write
+    - name: watch
+      httpMethod: GET
+      pattern: read
+    - name: validate
+      httpMethod: POST
+      pattern: read
+
+  schemas:
+    core:
+      - name: Application
+        description: "An Argo CD Application resource defining desired state from Git"
+      - name: ApplicationSpec
+        description: "Application specification including source, destination, and sync policy"
+      - name: ApplicationStatus
+        description: "Current application sync and health status"
+      - name: Cluster
+        description: "A registered Kubernetes cluster"
+      - name: Repository
+        description: "A Git or Helm repository configuration"
+      - name: Project
+        description: "An Argo CD project for RBAC isolation"
+      - name: Account
+        description: "A user account with optional API tokens"
+
+  authentication:
+    schemes:
+      - type: bearer
+        description: "JWT bearer token obtained via POST /api/v1/session"
+        header: Authorization
+        format: "Bearer <token>"
+
+capability:
+  workflows:
+    - name: GitOps Delivery
+      file: capabilities/gitops-delivery.yaml
+      description: "End-to-end GitOps continuous delivery combining application lifecycle, cluster management, and repository configuration"
+      apisCombined: [argocd]
+      toolCount: 9
+      personas: [Platform Engineer, DevOps Engineer]
+      domains: [Continuous Delivery, GitOps, Kubernetes]
+
+  personas:
+    - id: platform-engineer
+      name: Platform Engineer
+      description: "Manages the Argo CD platform, clusters, and project RBAC"
+      workflows: [GitOps Delivery]
+    - id: devops-engineer
+      name: DevOps Engineer
+      description: "Deploys and manages applications using GitOps workflows"
+      workflows: [GitOps Delivery]
+
+  domains:
+    - name: Continuous Delivery
+      description: "Automated application deployment and lifecycle management"
+    - name: GitOps
+      description: "Git as single source of truth for infrastructure and application state"
+    - name: Kubernetes
+      description: "Container orchestration platform"
+
+  namespaces:
+    - name: argocd
+      type: consumed
+      source: shared/argo-cd-api.yaml
+    - name: gitops-delivery-api
+      type: rest-exposed
+      port: 8080
+    - name: gitops-delivery-mcp
+      type: mcp-exposed
+      port: 9090
+
+  binds:
+    - name: ARGOCD_TOKEN
+      description: "JWT token for Argo CD authentication"
+      workflows: [GitOps Delivery]
+    - name: ARGOCD_SERVER
+      description: "Argo CD server base URL"
+      workflows: [GitOps Delivery]
+
+crossReference:
+  - resource: applications
+    operations: [list, get, create, update, delete, sync]
+    workflows: [GitOps Delivery]
+    personas: [Platform Engineer, DevOps Engineer]
+  - resource: clusters
+    operations: [list, get, create]
+    workflows: [GitOps Delivery]
+    personas: [Platform Engineer]
+  - resource: repositories
+    operations: [list, get, create]
+    workflows: [GitOps Delivery]
+    personas: [Platform Engineer]
+  - resource: projects
+    operations: [list, get, create]
+    workflows: [GitOps Delivery]
+    personas: [Platform Engineer]
+  - resource: accounts
+    operations: [list, get]
+    workflows: [GitOps Delivery]
+    personas: [Platform Engineer]

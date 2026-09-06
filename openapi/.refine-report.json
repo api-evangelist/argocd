@@ -33,6 +33,21 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "argocd-accountservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-applicationservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-applicationsetservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-certificateservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-clusterservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-gpgkeyservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-notificationservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-projectservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-repocredsservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-repositoryservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-sessionservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-settingsservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-versionservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
