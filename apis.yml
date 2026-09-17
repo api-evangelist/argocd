@@ -328,20 +328,6 @@ apis:
     url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
   - type: APIReference
     url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
-- aid: argocd:argocd-notificationservice-api
-  name: Argo CD NotificationService API
-  description: The NotificationService API from Argo CD — 3 operation(s) for notificationservice.
-  tags:
-  - Notification Service
-  tags_raw:
-  - NotificationService
-  properties:
-  - type: OpenAPI
-    url: openapi/argocd-notificationservice-api-openapi.yml
-  - type: Documentation
-    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
-  - type: APIReference
-    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
 - aid: argocd:argocd-projectservice-api
   name: Argo CD ProjectService API
   description: The ProjectService API from Argo CD — 10 operation(s) for projectservice.
@@ -410,6 +396,18 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/argocd-versionservice-api-openapi.yml
+  - type: Documentation
+    url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
+  - type: APIReference
+    url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
+- aid: argocd:argocd-notification-service-api
+  name: Argo CD Notification Service API
+  description: The Notification Service API from Argo CD — 3 operation(s) for notification service.
+  tags:
+  - Notification Service
+  properties:
+  - type: OpenAPI
+    url: openapi/argocd-notification-service-api-openapi.yml
   - type: Documentation
     url: https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/
   - type: APIReference
