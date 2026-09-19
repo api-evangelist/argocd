@@ -43,8 +43,8 @@ tags:
   - CNCF
   - Open-Source
   - Operator
-  - ArgoCD
 tags_raw:
+  - ArgoCD
   - DevOps
   - GitOps
   - Kubernetes
