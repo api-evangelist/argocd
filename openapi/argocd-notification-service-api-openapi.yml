@@ -1,15 +1,15 @@
 openapi: 3.2.0
 info:
   description: Description of all APIs
-  title: Consolidate Services AccountService Notification Service API
+  title: Consolidate Services Notification Service API
   version: version not set
 tags:
-- name: NotificationService
+- name: Notification Service
 paths:
   /api/v1/notifications/services:
     get:
       tags:
-      - NotificationService
+      - Notification Service
       summary: List returns list of services
       operationId: NotificationService_ListServices
       responses:
@@ -28,7 +28,7 @@ paths:
   /api/v1/notifications/templates:
     get:
       tags:
-      - NotificationService
+      - Notification Service
       summary: List returns list of templates
       operationId: NotificationService_ListTemplates
       responses:
@@ -47,7 +47,7 @@ paths:
   /api/v1/notifications/triggers:
     get:
       tags:
-      - NotificationService
+      - Notification Service
       summary: List returns list of triggers
       operationId: NotificationService_ListTriggers
       responses:
@@ -72,42 +72,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/notificationService'
-    notificationTemplateList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/notificationTemplate'
-    runtimeError:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-        error:
-          type: string
-        message:
-          type: string
-    notificationTemplate:
-      type: object
-      properties:
-        name:
-          type: string
-    notificationService:
-      type: object
-      properties:
-        name:
-          type: string
-    notificationTrigger:
-      type: object
-      properties:
-        name:
-          type: string
     notificationTriggerList:
       type: object
       properties:
@@ -123,3 +87,39 @@ components:
         value:
           type: string
           format: byte
+    runtimeError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+        error:
+          type: string
+        message:
+          type: string
+    notificationTrigger:
+      type: object
+      properties:
+        name:
+          type: string
+    notificationService:
+      type: object
+      properties:
+        name:
+          type: string
+    notificationTemplateList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/notificationTemplate'
+    notificationTemplate:
+      type: object
+      properties:
+        name:
+          type: string

@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   description: Description of all APIs
-  title: Consolidate Services AccountService Version Service API
+  title: Consolidate Services Version Service API
   version: version not set
 tags:
 - name: VersionService

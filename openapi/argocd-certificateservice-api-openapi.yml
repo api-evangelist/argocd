@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   description: Description of all APIs
-  title: Consolidate Services AccountService Certificate Service API
+  title: Consolidate Services Certificate Service API
   version: version not set
 tags:
 - name: CertificateService
@@ -108,37 +108,14 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
-    v1alpha1RepositoryCertificate:
+    protobufAny:
       type: object
-      title: A RepositoryCertificate is either SSH known hosts entry or TLS certificate
       properties:
-        certData:
+        type_url:
+          type: string
+        value:
           type: string
           format: byte
-          title: CertData contains the actual certificate data, dependent on the certificate type
-        certInfo:
-          type: string
-          title: CertInfo will hold additional certificate info, depdendent on the certificate type (e.g. SSH fingerprint, X509 CommonName)
-        certSubType:
-          type: string
-          title: CertSubType specifies the sub type of the cert, i.e. "ssh-rsa"
-        certType:
-          type: string
-          title: CertType specifies the type of the certificate - currently one of "https" or "ssh"
-        serverName:
-          type: string
-          title: ServerName specifies the DNS name of the server this certificate is intended for
-    v1alpha1RepositoryCertificateList:
-      type: object
-      title: RepositoryCertificateList is a collection of RepositoryCertificates
-      properties:
-        items:
-          type: array
-          title: List of certificates to be processed
-          items:
-            $ref: '#/components/schemas/v1alpha1RepositoryCertificate'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'
     runtimeError:
       type: object
       properties:
@@ -153,6 +130,17 @@ components:
           type: string
         message:
           type: string
+    v1alpha1RepositoryCertificateList:
+      type: object
+      title: RepositoryCertificateList is a collection of RepositoryCertificates
+      properties:
+        items:
+          type: array
+          title: List of certificates to be processed
+          items:
+            $ref: '#/components/schemas/v1alpha1RepositoryCertificate'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
     v1ListMeta:
       description: 'ListMeta describes metadata that synthetic resources must have, including lists and
 
@@ -216,11 +204,23 @@ components:
           title: 'Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
 
             +optional'
-    protobufAny:
+    v1alpha1RepositoryCertificate:
       type: object
+      title: A RepositoryCertificate is either SSH known hosts entry or TLS certificate
       properties:
-        type_url:
-          type: string
-        value:
+        certData:
           type: string
           format: byte
+          title: CertData contains the actual certificate data, dependent on the certificate type
+        certInfo:
+          type: string
+          title: CertInfo will hold additional certificate info, depdendent on the certificate type (e.g. SSH fingerprint, X509 CommonName)
+        certSubType:
+          type: string
+          title: CertSubType specifies the sub type of the cert, i.e. "ssh-rsa"
+        certType:
+          type: string
+          title: CertType specifies the type of the certificate - currently one of "https" or "ssh"
+        serverName:
+          type: string
+          title: ServerName specifies the DNS name of the server this certificate is intended for

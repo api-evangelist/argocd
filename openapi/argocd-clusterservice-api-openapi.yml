@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   description: Description of all APIs
-  title: Consolidate Services AccountService Cluster Service API
+  title: Consolidate Services Cluster Service API
   version: version not set
 tags:
 - name: ClusterService
@@ -248,18 +248,56 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
-    v1alpha1ConnectionState:
+    v1alpha1AWSAuthConfig:
       type: object
-      title: ConnectionState contains information about remote resource connection state, currently used for clusters and repositories
+      title: AWSAuthConfig is an AWS IAM authentication configuration
       properties:
-        attemptedAt:
+        clusterName:
+          type: string
+          title: ClusterName contains AWS cluster name
+        profile:
+          description: Profile contains optional role ARN. If set then AWS IAM Authenticator uses the profile to perform cluster operations instead of the default AWS credential provider chain.
+          type: string
+        roleARN:
+          description: RoleARN contains optional role ARN. If set then AWS IAM Authenticator assume a role to perform cluster operations instead of the default AWS credential provider chain.
+          type: string
+    v1alpha1ClusterCacheInfo:
+      type: object
+      title: ClusterCacheInfo contains information about the cluster cache
+      properties:
+        apisCount:
+          type: integer
+          format: int64
+          title: APIsCount holds number of observed Kubernetes API count
+        lastCacheSyncTime:
           $ref: '#/components/schemas/v1Time'
-        message:
+        resourcesCount:
+          type: integer
+          format: int64
+          title: ResourcesCount holds number of observed Kubernetes resources
+    v1Time:
+      description: 'Time is a wrapper around time.Time which supports correct
+
+        marshaling to YAML and JSON.  Wrappers are provided for many
+
+        of the factory methods that the time package offers.
+
+
+        +protobuf.options.marshal=false
+
+        +protobuf.as=Timestamp
+
+        +protobuf.options.(gogoproto.goproto_stringer)=false'
+      type: string
+      format: date-time
+    protobufAny:
+      type: object
+      properties:
+        type_url:
           type: string
-          title: Message contains human readable information about the connection status
-        status:
+        value:
           type: string
-          title: Status contains the current status indicator for the connection
+          format: byte
     v1alpha1ClusterInfo:
       type: object
       title: ClusterInfo contains information about the cluster
@@ -280,6 +318,75 @@ components:
         serverVersion:
           type: string
           title: ServerVersion contains information about the Kubernetes version of the cluster
+    runtimeError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+        error:
+          type: string
+        message:
+          type: string
+    v1alpha1ClusterConfig:
+      description: 'ClusterConfig is the configuration attributes. This structure is subset of the go-client
+
+        rest.Config with annotations added for marshalling.'
+      type: object
+      properties:
+        awsAuthConfig:
+          $ref: '#/components/schemas/v1alpha1AWSAuthConfig'
+        bearerToken:
+          description: 'Server requires Bearer authentication. This client will not attempt to use
+
+            refresh tokens for an OAuth2 flow.
+
+            TODO: demonstrate an OAuth2 compatible client.'
+          type: string
+        disableCompression:
+          description: DisableCompression bypasses automatic GZip compression requests to the server.
+          type: boolean
+        execProviderConfig:
+          $ref: '#/components/schemas/v1alpha1ExecProviderConfig'
+        password:
+          type: string
+        proxyUrl:
+          type: string
+          title: ProxyURL is the URL to the proxy to be used for all requests send to the server
+        tlsClientConfig:
+          $ref: '#/components/schemas/v1alpha1TLSClientConfig'
+        username:
+          type: string
+          title: Server requires Basic authentication
+    v1alpha1ExecProviderConfig:
+      type: object
+      title: 'ExecProviderConfig is config used to call an external command to perform cluster authentication
+
+        See: https://godoc.org/k8s.io/client-go/tools/clientcmd/api#ExecConfig'
+      properties:
+        apiVersion:
+          type: string
+          title: Preferred input version of the ExecInfo
+        args:
+          type: array
+          title: Arguments to pass to the command when executing it
+          items:
+            type: string
+        command:
+          type: string
+          title: Command to execute
+        env:
+          type: object
+          title: Env defines additional environment variables to expose to the process
+          additionalProperties:
+            type: string
+        installHint:
+          type: string
+          title: This text is shown to the user when the executable doesn't seem to be present
     v1alpha1ClusterList:
       description: ClusterList is a collection of Clusters.
       type: object
@@ -290,6 +397,20 @@ components:
             $ref: '#/components/schemas/v1alpha1Cluster'
         metadata:
           $ref: '#/components/schemas/v1ListMeta'
+    clusterClusterResponse:
+      type: object
+    v1alpha1ConnectionState:
+      type: object
+      title: ConnectionState contains information about remote resource connection state, currently used for clusters and repositories
+      properties:
+        attemptedAt:
+          $ref: '#/components/schemas/v1Time'
+        message:
+          type: string
+          title: Message contains human readable information about the connection status
+        status:
+          type: string
+          title: Status contains the current status indicator for the connection
     v1alpha1TLSClientConfig:
       type: object
       title: TLSClientConfig contains settings to enable transport layer security
@@ -321,19 +442,6 @@ components:
             certificates against. If ServerName is empty, the hostname used to contact the
 
             server is used.'
-          type: string
-    v1alpha1AWSAuthConfig:
-      type: object
-      title: AWSAuthConfig is an AWS IAM authentication configuration
-      properties:
-        clusterName:
-          type: string
-          title: ClusterName contains AWS cluster name
-        profile:
-          description: Profile contains optional role ARN. If set then AWS IAM Authenticator uses the profile to perform cluster operations instead of the default AWS credential provider chain.
-          type: string
-        roleARN:
-          description: RoleARN contains optional role ARN. If set then AWS IAM Authenticator assume a role to perform cluster operations instead of the default AWS credential provider chain.
           type: string
     v1alpha1Cluster:
       type: object
@@ -383,49 +491,6 @@ components:
           description: Shard contains optional shard number. Calculated on the fly by the application controller if not specified.
           type: integer
           format: int64
-    runtimeError:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-        error:
-          type: string
-        message:
-          type: string
-    v1alpha1ClusterCacheInfo:
-      type: object
-      title: ClusterCacheInfo contains information about the cluster cache
-      properties:
-        apisCount:
-          type: integer
-          format: int64
-          title: APIsCount holds number of observed Kubernetes API count
-        lastCacheSyncTime:
-          $ref: '#/components/schemas/v1Time'
-        resourcesCount:
-          type: integer
-          format: int64
-          title: ResourcesCount holds number of observed Kubernetes resources
-    v1Time:
-      description: 'Time is a wrapper around time.Time which supports correct
-
-        marshaling to YAML and JSON.  Wrappers are provided for many
-
-        of the factory methods that the time package offers.
-
-
-        +protobuf.options.marshal=false
-
-        +protobuf.as=Timestamp
-
-        +protobuf.options.(gogoproto.goproto_stringer)=false'
-      type: string
-      format: date-time
     v1ListMeta:
       description: 'ListMeta describes metadata that synthetic resources must have, including lists and
 
@@ -489,68 +554,3 @@ components:
           title: 'Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
 
             +optional'
-    clusterClusterResponse:
-      type: object
-    v1alpha1ExecProviderConfig:
-      type: object
-      title: 'ExecProviderConfig is config used to call an external command to perform cluster authentication
-
-        See: https://godoc.org/k8s.io/client-go/tools/clientcmd/api#ExecConfig'
-      properties:
-        apiVersion:
-          type: string
-          title: Preferred input version of the ExecInfo
-        args:
-          type: array
-          title: Arguments to pass to the command when executing it
-          items:
-            type: string
-        command:
-          type: string
-          title: Command to execute
-        env:
-          type: object
-          title: Env defines additional environment variables to expose to the process
-          additionalProperties:
-            type: string
-        installHint:
-          type: string
-          title: This text is shown to the user when the executable doesn't seem to be present
-    v1alpha1ClusterConfig:
-      description: 'ClusterConfig is the configuration attributes. This structure is subset of the go-client
-
-        rest.Config with annotations added for marshalling.'
-      type: object
-      properties:
-        awsAuthConfig:
-          $ref: '#/components/schemas/v1alpha1AWSAuthConfig'
-        bearerToken:
-          description: 'Server requires Bearer authentication. This client will not attempt to use
-
-            refresh tokens for an OAuth2 flow.
-
-            TODO: demonstrate an OAuth2 compatible client.'
-          type: string
-        disableCompression:
-          description: DisableCompression bypasses automatic GZip compression requests to the server.
-          type: boolean
-        execProviderConfig:
-          $ref: '#/components/schemas/v1alpha1ExecProviderConfig'
-        password:
-          type: string
-        proxyUrl:
-          type: string
-          title: ProxyURL is the URL to the proxy to be used for all requests send to the server
-        tlsClientConfig:
-          $ref: '#/components/schemas/v1alpha1TLSClientConfig'
-        username:
-          type: string
-          title: Server requires Basic authentication
-    protobufAny:
-      type: object
-      properties:
-        type_url:
-          type: string
-        value:
-          type: string
-          format: byte

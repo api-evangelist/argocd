@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   description: Description of all APIs
-  title: Consolidate Services AccountService Session Service API
+  title: Consolidate Services Session Service API
   version: version not set
 tags:
 - name: SessionService
@@ -76,6 +76,14 @@ components:
       properties:
         token:
           type: string
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
     sessionSessionCreateRequest:
       description: SessionCreateRequest is for logging in.
       type: object
@@ -84,20 +92,6 @@ components:
           type: string
         token:
           type: string
-        username:
-          type: string
-    sessionGetUserInfoResponse:
-      type: object
-      title: The current user's userInfo info
-      properties:
-        groups:
-          type: array
-          items:
-            type: string
-        iss:
-          type: string
-        loggedIn:
-          type: boolean
         username:
           type: string
     runtimeError:
@@ -114,11 +108,17 @@ components:
           type: string
         message:
           type: string
-    protobufAny:
+    sessionGetUserInfoResponse:
       type: object
+      title: The current user's userInfo info
       properties:
-        type_url:
+        groups:
+          type: array
+          items:
+            type: string
+        iss:
           type: string
-        value:
+        loggedIn:
+          type: boolean
+        username:
           type: string
-          format: byte

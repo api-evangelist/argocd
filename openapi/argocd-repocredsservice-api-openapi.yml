@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   description: Description of all APIs
-  title: Consolidate Services AccountService Repo Creds Service API
+  title: Consolidate Services Repo Creds Service API
   version: version not set
 tags:
 - name: RepoCredsService
@@ -10,7 +10,7 @@ paths:
     get:
       tags:
       - RepoCredsService
-      summary: ListRepositoryCredentials gets a list of all configured repository credential sets
+      summary: ListRepositoryCredentials gets a list of all configured repository credential…
       operationId: RepoCredsService_ListRepositoryCredentials
       parameters:
       - description: Repo URL for query.
@@ -98,7 +98,7 @@ paths:
     delete:
       tags:
       - RepoCredsService
-      summary: DeleteRepositoryCredentials deletes a repository credential set from the configuration
+      summary: DeleteRepositoryCredentials deletes a repository credential set from the…
       operationId: RepoCredsService_DeleteRepositoryCredentials
       parameters:
       - name: url
@@ -123,7 +123,7 @@ paths:
     get:
       tags:
       - RepoCredsService
-      summary: ListWriteRepositoryCredentials gets a list of all configured repository credential sets that have write access
+      summary: ListWriteRepositoryCredentials gets a list of all configured repository…
       operationId: RepoCredsService_ListWriteRepositoryCredentials
       parameters:
       - description: Repo URL for query.
@@ -147,7 +147,7 @@ paths:
     post:
       tags:
       - RepoCredsService
-      summary: CreateWriteRepositoryCredentials creates a new repository credential set with write access
+      summary: CreateWriteRepositoryCredentials creates a new repository credential set with…
       operationId: RepoCredsService_CreateWriteRepositoryCredentials
       parameters:
       - description: Whether to create in upsert mode.
@@ -179,7 +179,7 @@ paths:
     put:
       tags:
       - RepoCredsService
-      summary: UpdateWriteRepositoryCredentials updates a repository credential set with write access
+      summary: UpdateWriteRepositoryCredentials updates a repository credential set with write…
       operationId: RepoCredsService_UpdateWriteRepositoryCredentials
       parameters:
       - description: URL is the URL to which these credentials match
@@ -211,7 +211,7 @@ paths:
     delete:
       tags:
       - RepoCredsService
-      summary: DeleteWriteRepositoryCredentials deletes a repository credential set with write access from the configuration
+      summary: DeleteWriteRepositoryCredentials deletes a repository credential set with write…
       operationId: RepoCredsService_DeleteWriteRepositoryCredentials
       parameters:
       - name: url
@@ -234,9 +234,14 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
-    repocredsRepoCredsResponse:
+    protobufAny:
       type: object
-      title: RepoCredsResponse is a response to most repository credentials requests
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
     v1alpha1RepoCreds:
       type: object
       title: RepoCreds holds the definition for repository credentials
@@ -312,6 +317,16 @@ components:
         username:
           type: string
           title: Username for authenticating at the repo server
+    v1alpha1RepoCredsList:
+      description: RepositoryList is a collection of Repositories.
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1alpha1RepoCreds'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
     runtimeError:
       type: object
       properties:
@@ -326,6 +341,9 @@ components:
           type: string
         message:
           type: string
+    repocredsRepoCredsResponse:
+      type: object
+      title: RepoCredsResponse is a response to most repository credentials requests
     v1ListMeta:
       description: 'ListMeta describes metadata that synthetic resources must have, including lists and
 
@@ -389,21 +407,3 @@ components:
           title: 'Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
 
             +optional'
-    v1alpha1RepoCredsList:
-      description: RepositoryList is a collection of Repositories.
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1alpha1RepoCreds'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'
-    protobufAny:
-      type: object
-      properties:
-        type_url:
-          type: string
-        value:
-          type: string
-          format: byte

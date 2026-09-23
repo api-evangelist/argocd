@@ -1,19 +1,7 @@
 {
   "provider": "argocd",
   "sources": [
-    "argocd-accountservice-api-openapi.yml",
-    "argocd-applicationservice-api-openapi.yml",
-    "argocd-applicationsetservice-api-openapi.yml",
-    "argocd-certificateservice-api-openapi.yml",
-    "argocd-clusterservice-api-openapi.yml",
-    "argocd-gpgkeyservice-api-openapi.yml",
-    "argocd-notificationservice-api-openapi.yml",
-    "argocd-projectservice-api-openapi.yml",
-    "argocd-repocredsservice-api-openapi.yml",
-    "argocd-repositoryservice-api-openapi.yml",
-    "argocd-sessionservice-api-openapi.yml",
-    "argocd-settingsservice-api-openapi.yml",
-    "argocd-versionservice-api-openapi.yml"
+    "_original/argocd-server-openapi.json"
   ],
   "outputs": [
     "argocd-accountservice-api-openapi.yml",
@@ -30,24 +18,43 @@
     "argocd-settingsservice-api-openapi.yml",
     "argocd-versionservice-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
-    "argocd-accountservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-applicationservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-applicationsetservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-certificateservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-clusterservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-gpgkeyservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-notificationservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-projectservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-repocredsservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-repositoryservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-sessionservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-settingsservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "argocd-versionservice-api-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "apis.yml register: already-registered"
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "argocd-server-openapi.json: upgraded swagger 2.0 -> OpenAPI 3.2.0",
+    "argocd-server-openapi.json: declared missing tag: AccountService",
+    "argocd-server-openapi.json: declared missing tag: ApplicationService",
+    "argocd-server-openapi.json: declared missing tag: ApplicationSetService",
+    "argocd-server-openapi.json: declared missing tag: CertificateService",
+    "argocd-server-openapi.json: declared missing tag: ClusterService",
+    "argocd-server-openapi.json: declared missing tag: GPGKeyService",
+    "argocd-server-openapi.json: declared missing tag: NotificationService",
+    "argocd-server-openapi.json: declared missing tag: ProjectService",
+    "argocd-server-openapi.json: declared missing tag: RepoCredsService",
+    "argocd-server-openapi.json: declared missing tag: RepositoryService",
+    "argocd-server-openapi.json: declared missing tag: SessionService",
+    "argocd-server-openapi.json: declared missing tag: SettingsService",
+    "argocd-server-openapi.json: declared missing tag: VersionService",
+    "superseded outputs removed: argocd-notification-service-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 27 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "argocd-accountservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-applicationservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-applicationsetservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-certificateservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-clusterservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-gpgkeyservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-notification-service-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-projectservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-repocredsservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-repositoryservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-sessionservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-settingsservice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "argocd-versionservice-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

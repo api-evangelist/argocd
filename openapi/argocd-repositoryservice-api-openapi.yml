@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   description: Description of all APIs
-  title: Consolidate Services AccountService Repository Service API
+  title: Consolidate Services Repository Service API
   version: version not set
 tags:
 - name: RepositoryService
@@ -288,6 +288,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
+      summary: Repository service list OCI tags
+      x-summary-source: derived
   /api/v1/repositories/{repo}/refs:
     get:
       tags:
@@ -323,6 +325,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/runtimeError'
+      summary: Repository service list refs
+      x-summary-source: derived
   /api/v1/repositories/{repo}/validate:
     post:
       tags:
@@ -841,6 +845,88 @@ paths:
         required: true
 components:
   schemas:
+    v1alpha1JsonnetVar:
+      type: object
+      title: JsonnetVar represents a variable to be passed to jsonnet during manifest generation
+      properties:
+        code:
+          type: boolean
+        name:
+          type: string
+        value:
+          type: string
+    intstrIntOrString:
+      description: '+protobuf=true
+
+        +protobuf.options.(gogoproto.goproto_stringer)=false
+
+        +k8s:openapi-gen=true'
+      type: object
+      title: 'IntOrString is a type that can hold an int32 or a string.  When used in
+
+        JSON or YAML marshalling and unmarshalling, it produces or consumes the
+
+        inner type.  This allows you to have, for example, a JSON field that can
+
+        accept a name or number.
+
+        TODO: Rename to Int32OrString'
+      properties:
+        intVal:
+          type: integer
+          format: int32
+        strVal:
+          type: string
+        type:
+          type: integer
+          format: int64
+    v1alpha1HelmParameter:
+      type: object
+      title: HelmParameter is a parameter that's passed to helm template during manifest generation
+      properties:
+        forceString:
+          type: boolean
+          title: ForceString determines whether to tell Helm to interpret booleans and numbers as strings
+        name:
+          type: string
+          title: Name is the name of the Helm parameter
+        value:
+          type: string
+          title: Value is the value for the Helm parameter
+    repositoryRefs:
+      type: object
+      title: A subset of the repository's named refs
+      properties:
+        branches:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+    repositoryPluginAppSpec:
+      type: object
+      title: PluginAppSpec contains details about a plugin-type Application
+      properties:
+        parametersAnnouncement:
+          type: array
+          items:
+            $ref: '#/components/schemas/repositoryParameterAnnouncement'
+    runtimeError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+        error:
+          type: string
+        message:
+          type: string
     v1alpha1ApplicationSourceHelm:
       type: object
       title: ApplicationSourceHelm holds helm specific options
@@ -903,132 +989,34 @@ components:
         version:
           type: string
           title: Version is the Helm version to use for templating ("3")
-    v1alpha1RepositoryList:
-      description: RepositoryList is a collection of Repositories.
+    repositoryKustomizeAppSpec:
       type: object
+      title: KustomizeAppSpec contains kustomize images
       properties:
-        items:
+        images:
+          description: images is a list of available images.
           type: array
           items:
-            $ref: '#/components/schemas/v1alpha1Repository'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'
-    v1alpha1KustomizeReplica:
+            type: string
+    v1alpha1ApplicationSourceJsonnet:
       type: object
+      title: ApplicationSourceJsonnet holds options specific to applications of type Jsonnet
       properties:
-        count:
-          $ref: '#/components/schemas/intstrIntOrString'
-        name:
-          type: string
-          title: Name of Deployment or StatefulSet
-    repositoryRepoAppsResponse:
-      type: object
-      title: RepoAppsResponse contains applications of specified repository
-      properties:
-        items:
+        extVars:
           type: array
+          title: ExtVars is a list of Jsonnet External Variables
           items:
-            $ref: '#/components/schemas/repositoryAppInfo'
-    intstrIntOrString:
-      description: '+protobuf=true
-
-        +protobuf.options.(gogoproto.goproto_stringer)=false
-
-        +k8s:openapi-gen=true'
-      type: object
-      title: 'IntOrString is a type that can hold an int32 or a string.  When used in
-
-        JSON or YAML marshalling and unmarshalling, it produces or consumes the
-
-        inner type.  This allows you to have, for example, a JSON field that can
-
-        accept a name or number.
-
-        TODO: Rename to Int32OrString'
-      properties:
-        intVal:
-          type: integer
-          format: int32
-        strVal:
-          type: string
-        type:
-          type: integer
-          format: int64
-    runtimeError:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        details:
+            $ref: '#/components/schemas/v1alpha1JsonnetVar'
+        libs:
           type: array
+          title: Additional library search dirs
           items:
-            $ref: '#/components/schemas/protobufAny'
-        error:
-          type: string
-        message:
-          type: string
-    v1alpha1KustomizeResId:
-      type: object
-      properties:
-        gvk:
-          $ref: '#/components/schemas/v1alpha1KustomizeGvk'
-        name:
-          type: string
-        namespace:
-          type: string
-    repositoryRepoAppDetailsQuery:
-      type: object
-      title: RepoAppDetailsQuery contains query information for app details request
-      properties:
-        appName:
-          type: string
-        appProject:
-          type: string
-        source:
-          $ref: '#/components/schemas/v1alpha1ApplicationSource'
-        sourceIndex:
-          type: integer
-          format: int32
-          title: source index (for multi source apps)
-        versionId:
-          type: integer
-          format: int32
-          title: versionId from historical data (for multi source apps)
-    v1alpha1ApplicationSourceDirectory:
-      type: object
-      title: ApplicationSourceDirectory holds options for applications of type plain YAML or Jsonnet
-      properties:
-        exclude:
-          type: string
-          title: Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation
-        include:
-          type: string
-          title: Include contains a glob pattern to match paths against that should be explicitly included during manifest generation
-        jsonnet:
-          $ref: '#/components/schemas/v1alpha1ApplicationSourceJsonnet'
-        recurse:
-          type: boolean
-          title: Recurse specifies whether to scan a directory recursively for manifests
-    v1alpha1KustomizeGvk:
-      type: object
-      properties:
-        group:
-          type: string
-        kind:
-          type: string
-        version:
-          type: string
-    applicationv1alpha1EnvEntry:
-      type: object
-      title: EnvEntry represents an entry in the application's environment
-      properties:
-        name:
-          type: string
-          title: Name is the name of the variable, usually expressed in uppercase
-        value:
-          type: string
-          title: Value is the value of the variable
+            type: string
+        tlas:
+          type: array
+          title: TLAS is a list of Jsonnet Top-level Arguments
+          items:
+            $ref: '#/components/schemas/v1alpha1JsonnetVar'
     v1alpha1ApplicationSourcePluginParameter:
       type: object
       properties:
@@ -1048,101 +1036,6 @@ components:
         string:
           description: String_ is the value of a string type parameter.
           type: string
-    repositoryPluginAppSpec:
-      type: object
-      title: PluginAppSpec contains details about a plugin-type Application
-      properties:
-        parametersAnnouncement:
-          type: array
-          items:
-            $ref: '#/components/schemas/repositoryParameterAnnouncement'
-    v1alpha1ApplicationSourcePlugin:
-      type: object
-      title: ApplicationSourcePlugin holds options specific to config management plugins
-      properties:
-        env:
-          type: array
-          items:
-            $ref: '#/components/schemas/applicationv1alpha1EnvEntry'
-        name:
-          type: string
-        parameters:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1alpha1ApplicationSourcePluginParameter'
-    repositoryParameterAnnouncement:
-      type: object
-      properties:
-        array:
-          description: array is the default value of the parameter if the parameter is an array.
-          type: array
-          items:
-            type: string
-        collectionType:
-          description: 'collectionType is the type of value this parameter holds - either a single value (a string) or a collection
-
-            (array or map). If collectionType is set, only the field with that type will be used. If collectionType is not
-
-            set, `string` is the default. If collectionType is set to an invalid value, a validation error is thrown.'
-          type: string
-        itemType:
-          description: 'itemType determines the primitive data type represented by the parameter. Parameters are always encoded as
-
-            strings, but this field lets them be interpreted as other primitive types.'
-          type: string
-        map:
-          description: map is the default value of the parameter if the parameter is a map.
-          type: object
-          additionalProperties:
-            type: string
-        name:
-          description: name is the name identifying a parameter.
-          type: string
-        required:
-          description: required defines if this given parameter is mandatory.
-          type: boolean
-        string:
-          description: string is the default value of the parameter if the parameter is a string.
-          type: string
-        title:
-          description: title is a human-readable text of the parameter name.
-          type: string
-        tooltip:
-          description: tooltip is a human-readable description of the parameter.
-          type: string
-    v1alpha1ConnectionState:
-      type: object
-      title: ConnectionState contains information about remote resource connection state, currently used for clusters and repositories
-      properties:
-        attemptedAt:
-          $ref: '#/components/schemas/v1Time'
-        message:
-          type: string
-          title: Message contains human readable information about the connection status
-        status:
-          type: string
-          title: Status contains the current status indicator for the connection
-    repositoryHelmChart:
-      type: object
-      properties:
-        name:
-          type: string
-        versions:
-          type: array
-          items:
-            type: string
-    repositoryRefs:
-      type: object
-      title: A subset of the repository's named refs
-      properties:
-        branches:
-          type: array
-          items:
-            type: string
-        tags:
-          type: array
-          items:
-            type: string
     v1alpha1ApplicationSourceKustomize:
       type: object
       title: ApplicationSourceKustomize holds options specific to an Application source specific to Kustomize
@@ -1219,135 +1112,6 @@ components:
         version:
           type: string
           title: Version controls which version of Kustomize to use for rendering manifests
-    v1alpha1ApplicationSource:
-      type: object
-      title: ApplicationSource contains all required information about the source of an application
-      properties:
-        chart:
-          description: Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo.
-          type: string
-        directory:
-          $ref: '#/components/schemas/v1alpha1ApplicationSourceDirectory'
-        helm:
-          $ref: '#/components/schemas/v1alpha1ApplicationSourceHelm'
-        kustomize:
-          $ref: '#/components/schemas/v1alpha1ApplicationSourceKustomize'
-        name:
-          description: Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.
-          type: string
-        path:
-          description: Path is a directory path within the Git repository, and is only valid for applications sourced from Git.
-          type: string
-        plugin:
-          $ref: '#/components/schemas/v1alpha1ApplicationSourcePlugin'
-        ref:
-          description: Ref is reference to another source within sources field. This field will not be used if used with a `source` tag.
-          type: string
-        repoURL:
-          type: string
-          title: RepoURL is the URL to the repository (Git or Helm) that contains the application manifests
-        targetRevision:
-          description: 'TargetRevision defines the revision of the source to sync the application to.
-
-            In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD.
-
-            In case of Helm, this is a semver tag for the Chart''s version.'
-          type: string
-    v1Time:
-      description: 'Time is a wrapper around time.Time which supports correct
-
-        marshaling to YAML and JSON.  Wrappers are provided for many
-
-        of the factory methods that the time package offers.
-
-
-        +protobuf.options.marshal=false
-
-        +protobuf.as=Timestamp
-
-        +protobuf.options.(gogoproto.goproto_stringer)=false'
-      type: string
-      format: date-time
-    repositoryHelmAppSpec:
-      type: object
-      title: HelmAppSpec contains helm app name  in source repo
-      properties:
-        fileParameters:
-          type: array
-          title: helm file parameters
-          items:
-            $ref: '#/components/schemas/v1alpha1HelmFileParameter'
-        name:
-          type: string
-        parameters:
-          type: array
-          title: the output of `helm inspect values`
-          items:
-            $ref: '#/components/schemas/v1alpha1HelmParameter'
-        valueFiles:
-          type: array
-          items:
-            type: string
-        values:
-          type: string
-          title: the contents of values.yaml
-    v1alpha1HelmParameter:
-      type: object
-      title: HelmParameter is a parameter that's passed to helm template during manifest generation
-      properties:
-        forceString:
-          type: boolean
-          title: ForceString determines whether to tell Helm to interpret booleans and numbers as strings
-        name:
-          type: string
-          title: Name is the name of the Helm parameter
-        value:
-          type: string
-          title: Value is the value for the Helm parameter
-    repositoryDirectoryAppSpec:
-      type: object
-      title: DirectoryAppSpec contains directory
-    repositoryKustomizeAppSpec:
-      type: object
-      title: KustomizeAppSpec contains kustomize images
-      properties:
-        images:
-          description: images is a list of available images.
-          type: array
-          items:
-            type: string
-    v1alpha1KustomizeSelector:
-      type: object
-      properties:
-        annotationSelector:
-          type: string
-        labelSelector:
-          type: string
-        resId:
-          $ref: '#/components/schemas/v1alpha1KustomizeResId'
-    runtimeRawExtension:
-      description: "RawExtension is used to hold extensions in external versions.\n\nTo use this, make a field which has RawExtension as its type in your external, versioned\nstruct, and Object in your internal struct. You also need to register your\nvarious plugin types.\n\n// Internal package:\n\n\ttype MyAPIObject struct {\n\t\truntime.TypeMeta `json:\",inline\"`\n\t\tMyPlugin runtime.Object `json:\"myPlugin\"`\n\t}\n\n\ttype PluginA struct {\n\t\tAOption string `json:\"aOption\"`\n\t}\n\n// External package:\n\n\ttype MyAPIObject struct {\n\t\truntime.TypeMeta `json:\",inline\"`\n\t\tMyPlugin runtime.RawExtension `json:\"myPlugin\"`\n\t}\n\n\ttype PluginA struct {\n\t\tAOption string `json:\"aOption\"`\n\t}\n\n// On the wire, the JSON will look something like this:\n\n\t{\n\t\t\"kind\":\"MyAPIObject\",\n\t\t\"apiVersion\":\"v1\",\n\t\t\"myPlugin\": {\n\t\t\t\"kind\":\"PluginA\",\n\t\t\t\"aOption\":\"foo\",\n\t\t},\n\t}\n\nSo what happens? Decode first uses json or yaml to unmarshal the serialized data into\nyour external MyAPIObject. That causes the raw JSON to be stored, but not unpacked.\nThe next step is to copy (using pkg/conversion) into the internal struct. The runtime\npackage's DefaultScheme has conversion functions installed which will unpack the\nJSON stored in RawExtension, turning it into the correct object type, and storing it\nin the Object. (TODO: In the case where the object is of an unknown type, a\nruntime.Unknown object will be created and stored.)\n\n+k8s:deepcopy-gen=true\n+protobuf=true\n+k8s:openapi-gen=true"
-      type: object
-      properties:
-        raw:
-          description: 'Raw is the underlying serialization of this object.
-
-
-            TODO: Determine how to detect ContentType and ContentEncoding of ''Raw'' data.'
-          type: string
-          format: byte
-    repositoryRepoResponse:
-      type: object
-    v1alpha1JsonnetVar:
-      type: object
-      title: JsonnetVar represents a variable to be passed to jsonnet during manifest generation
-      properties:
-        code:
-          type: boolean
-        name:
-          type: string
-        value:
-          type: string
     repositoryAppInfo:
       type: object
       title: AppInfo contains application type and app file path
@@ -1478,6 +1242,82 @@ components:
 
             operations for unaffected ones. Recommended for large monorepos with plain YAML manifests.'
           type: boolean
+    v1Time:
+      description: 'Time is a wrapper around time.Time which supports correct
+
+        marshaling to YAML and JSON.  Wrappers are provided for many
+
+        of the factory methods that the time package offers.
+
+
+        +protobuf.options.marshal=false
+
+        +protobuf.as=Timestamp
+
+        +protobuf.options.(gogoproto.goproto_stringer)=false'
+      type: string
+      format: date-time
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
+    v1alpha1KustomizePatch:
+      type: object
+      properties:
+        options:
+          type: object
+          additionalProperties:
+            type: boolean
+        patch:
+          type: string
+        path:
+          type: string
+        target:
+          $ref: '#/components/schemas/v1alpha1KustomizeSelector'
+    repositoryHelmChart:
+      type: object
+      properties:
+        name:
+          type: string
+        versions:
+          type: array
+          items:
+            type: string
+    v1alpha1RepositoryList:
+      description: RepositoryList is a collection of Repositories.
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1alpha1Repository'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
+    repositoryRepoResponse:
+      type: object
+    v1alpha1KustomizeResId:
+      type: object
+      properties:
+        gvk:
+          $ref: '#/components/schemas/v1alpha1KustomizeGvk'
+        name:
+          type: string
+        namespace:
+          type: string
+    applicationv1alpha1EnvEntry:
+      type: object
+      title: EnvEntry represents an entry in the application's environment
+      properties:
+        name:
+          type: string
+          title: Name is the name of the variable, usually expressed in uppercase
+        value:
+          type: string
+          title: Value is the value of the variable
     v1alpha1HelmFileParameter:
       type: object
       title: HelmFileParameter is a file parameter that's passed to helm template during manifest generation
@@ -1488,25 +1328,95 @@ components:
         path:
           type: string
           title: Path is the path to the file containing the values for the Helm parameter
-    v1alpha1ApplicationSourceJsonnet:
+    v1alpha1KustomizeReplica:
       type: object
-      title: ApplicationSourceJsonnet holds options specific to applications of type Jsonnet
       properties:
-        extVars:
+        count:
+          $ref: '#/components/schemas/intstrIntOrString'
+        name:
+          type: string
+          title: Name of Deployment or StatefulSet
+    v1alpha1ApplicationSourcePlugin:
+      type: object
+      title: ApplicationSourcePlugin holds options specific to config management plugins
+      properties:
+        env:
           type: array
-          title: ExtVars is a list of Jsonnet External Variables
           items:
-            $ref: '#/components/schemas/v1alpha1JsonnetVar'
-        libs:
+            $ref: '#/components/schemas/applicationv1alpha1EnvEntry'
+        name:
+          type: string
+        parameters:
           type: array
-          title: Additional library search dirs
+          items:
+            $ref: '#/components/schemas/v1alpha1ApplicationSourcePluginParameter'
+    v1alpha1KustomizeSelector:
+      type: object
+      properties:
+        annotationSelector:
+          type: string
+        labelSelector:
+          type: string
+        resId:
+          $ref: '#/components/schemas/v1alpha1KustomizeResId'
+    repositoryRepoAppDetailsQuery:
+      type: object
+      title: RepoAppDetailsQuery contains query information for app details request
+      properties:
+        appName:
+          type: string
+        appProject:
+          type: string
+        source:
+          $ref: '#/components/schemas/v1alpha1ApplicationSource'
+        sourceIndex:
+          type: integer
+          format: int32
+          title: source index (for multi source apps)
+        versionId:
+          type: integer
+          format: int32
+          title: versionId from historical data (for multi source apps)
+    repositoryParameterAnnouncement:
+      type: object
+      properties:
+        array:
+          description: array is the default value of the parameter if the parameter is an array.
+          type: array
           items:
             type: string
-        tlas:
-          type: array
-          title: TLAS is a list of Jsonnet Top-level Arguments
-          items:
-            $ref: '#/components/schemas/v1alpha1JsonnetVar'
+        collectionType:
+          description: 'collectionType is the type of value this parameter holds - either a single value (a string) or a collection
+
+            (array or map). If collectionType is set, only the field with that type will be used. If collectionType is not
+
+            set, `string` is the default. If collectionType is set to an invalid value, a validation error is thrown.'
+          type: string
+        itemType:
+          description: 'itemType determines the primitive data type represented by the parameter. Parameters are always encoded as
+
+            strings, but this field lets them be interpreted as other primitive types.'
+          type: string
+        map:
+          description: map is the default value of the parameter if the parameter is a map.
+          type: object
+          additionalProperties:
+            type: string
+        name:
+          description: name is the name identifying a parameter.
+          type: string
+        required:
+          description: required defines if this given parameter is mandatory.
+          type: boolean
+        string:
+          description: string is the default value of the parameter if the parameter is a string.
+          type: string
+        title:
+          description: title is a human-readable text of the parameter name.
+          type: string
+        tooltip:
+          description: tooltip is a human-readable description of the parameter.
+          type: string
     v1ListMeta:
       description: 'ListMeta describes metadata that synthetic resources must have, including lists and
 
@@ -1570,19 +1480,63 @@ components:
           title: 'Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
 
             +optional'
-    v1alpha1KustomizePatch:
+    v1alpha1ApplicationSource:
       type: object
+      title: ApplicationSource contains all required information about the source of an application
       properties:
-        options:
-          type: object
-          additionalProperties:
-            type: boolean
-        patch:
+        chart:
+          description: Chart is a Helm chart name, and must be specified for applications sourced from a Helm repo.
+          type: string
+        directory:
+          $ref: '#/components/schemas/v1alpha1ApplicationSourceDirectory'
+        helm:
+          $ref: '#/components/schemas/v1alpha1ApplicationSourceHelm'
+        kustomize:
+          $ref: '#/components/schemas/v1alpha1ApplicationSourceKustomize'
+        name:
+          description: Name is used to refer to a source and is displayed in the UI. It is used in multi-source Applications.
           type: string
         path:
+          description: Path is a directory path within the Git repository, and is only valid for applications sourced from Git.
           type: string
-        target:
-          $ref: '#/components/schemas/v1alpha1KustomizeSelector'
+        plugin:
+          $ref: '#/components/schemas/v1alpha1ApplicationSourcePlugin'
+        ref:
+          description: Ref is reference to another source within sources field. This field will not be used if used with a `source` tag.
+          type: string
+        repoURL:
+          type: string
+          title: RepoURL is the URL to the repository (Git or Helm) that contains the application manifests
+        targetRevision:
+          description: 'TargetRevision defines the revision of the source to sync the application to.
+
+            In case of Git, this can be commit, tag, or branch. If omitted, will equal to HEAD.
+
+            In case of Helm, this is a semver tag for the Chart''s version.'
+          type: string
+    repositoryRepoAppsResponse:
+      type: object
+      title: RepoAppsResponse contains applications of specified repository
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/repositoryAppInfo'
+    v1alpha1ApplicationSourceDirectory:
+      type: object
+      title: ApplicationSourceDirectory holds options for applications of type plain YAML or Jsonnet
+      properties:
+        exclude:
+          type: string
+          title: Exclude contains a glob pattern to match paths against that should be explicitly excluded from being used during manifest generation
+        include:
+          type: string
+          title: Include contains a glob pattern to match paths against that should be explicitly included during manifest generation
+        jsonnet:
+          $ref: '#/components/schemas/v1alpha1ApplicationSourceJsonnet'
+        recurse:
+          type: boolean
+          title: Recurse specifies whether to scan a directory recursively for manifests
     repositoryHelmChartsResponse:
       type: object
       properties:
@@ -1590,11 +1544,61 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/repositoryHelmChart'
-    protobufAny:
+    v1alpha1ConnectionState:
+      type: object
+      title: ConnectionState contains information about remote resource connection state, currently used for clusters and repositories
+      properties:
+        attemptedAt:
+          $ref: '#/components/schemas/v1Time'
+        message:
+          type: string
+          title: Message contains human readable information about the connection status
+        status:
+          type: string
+          title: Status contains the current status indicator for the connection
+    v1alpha1KustomizeGvk:
       type: object
       properties:
-        type_url:
+        group:
           type: string
-        value:
+        kind:
+          type: string
+        version:
+          type: string
+    runtimeRawExtension:
+      description: "RawExtension is used to hold extensions in external versions.\n\nTo use this, make a field which has RawExtension as its type in your external, versioned\nstruct, and Object in your internal struct. You also need to register your\nvarious plugin types.\n\n// Internal package:\n\n\ttype MyAPIObject struct {\n\t\truntime.TypeMeta `json:\",inline\"`\n\t\tMyPlugin runtime.Object `json:\"myPlugin\"`\n\t}\n\n\ttype PluginA struct {\n\t\tAOption string `json:\"aOption\"`\n\t}\n\n// External package:\n\n\ttype MyAPIObject struct {\n\t\truntime.TypeMeta `json:\",inline\"`\n\t\tMyPlugin runtime.RawExtension `json:\"myPlugin\"`\n\t}\n\n\ttype PluginA struct {\n\t\tAOption string `json:\"aOption\"`\n\t}\n\n// On the wire, the JSON will look something like this:\n\n\t{\n\t\t\"kind\":\"MyAPIObject\",\n\t\t\"apiVersion\":\"v1\",\n\t\t\"myPlugin\": {\n\t\t\t\"kind\":\"PluginA\",\n\t\t\t\"aOption\":\"foo\",\n\t\t},\n\t}\n\nSo what happens? Decode first uses json or yaml to unmarshal the serialized data into\nyour external MyAPIObject. That causes the raw JSON to be stored, but not unpacked.\nThe next step is to copy (using pkg/conversion) into the internal struct. The runtime\npackage's DefaultScheme has conversion functions installed which will unpack the\nJSON stored in RawExtension, turning it into the correct object type, and storing it\nin the Object. (TODO: In the case where the object is of an unknown type, a\nruntime.Unknown object will be created and stored.)\n\n+k8s:deepcopy-gen=true\n+protobuf=true\n+k8s:openapi-gen=true"
+      type: object
+      properties:
+        raw:
+          description: 'Raw is the underlying serialization of this object.
+
+
+            TODO: Determine how to detect ContentType and ContentEncoding of ''Raw'' data.'
           type: string
           format: byte
+    repositoryHelmAppSpec:
+      type: object
+      title: HelmAppSpec contains helm app name  in source repo
+      properties:
+        fileParameters:
+          type: array
+          title: helm file parameters
+          items:
+            $ref: '#/components/schemas/v1alpha1HelmFileParameter'
+        name:
+          type: string
+        parameters:
+          type: array
+          title: the output of `helm inspect values`
+          items:
+            $ref: '#/components/schemas/v1alpha1HelmParameter'
+        valueFiles:
+          type: array
+          items:
+            type: string
+        values:
+          type: string
+          title: the contents of values.yaml
+    repositoryDirectoryAppSpec:
+      type: object
+      title: DirectoryAppSpec contains directory
