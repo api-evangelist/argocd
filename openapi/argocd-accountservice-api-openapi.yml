@@ -173,6 +173,71 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
+    accountAccount:
+      type: object
+      properties:
+        capabilities:
+          type: array
+          items:
+            type: string
+        enabled:
+          type: boolean
+        name:
+          type: string
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/accountToken'
+    accountCreateTokenRequest:
+      type: object
+      properties:
+        expiresIn:
+          type: integer
+          format: int64
+          title: expiresIn represents a duration in seconds
+        id:
+          type: string
+        name:
+          type: string
+    accountAccountsList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/accountAccount'
+    runtimeError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+        error:
+          type: string
+        message:
+          type: string
+    accountCanIResponse:
+      type: object
+      properties:
+        value:
+          type: string
+    accountEmptyResponse:
+      type: object
+    accountToken:
+      type: object
+      properties:
+        expiresAt:
+          type: integer
+          format: int64
+        id:
+          type: string
+        issuedAt:
+          type: integer
+          format: int64
     accountUpdatePasswordRequest:
       type: object
       properties:
@@ -192,73 +257,8 @@ components:
           format: byte
     accountUpdatePasswordResponse:
       type: object
-    accountAccount:
-      type: object
-      properties:
-        capabilities:
-          type: array
-          items:
-            type: string
-        enabled:
-          type: boolean
-        name:
-          type: string
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/accountToken'
-    runtimeError:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-        error:
-          type: string
-        message:
-          type: string
-    accountAccountsList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/accountAccount'
-    accountCreateTokenRequest:
-      type: object
-      properties:
-        expiresIn:
-          type: integer
-          format: int64
-          title: expiresIn represents a duration in seconds
-        id:
-          type: string
-        name:
-          type: string
     accountCreateTokenResponse:
       type: object
       properties:
         token:
-          type: string
-    accountEmptyResponse:
-      type: object
-    accountToken:
-      type: object
-      properties:
-        expiresAt:
-          type: integer
-          format: int64
-        id:
-          type: string
-        issuedAt:
-          type: integer
-          format: int64
-    accountCanIResponse:
-      type: object
-      properties:
-        value:
           type: string

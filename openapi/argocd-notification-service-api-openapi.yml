@@ -65,6 +65,11 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
+    notificationService:
+      type: object
+      properties:
+        name:
+          type: string
     notificationServiceList:
       type: object
       properties:
@@ -79,14 +84,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/notificationTrigger'
-    protobufAny:
-      type: object
-      properties:
-        type_url:
-          type: string
-        value:
-          type: string
-          format: byte
     runtimeError:
       type: object
       properties:
@@ -101,16 +98,6 @@ components:
           type: string
         message:
           type: string
-    notificationTrigger:
-      type: object
-      properties:
-        name:
-          type: string
-    notificationService:
-      type: object
-      properties:
-        name:
-          type: string
     notificationTemplateList:
       type: object
       properties:
@@ -118,6 +105,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/notificationTemplate'
+    notificationTrigger:
+      type: object
+      properties:
+        name:
+          type: string
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
     notificationTemplate:
       type: object
       properties:

@@ -27,20 +27,14 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
-    runtimeError:
+    protobufAny:
       type: object
       properties:
-        code:
-          type: integer
-          format: int32
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-        error:
+        type_url:
           type: string
-        message:
+        value:
           type: string
+          format: byte
     versionVersionMessage:
       type: object
       title: VersionMessage represents version of the Argo CD API server
@@ -71,11 +65,17 @@ components:
           type: string
         Version:
           type: string
-    protobufAny:
+    runtimeError:
       type: object
       properties:
-        type_url:
+        code:
+          type: integer
+          format: int32
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+        error:
           type: string
-        value:
+        message:
           type: string
-          format: byte

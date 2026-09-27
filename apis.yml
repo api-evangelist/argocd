@@ -11,16 +11,22 @@ description: >-
   commercial offerings are provided by third parties (notably Akuity, founded by the Argo project's creators) rather
   than the Argo CD project itself.
 deliveryModel:
-  model: saas
-  open_source: false
+  model: open-core
+  license: Apache-2.0
+  license_evidence:
+    repo: argoproj/argo-cd
+    spdx: Apache-2.0
+    stars: 24241
+  open_source: true
   commercial: true
   callable_host: false
-  label: Hosted service · you call their endpoint
+  label: Open core · an OSS project plus a commercial hosted product
   confidence: medium
   source:
   - openapi
   - pricing
-  generated: '2026-08-28'
+  - repository-license
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: free
@@ -45,8 +51,10 @@ tags:
   - Kubernetes
   - Continuous Delivery
   - CNCF
-  - Open-Source
+  - Open Source
   - Operator
+  - Cloud-Native
+  - CI/CD
 tags_raw:
   - ArgoCD
   - DevOps
@@ -56,6 +64,9 @@ tags_raw:
   - CNCF
   - Open Source
   - Operator
+  - Open-Source
+  - Cloud-Native
+  - CI/CD
 created: '2026-05-08'
 modified: '2026-05-19'
 specificationVersion: '0.23'
