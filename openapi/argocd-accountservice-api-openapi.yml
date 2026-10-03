@@ -173,6 +173,31 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
+    accountCreateTokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    accountToken:
+      type: object
+      properties:
+        expiresAt:
+          type: integer
+          format: int64
+        id:
+          type: string
+        issuedAt:
+          type: integer
+          format: int64
+    accountUpdatePasswordResponse:
+      type: object
+    accountAccountsList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/accountAccount'
     accountAccount:
       type: object
       properties:
@@ -188,24 +213,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/accountToken'
-    accountCreateTokenRequest:
+    accountUpdatePasswordRequest:
       type: object
       properties:
-        expiresIn:
-          type: integer
-          format: int64
-          title: expiresIn represents a duration in seconds
-        id:
+        currentPassword:
           type: string
         name:
           type: string
-    accountAccountsList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/accountAccount'
+        newPassword:
+          type: string
     runtimeError:
       type: object
       properties:
@@ -225,28 +241,6 @@ components:
       properties:
         value:
           type: string
-    accountEmptyResponse:
-      type: object
-    accountToken:
-      type: object
-      properties:
-        expiresAt:
-          type: integer
-          format: int64
-        id:
-          type: string
-        issuedAt:
-          type: integer
-          format: int64
-    accountUpdatePasswordRequest:
-      type: object
-      properties:
-        currentPassword:
-          type: string
-        name:
-          type: string
-        newPassword:
-          type: string
     protobufAny:
       type: object
       properties:
@@ -255,10 +249,16 @@ components:
         value:
           type: string
           format: byte
-    accountUpdatePasswordResponse:
+    accountEmptyResponse:
       type: object
-    accountCreateTokenResponse:
+    accountCreateTokenRequest:
       type: object
       properties:
-        token:
+        expiresIn:
+          type: integer
+          format: int64
+          title: expiresIn represents a duration in seconds
+        id:
+          type: string
+        name:
           type: string

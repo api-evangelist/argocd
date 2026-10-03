@@ -114,6 +114,38 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
+    v1alpha1GnuPGPublicKeyList:
+      type: object
+      title: GnuPGPublicKeyList is a collection of GnuPGPublicKey objects
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1alpha1GnuPGPublicKey'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
+    v1alpha1GnuPGPublicKey:
+      type: object
+      title: GnuPGPublicKey is a representation of a GnuPG public key
+      properties:
+        fingerprint:
+          type: string
+          title: Fingerprint is the fingerprint of the key
+        keyData:
+          type: string
+          title: KeyData holds the raw key data, in base64 encoded format
+        keyID:
+          type: string
+          title: KeyID specifies the key ID, in hexadecimal string format
+        owner:
+          type: string
+          title: Owner holds the owner identification, e.g. a name and e-mail address
+        subType:
+          type: string
+          title: SubType holds the key's subtype (e.g. rsa4096)
+        trust:
+          type: string
+          title: Trust holds the level of trust assigned to this key
     v1ListMeta:
       description: 'ListMeta describes metadata that synthetic resources must have, including lists and
 
@@ -191,6 +223,14 @@ components:
           type: string
         message:
           type: string
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
     gpgkeyGnuPGPublicKeyCreateResponse:
       type: object
       title: Response to a public key creation request
@@ -202,46 +242,6 @@ components:
           title: List of key IDs that haven been skipped because they already exist on the server
           items:
             type: string
-    v1alpha1GnuPGPublicKey:
-      type: object
-      title: GnuPGPublicKey is a representation of a GnuPG public key
-      properties:
-        fingerprint:
-          type: string
-          title: Fingerprint is the fingerprint of the key
-        keyData:
-          type: string
-          title: KeyData holds the raw key data, in base64 encoded format
-        keyID:
-          type: string
-          title: KeyID specifies the key ID, in hexadecimal string format
-        owner:
-          type: string
-          title: Owner holds the owner identification, e.g. a name and e-mail address
-        subType:
-          type: string
-          title: SubType holds the key's subtype (e.g. rsa4096)
-        trust:
-          type: string
-          title: Trust holds the level of trust assigned to this key
     gpgkeyGnuPGPublicKeyResponse:
       type: object
       title: Generic (empty) response for GPG public key CRUD requests
-    v1alpha1GnuPGPublicKeyList:
-      type: object
-      title: GnuPGPublicKeyList is a collection of GnuPGPublicKey objects
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1alpha1GnuPGPublicKey'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'
-    protobufAny:
-      type: object
-      properties:
-        type_url:
-          type: string
-        value:
-          type: string
-          format: byte

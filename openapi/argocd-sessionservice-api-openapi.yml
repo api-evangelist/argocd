@@ -70,21 +70,19 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
-    sessionSessionCreateRequest:
-      description: SessionCreateRequest is for logging in.
+    sessionGetUserInfoResponse:
       type: object
+      title: The current user's userInfo info
       properties:
-        password:
+        groups:
+          type: array
+          items:
+            type: string
+        iss:
           type: string
-        token:
-          type: string
+        loggedIn:
+          type: boolean
         username:
-          type: string
-    sessionSessionResponse:
-      description: SessionResponse wraps the created token or returns an empty string if deleted.
-      type: object
-      properties:
-        token:
           type: string
     runtimeError:
       type: object
@@ -100,20 +98,6 @@ components:
           type: string
         message:
           type: string
-    sessionGetUserInfoResponse:
-      type: object
-      title: The current user's userInfo info
-      properties:
-        groups:
-          type: array
-          items:
-            type: string
-        iss:
-          type: string
-        loggedIn:
-          type: boolean
-        username:
-          type: string
     protobufAny:
       type: object
       properties:
@@ -122,3 +106,19 @@ components:
         value:
           type: string
           format: byte
+    sessionSessionResponse:
+      description: SessionResponse wraps the created token or returns an empty string if deleted.
+      type: object
+      properties:
+        token:
+          type: string
+    sessionSessionCreateRequest:
+      description: SessionCreateRequest is for logging in.
+      type: object
+      properties:
+        password:
+          type: string
+        token:
+          type: string
+        username:
+          type: string

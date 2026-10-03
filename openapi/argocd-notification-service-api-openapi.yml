@@ -70,20 +70,11 @@ components:
       properties:
         name:
           type: string
-    notificationServiceList:
+    notificationTemplate:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/notificationService'
-    notificationTriggerList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/notificationTrigger'
+        name:
+          type: string
     runtimeError:
       type: object
       properties:
@@ -98,18 +89,6 @@ components:
           type: string
         message:
           type: string
-    notificationTemplateList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/notificationTemplate'
-    notificationTrigger:
-      type: object
-      properties:
-        name:
-          type: string
     protobufAny:
       type: object
       properties:
@@ -118,8 +97,29 @@ components:
         value:
           type: string
           format: byte
-    notificationTemplate:
+    notificationTrigger:
       type: object
       properties:
         name:
           type: string
+    notificationServiceList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/notificationService'
+    notificationTemplateList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/notificationTemplate'
+    notificationTriggerList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/notificationTrigger'

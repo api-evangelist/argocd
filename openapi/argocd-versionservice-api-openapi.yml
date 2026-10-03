@@ -27,6 +27,20 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
+    runtimeError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+        error:
+          type: string
+        message:
+          type: string
     protobufAny:
       type: object
       properties:
@@ -64,18 +78,4 @@ components:
         Platform:
           type: string
         Version:
-          type: string
-    runtimeError:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-        error:
-          type: string
-        message:
           type: string
