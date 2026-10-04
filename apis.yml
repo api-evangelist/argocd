@@ -429,6 +429,9 @@ apis:
   - type: APIReference
     url: https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/
 common:
+  - type: CapabilityMap
+    url: capabilities/argocd-capability-edges.yml
+    name: Argo CD Business Capability Map
   - type: SecurityPolicy
     url: https://github.com/argoproj/argo-cd/blob/master/SECURITY.md
   - type: ContributionGuide

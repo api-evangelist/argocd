@@ -1,0 +1,68 @@
+slug: argocd
+provider: Argo CD
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: AccountService
+  spec_file: argocd-accountservice-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: PUT /api/v1/account/password 'UpdatePassword updates an account's password', GET /api/v1/account/can-i/{resource}/{action}/{subresource}
+    'CanI checks if the current account has permission to perform an action', POST /api/v1/account/{name}/token
+    'CreateToken creates a token'
+  reason: Account, credential, token and permission-check operations are identity and access management
+    for the platform.
+- tag: ApplicationService
+  spec_file: argocd-applicationservice-api-openapi.yml
+  capability_id: BC-4210.40
+  capability_id_l1: BC-4210
+  capability_name: Deployment Orchestration
+  confidence: 0.75
+  evidence: '''Create creates an application'', ''GetManifestsWithFiles returns application manifests'',
+    ''ServerSideDiff performs server-side diff calculation using dry-run apply'' in a ''declarative GitOps
+    continuous-delivery tool for Kubernetes'''
+  reason: Managing Argo CD Applications drives delivery of changes to Kubernetes clusters — deployment
+    orchestration; some overlap with environment/config management keeps confidence below 0.8.
+- tag: ClusterService
+  spec_file: argocd-clusterservice-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.72
+  evidence: POST /api/v1/clusters 'Create creates a cluster', 'RotateAuth rotates the bearer token used
+    for a cluster', schema v1alpha1ClusterConfig
+  reason: Registering and maintaining Kubernetes cluster targets and their connection configuration is
+    management of compute/cloud infrastructure; alternative reading as environment management keeps confidence
+    moderate.
+- tag: ApplicationSetService
+  spec_file: argocd-applicationsetservice-api-openapi.yml
+  capability_id: BC-4210.40
+  capability_id_l1: BC-4210
+  capability_name: Deployment Orchestration
+  confidence: 0.7
+  evidence: POST /api/v1/applicationsets 'Create creates an applicationset' and 'Generate generates' in
+    a GitOps continuous-delivery tool
+  reason: ApplicationSets template and fan out Argo CD Applications across clusters, i.e. orchestrating
+    deployment of changes; sub-capability inferred from the same deployment surface.
+- tag: RepoCredsService
+  spec_file: argocd-repocredsservice-api-openapi.yml
+  capability_id: BC-4210.60
+  capability_id_l1: BC-4210
+  capability_name: Configuration & Secrets Management
+  confidence: 0.7
+  evidence: POST /api/v1/repocreds 'CreateRepositoryCredentials creates a new repository credential set'
+  reason: CRUD over stored credential sets that the delivery tool uses to access source and write repositories
+    — runtime secrets consumed by the deployment service, i.e. Configuration & Secrets Management under
+    release & deployment.
