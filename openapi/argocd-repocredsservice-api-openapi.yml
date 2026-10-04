@@ -234,9 +234,6 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
-    repocredsRepoCredsResponse:
-      type: object
-      title: RepoCredsResponse is a response to most repository credentials requests
     v1ListMeta:
       description: 'ListMeta describes metadata that synthetic resources must have, including lists and
 
@@ -314,6 +311,16 @@ components:
           type: string
         message:
           type: string
+    v1alpha1RepoCredsList:
+      description: RepositoryList is a collection of Repositories.
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1alpha1RepoCreds'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
     v1alpha1RepoCreds:
       type: object
       title: RepoCreds holds the definition for repository credentials
@@ -389,6 +396,9 @@ components:
         username:
           type: string
           title: Username for authenticating at the repo server
+    repocredsRepoCredsResponse:
+      type: object
+      title: RepoCredsResponse is a response to most repository credentials requests
     protobufAny:
       type: object
       properties:
@@ -397,13 +407,3 @@ components:
         value:
           type: string
           format: byte
-    v1alpha1RepoCredsList:
-      description: RepositoryList is a collection of Repositories.
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1alpha1RepoCreds'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'

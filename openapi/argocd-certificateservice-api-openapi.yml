@@ -108,37 +108,6 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
-    v1alpha1RepositoryCertificateList:
-      type: object
-      title: RepositoryCertificateList is a collection of RepositoryCertificates
-      properties:
-        items:
-          type: array
-          title: List of certificates to be processed
-          items:
-            $ref: '#/components/schemas/v1alpha1RepositoryCertificate'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'
-    v1alpha1RepositoryCertificate:
-      type: object
-      title: A RepositoryCertificate is either SSH known hosts entry or TLS certificate
-      properties:
-        certData:
-          type: string
-          format: byte
-          title: CertData contains the actual certificate data, dependent on the certificate type
-        certInfo:
-          type: string
-          title: CertInfo will hold additional certificate info, depdendent on the certificate type (e.g. SSH fingerprint, X509 CommonName)
-        certSubType:
-          type: string
-          title: CertSubType specifies the sub type of the cert, i.e. "ssh-rsa"
-        certType:
-          type: string
-          title: CertType specifies the type of the certificate - currently one of "https" or "ssh"
-        serverName:
-          type: string
-          title: ServerName specifies the DNS name of the server this certificate is intended for
     v1ListMeta:
       description: 'ListMeta describes metadata that synthetic resources must have, including lists and
 
@@ -216,6 +185,26 @@ components:
           type: string
         message:
           type: string
+    v1alpha1RepositoryCertificate:
+      type: object
+      title: A RepositoryCertificate is either SSH known hosts entry or TLS certificate
+      properties:
+        certData:
+          type: string
+          format: byte
+          title: CertData contains the actual certificate data, dependent on the certificate type
+        certInfo:
+          type: string
+          title: CertInfo will hold additional certificate info, depdendent on the certificate type (e.g. SSH fingerprint, X509 CommonName)
+        certSubType:
+          type: string
+          title: CertSubType specifies the sub type of the cert, i.e. "ssh-rsa"
+        certType:
+          type: string
+          title: CertType specifies the type of the certificate - currently one of "https" or "ssh"
+        serverName:
+          type: string
+          title: ServerName specifies the DNS name of the server this certificate is intended for
     protobufAny:
       type: object
       properties:
@@ -224,3 +213,14 @@ components:
         value:
           type: string
           format: byte
+    v1alpha1RepositoryCertificateList:
+      type: object
+      title: RepositoryCertificateList is a collection of RepositoryCertificates
+      properties:
+        items:
+          type: array
+          title: List of certificates to be processed
+          items:
+            $ref: '#/components/schemas/v1alpha1RepositoryCertificate'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
