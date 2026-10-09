@@ -1,17 +1,23 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/argocd-server-openapi.json
+source: openapi/argocd-accountservice-api-openapi.yml, openapi/argocd-applicationservice-api-openapi.yml,
+  openapi/argocd-applicationsetservice-api-openapi.yml, openapi/argocd-certificateservice-api-openapi.yml,
+  openapi/argocd-clusterservice-api-openapi.yml, openapi/argocd-gpgkeyservice-api-openapi.yml,
+  openapi/argocd-notification-service-api-openapi.yml, openapi/argocd-projectservice-api-openapi.yml,
+  openapi/argocd-repocredsservice-api-openapi.yml, openapi/argocd-repositoryservice-api-openapi.yml,
+  openapi/argocd-sessionservice-api-openapi.yml, openapi/argocd-settingsservice-api-openapi.yml,
+  openapi/argocd-versionservice-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 106
   by_action_class:
-    connected: 56
-    acting: 50
+    connected: 58
+    acting: 48
   by_consequence:
-    read: 56
-    write: 49
+    read: 58
+    write: 47
     safety-critical: 1
   human_in_the_loop_required: 1
 operations:
@@ -123,18 +129,12 @@ operations:
   method: post
   operationId: ApplicationService_GetManifestsWithFiles
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /api/v1/applications/{appName}/server-side-diff
   method: get
   operationId: ApplicationService_ServerSideDiff
@@ -471,6 +471,26 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /api/v1/stream/applications
+  method: get
+  operationId: ApplicationService_Watch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/stream/applications/{applicationName}/resource-tree
+  method: get
+  operationId: ApplicationService_WatchResourceTree
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/v1/applicationsets
   method: get
   operationId: ApplicationSetService_List
@@ -552,6 +572,16 @@ operations:
 - path: /api/v1/applicationsets/{name}/resource-tree
   method: get
   operationId: ApplicationSetService_ResourceTree
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/stream/applicationsets
+  method: get
+  operationId: ApplicationSetService_Watch
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -991,6 +1021,64 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /api/v1/write-repocreds
+  method: get
+  operationId: RepoCredsService_ListWriteRepositoryCredentials
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/write-repocreds
+  method: post
+  operationId: RepoCredsService_CreateWriteRepositoryCredentials
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/write-repocreds/{creds.url}
+  method: put
+  operationId: RepoCredsService_UpdateWriteRepositoryCredentials
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/write-repocreds/{url}
+  method: delete
+  operationId: RepoCredsService_DeleteWriteRepositoryCredentials
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /api/v1/repositories
   method: get
   operationId: RepositoryService_ListRepositories
@@ -1119,168 +1207,12 @@ operations:
   method: post
   operationId: RepositoryService_GetAppDetails
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v1/session
-  method: post
-  operationId: SessionService_Create
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v1/session
-  method: delete
-  operationId: SessionService_Delete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v1/session/userinfo
-  method: get
-  operationId: SessionService_GetUserInfo
-  x-agentic-access:
     action-class: connected
     consequence: read
     subject: optional
     token:
       max-ttl: 3600
     audit: none
-- path: /api/v1/settings
-  method: get
-  operationId: SettingsService_Get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v1/settings/plugins
-  method: get
-  operationId: SettingsService_GetPlugins
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v1/stream/applications
-  method: get
-  operationId: ApplicationService_Watch
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v1/stream/applications/{applicationName}/resource-tree
-  method: get
-  operationId: ApplicationService_WatchResourceTree
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v1/stream/applicationsets
-  method: get
-  operationId: ApplicationSetService_Watch
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v1/write-repocreds
-  method: get
-  operationId: RepoCredsService_ListWriteRepositoryCredentials
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v1/write-repocreds
-  method: post
-  operationId: RepoCredsService_CreateWriteRepositoryCredentials
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v1/write-repocreds/{creds.url}
-  method: put
-  operationId: RepoCredsService_UpdateWriteRepositoryCredentials
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /api/v1/write-repocreds/{url}
-  method: delete
-  operationId: RepoCredsService_DeleteWriteRepositoryCredentials
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /api/v1/write-repositories
   method: get
   operationId: RepositoryService_ListWriteRepositories
@@ -1365,6 +1297,68 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /api/v1/session
+  method: post
+  operationId: SessionService_Create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/session
+  method: delete
+  operationId: SessionService_Delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/v1/session/userinfo
+  method: get
+  operationId: SessionService_GetUserInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/settings
+  method: get
+  operationId: SettingsService_Get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v1/settings/plugins
+  method: get
+  operationId: SettingsService_GetPlugins
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/version
   method: get
   operationId: VersionService_Version
