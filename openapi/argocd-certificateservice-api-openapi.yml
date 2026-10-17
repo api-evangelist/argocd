@@ -108,6 +108,17 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
+    v1alpha1RepositoryCertificateList:
+      type: object
+      title: RepositoryCertificateList is a collection of RepositoryCertificates
+      properties:
+        items:
+          type: array
+          title: List of certificates to be processed
+          items:
+            $ref: '#/components/schemas/v1alpha1RepositoryCertificate'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
     v1ListMeta:
       description: 'ListMeta describes metadata that synthetic resources must have, including lists and
 
@@ -171,20 +182,6 @@ components:
           title: 'Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
 
             +optional'
-    runtimeError:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        details:
-          type: array
-          items:
-            $ref: '#/components/schemas/protobufAny'
-        error:
-          type: string
-        message:
-          type: string
     v1alpha1RepositoryCertificate:
       type: object
       title: A RepositoryCertificate is either SSH known hosts entry or TLS certificate
@@ -205,6 +202,20 @@ components:
         serverName:
           type: string
           title: ServerName specifies the DNS name of the server this certificate is intended for
+    runtimeError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+        error:
+          type: string
+        message:
+          type: string
     protobufAny:
       type: object
       properties:
@@ -213,14 +224,3 @@ components:
         value:
           type: string
           format: byte
-    v1alpha1RepositoryCertificateList:
-      type: object
-      title: RepositoryCertificateList is a collection of RepositoryCertificates
-      properties:
-        items:
-          type: array
-          title: List of certificates to be processed
-          items:
-            $ref: '#/components/schemas/v1alpha1RepositoryCertificate'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'

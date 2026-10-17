@@ -114,9 +114,17 @@ paths:
                 $ref: '#/components/schemas/runtimeError'
 components:
   schemas:
-    gpgkeyGnuPGPublicKeyResponse:
+    gpgkeyGnuPGPublicKeyCreateResponse:
       type: object
-      title: Generic (empty) response for GPG public key CRUD requests
+      title: Response to a public key creation request
+      properties:
+        created:
+          $ref: '#/components/schemas/v1alpha1GnuPGPublicKeyList'
+        skipped:
+          type: array
+          title: List of key IDs that haven been skipped because they already exist on the server
+          items:
+            type: string
     v1ListMeta:
       description: 'ListMeta describes metadata that synthetic resources must have, including lists and
 
@@ -180,6 +188,19 @@ components:
           title: 'Deprecated: selfLink is a legacy read-only field that is no longer populated by the system.
 
             +optional'
+    v1alpha1GnuPGPublicKeyList:
+      type: object
+      title: GnuPGPublicKeyList is a collection of GnuPGPublicKey objects
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1alpha1GnuPGPublicKey'
+        metadata:
+          $ref: '#/components/schemas/v1ListMeta'
+    gpgkeyGnuPGPublicKeyResponse:
+      type: object
+      title: Generic (empty) response for GPG public key CRUD requests
     runtimeError:
       type: object
       properties:
@@ -194,6 +215,14 @@ components:
           type: string
         message:
           type: string
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          type: string
+          format: byte
     v1alpha1GnuPGPublicKey:
       type: object
       title: GnuPGPublicKey is a representation of a GnuPG public key
@@ -216,32 +245,3 @@ components:
         trust:
           type: string
           title: Trust holds the level of trust assigned to this key
-    v1alpha1GnuPGPublicKeyList:
-      type: object
-      title: GnuPGPublicKeyList is a collection of GnuPGPublicKey objects
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1alpha1GnuPGPublicKey'
-        metadata:
-          $ref: '#/components/schemas/v1ListMeta'
-    gpgkeyGnuPGPublicKeyCreateResponse:
-      type: object
-      title: Response to a public key creation request
-      properties:
-        created:
-          $ref: '#/components/schemas/v1alpha1GnuPGPublicKeyList'
-        skipped:
-          type: array
-          title: List of key IDs that haven been skipped because they already exist on the server
-          items:
-            type: string
-    protobufAny:
-      type: object
-      properties:
-        type_url:
-          type: string
-        value:
-          type: string
-          format: byte
