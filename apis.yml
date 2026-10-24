@@ -121,6 +121,11 @@ apis:
   name: Argo CD Repositories API
   tags:
   - Repositories
+  - Version Control
+  - Helm
+  - OCI
+  tags_raw:
+  - Repositories
   - Git
   - Helm
   - OCI
@@ -312,6 +317,8 @@ apis:
   name: Argo CD CertificateService API
   description: The CertificateService API from Argo CD — 1 operation(s) for certificateservice.
   tags:
+  - Certificate Service
+  tags_raw:
   - CertificateService
   properties:
   - type: OpenAPI
