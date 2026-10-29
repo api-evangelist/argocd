@@ -1,4 +1,4 @@
-# Argo CD (argocd)
+# Argo CD
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,301 +66,164 @@
 
 Argo CD is a declarative GitOps continuous-delivery tool for Kubernetes, part of the CNCF Graduated Argo project. The argocd-server component exposes a gRPC and REST API used by the Web UI, the argocd CLI, and CI/CD systems. APIs cover applications, projects, clusters, repositories, accounts, certificates, GPG keys, sessions, settings, and notifications. Argo CD is also a Kubernetes operator that defines first-class CRDs (Application, ApplicationSet, AppProject) — those CRDs are themselves a Kubernetes-native API. Argo CD is open-source under the Apache 2.0 license; commercial offerings are provided by third parties (notably Akuity, founded by the Argo project's creators) rather than the Argo CD project itself.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/argocd/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/argocd/refs/heads/main/apis.yml)
+**Areas:** ArgoCD · DevOps · GitOps · Kubernetes · Continuous Delivery · CNCF · Open Source · Operator · Cloud-Native · CI/CD
 
-## Tags
+## Argo CD on APIs.io
 
-- DevOps
-- GitOps
-- Kubernetes
-- Continuous Delivery
-- CNCF
-- Open Source
-- Operator
+Everything profiled for Argo CD is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/argocd/](https://apis.io/providers/argocd/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (27)
 
-- **Created:** 2026-05-08
-- **Modified:** 2026-05-19
+- [Argo CD ApplicationSets API](https://apis.io/apis/argocd/argocd-applicationsets-api/) — The Argo CD ApplicationSets API (/api/v1/applicationsets) manages ApplicationSet resources — templated app generators (List, Cluster, Git, Matrix, Merge,…
+- [Argo CD Projects API](https://apis.io/apis/argocd/argocd-projects-api/) — The Argo CD Projects API (/api/v1/projects) manages AppProject resources — multi-tenant boundaries that restrict the source repos, destination…
+- [Argo CD Clusters API](https://apis.io/apis/argocd/argocd-clusters-api/) — The Argo CD Clusters API (/api/v1/clusters) registers, updates, lists, and removes target Kubernetes clusters that Argo CD deploys into, including cluster…
+- [Argo CD Repositories API](https://apis.io/apis/argocd/argocd-repositories-api/) — The Argo CD Repositories API (/api/v1/repositories and /api/v1/repocreds) manages Git, Helm chart, and OCI-registry source repositories with credentials,…
+- [Argo CD Accounts API](https://apis.io/apis/argocd/argocd-accounts-api/) — The Argo CD Accounts API (/api/v1/account) manages local accounts and their API tokens (capability for service accounts), including password rotation and…
+- [Argo CD Sessions API](https://apis.io/apis/argocd/argocd-sessions-api/) — The Argo CD Sessions API (/api/v1/session) issues bearer tokens for username/password and OIDC-authenticated sessions used by all other API endpoints.
+- [Argo CD Settings API](https://apis.io/apis/argocd/argocd-settings-api/) — The Argo CD Settings API (/api/v1/settings) returns the active server configuration — UI banner, OIDC config, Helm/Kustomize plugin defaults, resource…
+- [Argo CD Certificates API](https://apis.io/apis/argocd/argocd-certificates-api/) — The Argo CD Certificates API (/api/v1/certificates) manages TLS certificates and SSH known_hosts entries used to securely connect to private Git, Helm, and…
+- [Argo CD GPG Keys API](https://apis.io/apis/argocd/argocd-gpgkeys-api/) — The Argo CD GPG Keys API (/api/v1/gpgkeys) registers and removes GPG public keys used to verify signed commits before they are deployed.
+- [Argo CD Notifications API](https://apis.io/apis/argocd/argocd-notifications-api/) — The Argo CD Notifications subsystem delivers app lifecycle events (sync, health, deploy) to webhooks, Slack, MS Teams, email, GitHub commit status, and…
+- [Argo CD Version API](https://apis.io/apis/argocd/argocd-version-api/) — The Argo CD Version API (/api/version) returns the running argocd-server build version, Kustomize/Helm/Jsonnet versions, and Kubernetes server version.
+- [Argo CD Application CRD](https://apis.io/apis/argocd/argocd-application-crd/) — Argo CD defines an Application Custom Resource Definition (argoproj.io/v1alpha1, kind=Application) describing a desired sync of a single source…
+- [Argo CD ApplicationSet CRD](https://apis.io/apis/argocd/argocd-applicationset-crd/) — Argo CD defines an ApplicationSet Custom Resource Definition (argoproj.io/v1alpha1, kind=ApplicationSet) which templatizes Application creation across many…
+- [Argo CD AppProject CRD](https://apis.io/apis/argocd/argocd-appproject-crd/) — Argo CD defines an AppProject Custom Resource Definition (argoproj.io/v1alpha1, kind=AppProject) which scopes which sources, destinations, and resource…
+- [Argo CD AccountService API](https://apis.io/apis/argocd/argocd-accountservice-api/) — The AccountService API from Argo CD — 6 operation(s) for accountservice.
+- [Argo CD ApplicationService API](https://apis.io/apis/argocd/argocd-applicationservice-api/) — The ApplicationService API from Argo CD — 26 operation(s) for applicationservice.
+- [Argo CD ApplicationSetService API](https://apis.io/apis/argocd/argocd-applicationsetservice-api/) — The ApplicationSetService API from Argo CD — 6 operation(s) for applicationsetservice.
+- [Argo CD CertificateService API](https://apis.io/apis/argocd/argocd-certificateservice-api/) — The CertificateService API from Argo CD — 1 operation(s) for certificateservice.
+- [Argo CD ClusterService API](https://apis.io/apis/argocd/argocd-clusterservice-api/) — The ClusterService API from Argo CD — 4 operation(s) for clusterservice.
+- [Argo CD GPGKeyService API](https://apis.io/apis/argocd/argocd-gpgkeyservice-api/) — The GPGKeyService API from Argo CD — 2 operation(s) for gpgkeyservice.
+- [Argo CD ProjectService API](https://apis.io/apis/argocd/argocd-projectservice-api/) — The ProjectService API from Argo CD — 10 operation(s) for projectservice.
+- [Argo CD RepoCredsService API](https://apis.io/apis/argocd/argocd-repocredsservice-api/) — The RepoCredsService API from Argo CD — 6 operation(s) for repocredsservice.
+- [Argo CD RepositoryService API](https://apis.io/apis/argocd/argocd-repositoryservice-api/) — The RepositoryService API from Argo CD — 13 operation(s) for repositoryservice.
+- [Argo CD SessionService API](https://apis.io/apis/argocd/argocd-sessionservice-api/) — The SessionService API from Argo CD — 2 operation(s) for sessionservice.
+- [Argo CD SettingsService API](https://apis.io/apis/argocd/argocd-settingsservice-api/) — The SettingsService API from Argo CD — 2 operation(s) for settingsservice.
+- [Argo CD VersionService API](https://apis.io/apis/argocd/argocd-versionservice-api/) — The VersionService API from Argo CD — 1 operation(s) for versionservice.
+- [Argo CD Notification Service API](https://apis.io/apis/argocd/argocd-notification-service-api/) — The Notification Service API from Argo CD — 3 operation(s) for notification service.
 
-## APIs
+### Published properties
 
-### Argo CD Applications API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-The Argo CD Applications API (/api/v1/applications) creates, updates, deletes, syncs, refreshes, and rolls back applications, surfaces application resource trees, manifests, events, logs, and pod terminal access. All endpoints accept an optional `project` query parameter to scope by AppProject.
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Applications
-- Sync
-- GitOps
-- Lifecycle
+- [Argocd Agentic Access](https://apis.io/agentic-access/argocd/argocd-agentic-access/)
 
-#### Properties
+#### Collections (14)
 
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/)
-- [API Reference](https://argo-cd.readthedocs.io/en/stable/operator-manual/server-commands/argocd-server/)
-- [OpenAPI](openapi/argocd-server-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Postman and Open Collection request collections.
 
-### Argo CD ApplicationSets API
+- [Consolidate Services AccountService API](https://apis.io/collections/argocd/open-argocd-accountservice-api/)
+- [Consolidate Services AccountService ApplicationService API](https://apis.io/collections/argocd/open-argocd-applicationservice-api/)
+- [Consolidate Services AccountService ApplicationSetService API](https://apis.io/collections/argocd/open-argocd-applicationsetservice-api/)
+- [Consolidate Services AccountService CertificateService API](https://apis.io/collections/argocd/open-argocd-certificateservice-api/)
+- [Consolidate Services AccountService ClusterService API](https://apis.io/collections/argocd/open-argocd-clusterservice-api/)
+- [Consolidate Services AccountService GPGKeyService API](https://apis.io/collections/argocd/open-argocd-gpgkeyservice-api/)
+- [Consolidate Services AccountService NotificationService API](https://apis.io/collections/argocd/open-argocd-notificationservice-api/)
+- [Consolidate Services AccountService ProjectService API](https://apis.io/collections/argocd/open-argocd-projectservice-api/)
+- [Consolidate Services AccountService RepoCredsService API](https://apis.io/collections/argocd/open-argocd-repocredsservice-api/)
+- [Consolidate Services AccountService RepositoryService API](https://apis.io/collections/argocd/open-argocd-repositoryservice-api/)
+- [Consolidate Services](https://apis.io/collections/argocd/open-argocd-server/)
+- [Consolidate Services AccountService SessionService API](https://apis.io/collections/argocd/open-argocd-sessionservice-api/)
+- [Consolidate Services AccountService SettingsService API](https://apis.io/collections/argocd/open-argocd-settingsservice-api/)
+- [Consolidate Services AccountService VersionService API](https://apis.io/collections/argocd/open-argocd-versionservice-api/)
 
-The Argo CD ApplicationSets API (/api/v1/applicationsets) manages ApplicationSet resources — templated app generators (List, Cluster, Git, Matrix, Merge, Pull Request, SCM Provider) used to programmatically scale Argo CD across many clusters and tenants.
+#### Governance rules (1)
 
-#### Tags
+Spectral rulesets for the provider's contracts.
 
-- ApplicationSets
-- Generators
-- GitOps
+- [Argo CD API Rules](https://apis.io/rules/argocd/argocd-spectral-rules/)
 
-#### Properties
+#### Security (2)
 
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-### Argo CD Projects API
+- [Argocd Authentication](https://apis.io/security/argocd/argocd-authentication/)
+- [Argocd Domain Security](https://apis.io/security/argocd/argocd-domain-security/)
 
-The Argo CD Projects API (/api/v1/projects) manages AppProject resources — multi-tenant boundaries that restrict the source repos, destination clusters/namespaces, and resource kinds available to a group of applications, plus per-project RBAC and JWT tokens.
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Projects
-- AppProjects
-- RBAC
+- [Argocd Plans Pricing](https://apis.io/plans/argocd/argocd-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/user-guide/projects/)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### Argo CD Clusters API
+- [Argocd Rate Limits](https://apis.io/rate-limits/argocd/argocd-rate-limits/)
 
-The Argo CD Clusters API (/api/v1/clusters) registers, updates, lists, and removes target Kubernetes clusters that Argo CD deploys into, including cluster credentials, sharding hints, and namespace scoping.
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Clusters
-- Targets
-- Kubernetes
+- [Argocd Finops](https://apis.io/finops/argocd/argocd-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Argo CD Repositories API
-
-The Argo CD Repositories API (/api/v1/repositories and /api/v1/repocreds) manages Git, Helm chart, and OCI-registry source repositories with credentials, certificates, and per-repo settings used by the Application controller.
-
-#### Tags
-
-- Repositories
-- Git
-- Helm
-- OCI
-
-#### Properties
-
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/user-guide/private-repositories/)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Argo CD Accounts API
-
-The Argo CD Accounts API (/api/v1/account) manages local accounts and their API tokens (capability for service accounts), including password rotation and token issuance/revocation.
-
-#### Tags
-
-- Accounts
-- Authentication
-- Tokens
-
-#### Properties
-
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Argo CD Sessions API
-
-The Argo CD Sessions API (/api/v1/session) issues bearer tokens for username/password and OIDC-authenticated sessions used by all other API endpoints.
-
-#### Tags
-
-- Sessions
-- Authentication
-- JWT
-
-#### Properties
-
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Argo CD Settings API
-
-The Argo CD Settings API (/api/v1/settings) returns the active server configuration — UI banner, OIDC config, Helm/Kustomize plugin defaults, resource exclusions, application instance label key, and similar runtime settings.
-
-#### Tags
-
-- Settings
-- Configuration
-- Plugins
-
-#### Properties
-
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/argocd-cm-yaml/)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Argo CD Certificates API
-
-The Argo CD Certificates API (/api/v1/certificates) manages TLS certificates and SSH known_hosts entries used to securely connect to private Git, Helm, and OCI repositories.
-
-#### Tags
-
-- Certificates
-- TLS
-- SSH
-
-#### Properties
-
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Argo CD GPG Keys API
-
-The Argo CD GPG Keys API (/api/v1/gpgkeys) registers and removes GPG public keys used to verify signed commits before they are deployed.
-
-#### Tags
-
-- GPG
-- Signed Commits
-- Security
-
-#### Properties
-
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/user-guide/gpg-verification/)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Argo CD Notifications API
-
-The Argo CD Notifications subsystem delivers app lifecycle events (sync, health, deploy) to webhooks, Slack, MS Teams, email, GitHub commit status, and other channels via templated triggers.
-
-#### Tags
-
-- Notifications
-- Webhooks
-- Slack
-- Email
-
-#### Properties
-
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Argo CD Version API
-
-The Argo CD Version API (/api/version) returns the running argocd-server build version, Kustomize/Helm/Jsonnet versions, and Kubernetes server version.
-
-#### Tags
-
-- Version
-- Build Info
-
-#### Properties
-
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Argo CD Application CRD
-
-Argo CD defines an Application Custom Resource Definition (argoproj.io/v1alpha1, kind=Application) describing a desired sync of a single source (Git/Helm/OCI) to a destination cluster/namespace, with sync policy, automated/manual sync, and ignore/diff rules.
-
-#### Tags
-
-- CRD
-- Kubernetes
-- Application
-- GitOps
-
-#### Properties
-
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/application.yaml/)
-- [Source](https://github.com/argoproj/argo-cd/blob/master/manifests/crds/application-crd.yaml)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Argo CD ApplicationSet CRD
-
-Argo CD defines an ApplicationSet Custom Resource Definition (argoproj.io/v1alpha1, kind=ApplicationSet) which templatizes Application creation across many targets via pluggable generators.
-
-#### Tags
-
-- CRD
-- Kubernetes
-- ApplicationSet
-- Generators
-
-#### Properties
-
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/)
-- [Source](https://github.com/argoproj/argo-cd/blob/master/manifests/crds/applicationset-crd.yaml)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Argo CD AppProject CRD
-
-Argo CD defines an AppProject Custom Resource Definition (argoproj.io/v1alpha1, kind=AppProject) which scopes which sources, destinations, and resource kinds Applications inside the project may use, plus per-project RBAC.
-
-#### Tags
-
-- CRD
-- Kubernetes
-- AppProject
-- RBAC
-
-#### Properties
-
-- [Documentation](https://argo-cd.readthedocs.io/en/stable/user-guide/projects/)
-- [Source](https://github.com/argoproj/argo-cd/blob/master/manifests/crds/appproject-crd.yaml)
-- [Postman Collection](collections/argocd-server.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/argocd-server.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/argoproj)
 - [Website](https://argo-cd.readthedocs.io/)
 - [Documentation](https://argo-cd.readthedocs.io/en/stable/)
-- [API Reference](https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/)
-- [Getting Started](https://argo-cd.readthedocs.io/en/stable/getting_started/)
-- [GitHub Organization](https://github.com/argoproj)
-- [Source](https://github.com/argoproj/argo-cd)
-- [License](https://github.com/argoproj/argo-cd/blob/master/LICENSE)
-- [C N C F  Project](https://www.cncf.io/projects/argo/)
-- [Helm  Chart](https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd)
-- [Slack  Community](https://argoproj.github.io/community/join-slack/)
+- [Getting started](https://argo-cd.readthedocs.io/en/stable/getting_started/)
+- [API reference](https://argo-cd.readthedocs.io/en/stable/developer-guide/api-docs/)
+- [Support](https://github.com/argoproj/argo-cd/issues)
+- [Changelog](https://github.com/argoproj/argo-cd/blob/master/CHANGELOG.md)
 - [Blog](https://blog.argoproj.io/)
-- [X ( Twitter)](https://x.com/argoproj)
-- [YouTube](https://www.youtube.com/@ArgoProj)
-- [Releases](https://github.com/argoproj/argo-cd/releases)
-- [Roadmap](https://github.com/argoproj/argo-cd/blob/master/docs/roadmap.md)
-- [Contribution  Guide](https://argo-cd.readthedocs.io/en/stable/developer-guide/contributors-quickstart-guide/)
-- [Operator  Manual](https://argo-cd.readthedocs.io/en/stable/operator-manual/)
-- [User  Guide](https://argo-cd.readthedocs.io/en/stable/user-guide/)
-- [Plans](plans/argocd-plans-pricing.yml)
-- [Rate Limits](rate-limits/argocd-rate-limits.yml)
-- [Fin Ops](finops/argocd-finops.yml)
+- [GitHub](https://github.com/argoproj)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 36.6** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 48.2 |
+| Contract quality | 35.7 |
+| Contract governance | 27.3 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 61.9 |
+| Access clarity | 5.3 |
+
+**Agent readiness 22.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | yes |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/argocd/](https://apis.io/providers/argocd/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Argo CD: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/argocd/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
